@@ -1,0 +1,60 @@
+<!--<!DOCTYPE html>-->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=$initialscale$"></head>
+<meta http-equiv="X-WebKit-CSP" content="$imgsrc$; script-src 'self'">
+<style>
+html, body {
+    font-family:helvetica, verdana, san-serif;
+    word-break:break-word;
+    background-color:white !important;
+    line-height:1.5;
+    margin:0 8px !important;
+}
+img {
+    max-width:100%;
+    height:auto !important;
+}
+blockquote {
+    -webkit-margin-start: 0 !important;
+    -webkit-margin-end: 0 !important;
+}
+a {
+    color: #116cdf;
+    text-decoration: underline;
+}
+.readmail_preloader_img {
+    display:none !important;
+}
+.readmail_preloader_placeholder {
+    display:inline-block;
+    margin:3px 5px 3px 5px !important;
+    width: 39px !important;
+    height: 30px !important;
+    background: url(icon_pic_loading_2x.png);
+    background-size: 39px 30px;
+}
+.selfdiv{
+    width:auto!important;
+    height:auto!important;
+}
+@media only screen and (-webkit-min-device-pixel-ratio:3){
+    .readmail_preloader_placeholder {
+        background: url(icon_pic_loading_3x.png);
+        background-size: 39px 30px;
+    }
+}
+
+#mail_fold_toggle{ display:inline-block; line-height:2em; font-size:70%; font-weight:normal; padding:0 0.5em 0 0.7em; border:1px solid #d9d9d9; border-radius:3px; background:#fff; color:#9a9a9a; text-decoration:none;}
+#mail_fold_toggle span{ display:inline-block; text-indent:-9999px; float:right; width:9px; height:2em; background-size:9px 5px; background-repeat:no-repeat; background-position:center center; margin-left:0.25em;}
+#mail_fold_toggle span, #mail_fold_toggle .mail_fold_toggle_close{ background-image:url(icon_fold_down@2x.png); background-size: 9px 5px;}
+#mail_fold_toggle .mail_fold_toggle_open{ background-image:url(icon_fold_up@2x.png); background-size: 9px 5px;}
+#mailFoldWrap{ }
+.mail_fold_toggle_wrap{  position:relative; margin:20px 0 10px;}
+#mailFoldSpace{ position:absolute; width:100%; z-index:-1; height:0px; top:24; left:0;}
+
+</style>
+<script type="text/configuration" id="readmailconfiguration">$configuration$</script>
+<script type="text/javascript" src="readmail.js"></script>
+<body style="margin:0;padding:0;visibility:hidden;"><div id="mailcontent">$content$</div></body>
+</html>
