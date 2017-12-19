@@ -25,6 +25,9 @@
 		343AE94E1FCFFD0100585741 /* Test_weworkDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343AE94D1FCFFD0100585741 /* Test_weworkDylib.mm */; };
 		343AE9501FCFFD0100585741 /* Test_weworkDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 343AE94F1FCFFD0100585741 /* Test_weworkDylib.h */; };
 		343AE9521FCFFD0100585741 /* Test_weworkDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 343AE9511FCFFD0100585741 /* Test_weworkDylib.m */; };
+		34CAE4821FE8EEAE0019BA8D /* HookWWKMessageListController.h in Headers */ = {isa = PBXBuildFile; fileRef = 34CAE4801FE8EEAE0019BA8D /* HookWWKMessageListController.h */; };
+		34CAE4831FE8EEAE0019BA8D /* HookWWKMessageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */; };
+		9D6D92E3DF00A9930FE41265 /* Pods_Test_weworkDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC851E534822B2DD252BF74B /* Pods_Test_weworkDylib.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,10 +72,16 @@
 		343AE9451FCFFD0100585741 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
 		343AE9481FCFFD0100585741 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
 		343AE94A1FCFFD0100585741 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
-		343AE94C1FCFFD0100585741 /* Test_weworkDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = Test_weworkDylib.xm; sourceTree = "<group>"; };
+		343AE94C1FCFFD0100585741 /* Test_weworkDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_weworkDylib.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		343AE94D1FCFFD0100585741 /* Test_weworkDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_weworkDylib.mm; sourceTree = "<group>"; };
 		343AE94F1FCFFD0100585741 /* Test_weworkDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_weworkDylib.h; sourceTree = "<group>"; };
 		343AE9511FCFFD0100585741 /* Test_weworkDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_weworkDylib.m; sourceTree = "<group>"; };
+		34CAE4801FE8EEAE0019BA8D /* HookWWKMessageListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookWWKMessageListController.h; sourceTree = "<group>"; };
+		34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookWWKMessageListController.m; sourceTree = "<group>"; };
+		6672E14A19382F038626019E /* Pods-Test-weworkDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-weworkDylib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Test-weworkDylib/Pods-Test-weworkDylib.debug.xcconfig"; sourceTree = "<group>"; };
+		96923BA3CEAEA9E2E29301BF /* Pods-Test-weworkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-weworkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-Test-weworkDylib/Pods-Test-weworkDylib.release.xcconfig"; sourceTree = "<group>"; };
+		F9BF3DDF81F04A84C2D19360 /* libPods-Test-wework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Test-wework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC851E534822B2DD252BF74B /* Pods_Test_weworkDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_weworkDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +101,7 @@
 				343AE92F1FCFFD0000585741 /* Cycript.framework in Frameworks */,
 				343AE9351FCFFD0000585741 /* Foundation.framework in Frameworks */,
 				343AE9371FCFFD0000585741 /* UIKit.framework in Frameworks */,
+				9D6D92E3DF00A9930FE41265 /* Pods_Test_weworkDylib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +115,7 @@
 				343AE9381FCFFD0100585741 /* Test-weworkDylib */,
 				343AE92D1FCFFD0000585741 /* Frameworks */,
 				343AE91C1FCFFD0000585741 /* Products */,
+				A429E9553BD582194CBFE295 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +154,8 @@
 				343AE9321FCFFD0000585741 /* RevealServer.framework */,
 				343AE9341FCFFD0000585741 /* Foundation.framework */,
 				343AE9361FCFFD0000585741 /* UIKit.framework */,
+				F9BF3DDF81F04A84C2D19360 /* libPods-Test-wework.a */,
+				FC851E534822B2DD252BF74B /* Pods_Test_weworkDylib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,6 +167,8 @@
 				343AE94D1FCFFD0100585741 /* Test_weworkDylib.mm */,
 				343AE94F1FCFFD0100585741 /* Test_weworkDylib.h */,
 				343AE9511FCFFD0100585741 /* Test_weworkDylib.m */,
+				34CAE4801FE8EEAE0019BA8D /* HookWWKMessageListController.h */,
+				34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */,
 				343AE9391FCFFD0100585741 /* MethodTrace */,
 				343AE9441FCFFD0100585741 /* AntiAntiDebug */,
 				343AE9471FCFFD0100585741 /* fishhook */,
@@ -198,6 +213,15 @@
 			name = fishhook;
 			sourceTree = "<group>";
 		};
+		A429E9553BD582194CBFE295 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6672E14A19382F038626019E /* Pods-Test-weworkDylib.debug.xcconfig */,
+				96923BA3CEAEA9E2E29301BF /* Pods-Test-weworkDylib.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -205,6 +229,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34CAE4821FE8EEAE0019BA8D /* HookWWKMessageListController.h in Headers */,
 				343AE93B1FCFFD0100585741 /* ANYMethodLog.h in Headers */,
 				343AE93F1FCFFD0100585741 /* MethodTrace.h in Headers */,
 				343AE9501FCFFD0100585741 /* Test_weworkDylib.h in Headers */,
@@ -240,10 +265,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 343AE9551FCFFD0100585741 /* Build configuration list for PBXNativeTarget "Test-weworkDylib" */;
 			buildPhases = (
+				DEAA3AA140E8F9782952E461 /* [CP] Check Pods Manifest.lock */,
 				343AE9241FCFFD0000585741 /* ShellScript */,
 				343AE9251FCFFD0000585741 /* Sources */,
 				343AE9261FCFFD0000585741 /* Frameworks */,
 				343AE9271FCFFD0000585741 /* Headers */,
+				6ABCB3AA9DAD97A89B901A2D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,6 +370,39 @@
 			shellPath = /bin/sh;
 			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
 		};
+		6ABCB3AA9DAD97A89B901A2D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Test-weworkDylib/Pods-Test-weworkDylib-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEAA3AA140E8F9782952E461 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Test-weworkDylib-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -357,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34CAE4831FE8EEAE0019BA8D /* HookWWKMessageListController.m in Sources */,
 				343AE9461FCFFD0100585741 /* AntiAntiDebug.m in Sources */,
 				343AE9411FCFFD0100585741 /* MethodTrace.m in Sources */,
 				343AE9491FCFFD0100585741 /* fishhook.c in Sources */,
@@ -483,6 +544,7 @@
 		};
 		343AE9561FCFFD0100585741 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6672E14A19382F038626019E /* Pods-Test-weworkDylib.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5CJEBBFK9A;
@@ -537,6 +599,7 @@
 		};
 		343AE9571FCFFD0100585741 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96923BA3CEAEA9E2E29301BF /* Pods-Test-weworkDylib.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
@@ -595,7 +658,7 @@
 				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
-				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
@@ -612,7 +675,7 @@
 				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
-				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";

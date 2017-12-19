@@ -3,16 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>ENABLE_METHODTRACE</key>
-	<false/>
+	<true/>
 	<key>TARGET_CLASS_LIST</key>
 	<dict>
-		<key>BaseMsgContentViewController</key>
+		<key>WWKMessage</key>
 		<string></string>
-		<key>CMessageMgr</key>
-		<array>
-			<string>AsyncOnAddMsg:MsgWrap:</string>
-			<string>onRevokeMsg:</string>
-		</array>
+		<key>WWKMessageRTXNotify</key>
+		<string></string>
+		<key>WWKMessageNotify</key>
+		<string></string>
+		<key>ConversationHelper</key>
+		<string></string>
+		<key>WAAppMsgItem</key>
+		<string></string>
+		<key>WWKAppMessageContact</key>
+		<string></string>
+		<key>WWKConversationViewController</key>
+		<string></string>
+		<key>WWKMessageListController</key>
+		<string></string>
 	</dict>
 </dict>
 </plist>
