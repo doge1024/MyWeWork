@@ -6,6 +6,12 @@
 	<true/>
 	<key>TARGET_CLASS_LIST</key>
 	<dict>
+		<key>WWKConversationRedEnvelopesBubbleView</key>
+		<string></string>
+		<key>WWKMessageRedEnvelopes</key>
+		<string></string>
+		<key>WWKMessageMedia</key>
+		<string></string>
 		<key>WWKMessage</key>
 		<string></string>
 		<key>WWKMessageRTXNotify</key>

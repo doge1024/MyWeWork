@@ -11,3 +11,4 @@
 @protocol ABNewPersonViewControllerDelegate <NSObject>
 - (void)newPersonViewController:(ABNewPersonViewController *)arg1 didCompleteWithNewPerson:(const void *)arg2;
 @end
+

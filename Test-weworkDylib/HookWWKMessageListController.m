@@ -12,15 +12,21 @@
 
 + (void)addMyViewFor:(UIViewController *)vc {
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(100, 100, 80, 40);
-    button.backgroundColor = [UIColor orangeColor];
-    [vc.view addSubview:button];
-    button.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
-        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-            NSLog(@"123");
-            [subscriber sendCompleted];
-            return [RACDisposable disposableWithBlock:nil];
+    [[[vc rac_signalForSelector:@selector(viewDidAppear:)] takeUntil:vc.rac_willDeallocSignal] subscribeNext:^(RACTuple * _Nullable x) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat width = 80;
+        button.frame = CGRectMake(screenWidth - width, 100, width, 40);
+        button.backgroundColor = [UIColor orangeColor];
+        [button setTitle:@"打开" forState:UIControlStateNormal];
+        [vc.view addSubview:button];
+        button.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+            return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+                NSLog(@"123");
+                [subscriber sendCompleted];
+                return [RACDisposable disposableWithBlock:^{}];
+            }];
         }];
     }];
 }
@@ -30,6 +36,7 @@
 
 CHDeclareClass(WWKMessageListController)
 CHDeclareClass(WWKConversationViewController)
+CHDeclareClass(WWKMessageRedEnvelopes)
 
 CHOptimizedMethod(2, self, NSInteger, WWKMessageListController, p_findDataWrapperType, NSUInteger, type, andConvId, NSInteger, convid){
     //get origin value
@@ -48,12 +55,21 @@ CHOptimizedMethod(2, self, NSInteger, WWKMessageListController, p_findDataWrappe
     return find;
 }
 
-CHOptimizedMethod1(self, void, WWKConversationViewController, viewDidAppear, BOOL, animted){
-    CHSuper1(WWKConversationViewController, viewDidAppear, animted);
+CHOptimizedMethod0(self, void, WWKConversationViewController, loadView){
     
-    // add my view
-    UIViewController *viewController = (UIViewController *)self;
-    [HookWWKMessageListController addMyViewFor:viewController];
+    UIViewController *vc = (UIViewController *)self;
+    if([vc isMemberOfClass:NSClassFromString(@"WWKConversationViewController")]) {
+        // add my view
+        [HookWWKMessageListController addMyViewFor:vc];
+    }
+    
+    CHSuper0(WWKConversationViewController, loadView);
+}
+
+// 拦截设置红包ID
+CHOptimizedMethod1(self, void, WWKMessageRedEnvelopes, setHongbaoID, NSString *, hongbaoID){
+    
+    CHSuper1(WWKMessageRedEnvelopes, setHongbaoID, hongbaoID);
 }
 
 CHConstructor{
@@ -61,5 +77,8 @@ CHConstructor{
     CHClassHook(2, WWKMessageListController, p_findDataWrapperType, andConvId);
     
     CHLoadLateClass(WWKConversationViewController);
-    CHClassHook1(WWKConversationViewController, viewDidAppear);
+    CHClassHook0(WWKConversationViewController, loadView);
+    
+    CHLoadLateClass(WWKMessageRedEnvelopes);
+    CHClassHook1(WWKMessageRedEnvelopes, setHongbaoID);
 }
