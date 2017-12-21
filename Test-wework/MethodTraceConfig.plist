@@ -6,6 +6,13 @@
 	<true/>
 	<key>TARGET_CLASS_LIST</key>
 	<dict>
+		<key>WWRedEnvOpenHongBaoWindow</key>
+		<string></string>
+		<key>WWKConversationMessageBubbleView</key>
+		<array>
+			<string>viewDidTap:</string>
+			<string>viewDidLongPress:</string>
+		</array>
 		<key>WWKConversationRedEnvelopesBubbleView</key>
 		<string></string>
 		<key>WWKMessageRedEnvelopes</key>

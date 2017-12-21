@@ -6,7 +6,15 @@
 //  Copyright © 2017年 lzh. All rights reserved.
 //
 
-#import "HookWWKMessageListController.h"
+#import "HookFunction.h"
+
+static id contain = nil;
+
+@interface HookWWKMessageListController : NSObject
+
++ (void)addMyViewFor:(UIViewController *)vc;
+
+@end
 
 @implementation HookWWKMessageListController
 
@@ -37,6 +45,7 @@
 CHDeclareClass(WWKMessageListController)
 CHDeclareClass(WWKConversationViewController)
 CHDeclareClass(WWKMessageRedEnvelopes)
+CHDeclareClass(WWKConversationRedEnvelopesBubbleView)
 
 CHOptimizedMethod(2, self, NSInteger, WWKMessageListController, p_findDataWrapperType, NSUInteger, type, andConvId, NSInteger, convid){
     //get origin value
@@ -58,9 +67,9 @@ CHOptimizedMethod(2, self, NSInteger, WWKMessageListController, p_findDataWrappe
 CHOptimizedMethod0(self, void, WWKConversationViewController, loadView){
     
     UIViewController *vc = (UIViewController *)self;
-    if([vc isMemberOfClass:NSClassFromString(@"WWKConversationViewController")]) {
+    if([vc isMemberOfClass:NSClassFromString (@"WWKConversationViewController")]) {
         // add my view
-        [HookWWKMessageListController addMyViewFor:vc];
+//        [HookWWKMessageListController addMyViewFor:vc];
     }
     
     CHSuper0(WWKConversationViewController, loadView);
@@ -68,8 +77,18 @@ CHOptimizedMethod0(self, void, WWKConversationViewController, loadView){
 
 // 拦截设置红包ID
 CHOptimizedMethod1(self, void, WWKMessageRedEnvelopes, setHongbaoID, NSString *, hongbaoID){
-    
     CHSuper1(WWKMessageRedEnvelopes, setHongbaoID, hongbaoID);
+}
+
+// [WWKConversationRedEnvelopesBubbleView viewDidTap:]
+CHOptimizedMethod1(self, void, WWKConversationRedEnvelopesBubbleView, viewDidTap, UITapGestureRecognizer *, tap){
+//    CHSuper1(WWKConversationRedEnvelopesBubbleView, viewDidTap, tap);
+    id this = self;
+    id view = [[NSClassFromString(@"WWKConversationRedEnvelopesBubbleView") alloc] init];
+    [view performSelector:@selector(setMessage:) withObject:[this message]];
+    [view performSelector:@selector(setDelegate:) withObject:[this delegate]];
+    [view performSelector:NSSelectorFromString(@"tony_onClickHongbaoMessage")];
+    contain = view;
 }
 
 CHConstructor{
@@ -81,4 +100,7 @@ CHConstructor{
     
     CHLoadLateClass(WWKMessageRedEnvelopes);
     CHClassHook1(WWKMessageRedEnvelopes, setHongbaoID);
+    
+    CHLoadLateClass(WWKConversationRedEnvelopesBubbleView);
+    CHClassHook1(WWKConversationRedEnvelopesBubbleView, viewDidTap);
 }

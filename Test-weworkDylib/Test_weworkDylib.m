@@ -13,7 +13,6 @@
 #import <UIKit/UIKit.h>
 #import <Cycript/Cycript.h>
 #import <FLEX/FLEX.h>
-#import "HookWWKMessageListController.h"
 
 static __attribute__((constructor)) void entry(){
     NSLog(@"\n               🎉!!！congratulations!!！🎉\n👍----------------insert dylib success----------------👍");
@@ -23,7 +22,7 @@ static __attribute__((constructor)) void entry(){
         CYListenServer(6666);
         
         // show FLEX
-        [[FLEXManager sharedManager] showExplorer];
+//        [[FLEXManager sharedManager] showExplorer];
     }];
 }
 
