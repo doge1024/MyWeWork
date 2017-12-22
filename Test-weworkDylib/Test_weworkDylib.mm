@@ -2,6 +2,10 @@
 
 
 #import <UIKit/UIKit.h>
+#import "HookTool.h"
+#import "HookFunction.h"
+
+@class WWKMessageRedEnvelopes;
 
 
 #include <substrate.h>
@@ -24,40 +28,58 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class ClassName; 
-static id (*_logos_meta_orig$_ungrouped$ClassName$sharedInstance)(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL); static id _logos_meta_method$_ungrouped$ClassName$sharedInstance(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$)(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST, SEL, id); static void _logos_method$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST, SEL, id); static id (*_logos_orig$_ungrouped$ClassName$messageWithReturnAndNoArguments)(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST, SEL); static id _logos_method$_ungrouped$ClassName$messageWithReturnAndNoArguments(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST, SEL); 
+@class WWKConversationViewController; @class WWKMessage; 
+static WWKConversationViewController* (*_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$)(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationViewController$initWithConversation$(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$observe$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; 
 
-#line 5 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
+#line 9 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
 
 
 
-static id _logos_meta_method$_ungrouped$ClassName$sharedInstance(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
-	HBLogDebug(@"+[<ClassName: %p> sharedInstance]", self);
-
-	return _logos_meta_orig$_ungrouped$ClassName$sharedInstance(self, _cmd);
+static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationViewController$initWithConversation$(_LOGOS_SELF_TYPE_INIT WWKConversationViewController* __unused self, SEL __unused _cmd, void * arg1) _LOGOS_RETURN_RETAINED {
+    id conversationViewController = _logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$(self, _cmd, arg1);
+    [HookTool sharedInstance].currentConversationViewController = conversationViewController;
+    return conversationViewController;
 }
 
 
-static void _logos_method$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, id originalArgument) {
-	HBLogDebug(@"-[<ClassName: %p> messageWithNoReturnAndOneArgument:%@]", self, originalArgument);
 
-	_logos_orig$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$(self, _cmd, originalArgument);
-	
-	
+
+
+
+
+
+
+
+
+
+
+static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$(_LOGOS_SELF_TYPE_INIT WWKMessage* __unused self, SEL __unused _cmd, void * arg1) _LOGOS_RETURN_RETAINED {
+    
+    id wkMessage = _logos_orig$_ungrouped$WWKMessage$initWithMessage$(self, _cmd, arg1);
+    
+    
+    NSArray *messageItems = [wkMessage messageItems];
+    id redEnvelopes = [messageItems firstObject]; 
+    if (redEnvelopes && [redEnvelopes isKindOfClass:NSClassFromString(@"WWKMessageRedEnvelopes")]) {
+        if ([HookTool sharedInstance].currentConversationViewController) { 
+            id view = [[NSClassFromString(@"WWKConversationRedEnvelopesBubbleView") alloc] init];
+            [view performSelector:@selector(setMessage:) withObject:wkMessage];
+            [view performSelector:@selector(setDelegate:) withObject:[HookTool sharedInstance].currentConversationViewController]; 
+            [view performSelector:NSSelectorFromString(@"tony_onClickHongbaoMessage")];
+            
+            [HookTool sharedInstance].redEnvelopesBubbleView = view;
+        }
+    }
+    
+    return wkMessage;
 }
 
 
-static id _logos_method$_ungrouped$ClassName$messageWithReturnAndNoArguments(_LOGOS_SELF_TYPE_NORMAL ClassName* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
-	HBLogDebug(@"-[<ClassName: %p> messageWithReturnAndNoArguments]", self);
-
-	id originalReturnOfMessage = _logos_orig$_ungrouped$ClassName$messageWithReturnAndNoArguments(self, _cmd);
-	
-	
-
-	return originalReturnOfMessage;
+static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$observe$(_LOGOS_SELF_TYPE_INIT WWKMessage* __unused self, SEL __unused _cmd, void * arg1, BOOL arg2) _LOGOS_RETURN_RETAINED {
+    return _logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$(self, _cmd, arg1, arg2);
 }
 
 
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$ClassName = objc_getClass("ClassName"); Class _logos_metaclass$_ungrouped$ClassName = object_getClass(_logos_class$_ungrouped$ClassName); MSHookMessageEx(_logos_metaclass$_ungrouped$ClassName, @selector(sharedInstance), (IMP)&_logos_meta_method$_ungrouped$ClassName$sharedInstance, (IMP*)&_logos_meta_orig$_ungrouped$ClassName$sharedInstance);MSHookMessageEx(_logos_class$_ungrouped$ClassName, @selector(messageWithNoReturnAndOneArgument:), (IMP)&_logos_method$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$, (IMP*)&_logos_orig$_ungrouped$ClassName$messageWithNoReturnAndOneArgument$);MSHookMessageEx(_logos_class$_ungrouped$ClassName, @selector(messageWithReturnAndNoArguments), (IMP)&_logos_method$_ungrouped$ClassName$messageWithReturnAndNoArguments, (IMP*)&_logos_orig$_ungrouped$ClassName$messageWithReturnAndNoArguments);} }
-#line 35 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
+{Class _logos_class$_ungrouped$WWKConversationViewController = objc_getClass("WWKConversationViewController"); MSHookMessageEx(_logos_class$_ungrouped$WWKConversationViewController, @selector(initWithConversation:), (IMP)&_logos_method$_ungrouped$WWKConversationViewController$initWithConversation$, (IMP*)&_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$);Class _logos_class$_ungrouped$WWKMessage = objc_getClass("WWKMessage"); MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$);MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:observe:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$observe$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$);} }
+#line 57 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"

@@ -30,7 +30,7 @@ CHOptimizedMethod0(self, void, WWRedEnvOpenHongBaoWindow, startOpenHongbaoAnimat
 CHConstructor{
     CHLoadLateClass(WWRedEnvOpenHongBaoWindow);
     CHClassHook1(WWRedEnvOpenHongBaoWindow, setQyhbSubType);
-    
+
     CHLoadLateClass(WWRedEnvOpenHongBaoWindow);
     CHClassHook0(WWRedEnvOpenHongBaoWindow, startOpenHongbaoAnimation);
 }

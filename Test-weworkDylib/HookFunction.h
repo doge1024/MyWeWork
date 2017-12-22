@@ -21,6 +21,8 @@
 @property(nonatomic, assign) NSInteger mHongbaoStatus;
 @property(strong, nonatomic) UIButton *mOpenBtn;
 
+@property(nonatomic, strong) NSArray *messageItems;
+
 - (void)onOpenBtnClick:(id)arg1;
 
 @end

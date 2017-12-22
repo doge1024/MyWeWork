@@ -28,7 +28,8 @@
 		34C2A5B11FEC2C840099983A /* HookWWRedEnvOpenHongBaoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C2A5B01FEC2C840099983A /* HookWWRedEnvOpenHongBaoWindow.m */; };
 		34C2A5B71FEC2E9E0099983A /* HookFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C2A5B51FEC2E9E0099983A /* HookFunction.m */; };
 		34C2A5B81FEC34940099983A /* HookFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C2A5B41FEC2E9E0099983A /* HookFunction.h */; };
-		34CAE4831FE8EEAE0019BA8D /* HookWWKMessageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */; };
+		34C8787E1FED795B005B7AB7 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C8787C1FED795B005B7AB7 /* HookTool.h */; };
+		34C8787F1FED795B005B7AB7 /* HookTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C8787D1FED795B005B7AB7 /* HookTool.m */; };
 		9D6D92E3DF00A9930FE41265 /* Pods_Test_weworkDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC851E534822B2DD252BF74B /* Pods_Test_weworkDylib.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +82,8 @@
 		34C2A5B01FEC2C840099983A /* HookWWRedEnvOpenHongBaoWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookWWRedEnvOpenHongBaoWindow.m; sourceTree = "<group>"; };
 		34C2A5B41FEC2E9E0099983A /* HookFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookFunction.h; sourceTree = "<group>"; };
 		34C2A5B51FEC2E9E0099983A /* HookFunction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookFunction.m; sourceTree = "<group>"; };
-		34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookWWKMessageListController.m; sourceTree = "<group>"; };
+		34C8787C1FED795B005B7AB7 /* HookTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
+		34C8787D1FED795B005B7AB7 /* HookTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookTool.m; sourceTree = "<group>"; };
 		6672E14A19382F038626019E /* Pods-Test-weworkDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-weworkDylib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Test-weworkDylib/Pods-Test-weworkDylib.debug.xcconfig"; sourceTree = "<group>"; };
 		96923BA3CEAEA9E2E29301BF /* Pods-Test-weworkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-weworkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-Test-weworkDylib/Pods-Test-weworkDylib.release.xcconfig"; sourceTree = "<group>"; };
 		F9BF3DDF81F04A84C2D19360 /* libPods-Test-wework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Test-wework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,8 +175,9 @@
 				343AE9511FCFFD0100585741 /* Test_weworkDylib.m */,
 				34C2A5B41FEC2E9E0099983A /* HookFunction.h */,
 				34C2A5B51FEC2E9E0099983A /* HookFunction.m */,
-				34CAE4811FE8EEAE0019BA8D /* HookWWKMessageListController.m */,
 				34C2A5B01FEC2C840099983A /* HookWWRedEnvOpenHongBaoWindow.m */,
+				34C8787C1FED795B005B7AB7 /* HookTool.h */,
+				34C8787D1FED795B005B7AB7 /* HookTool.m */,
 				343AE9391FCFFD0100585741 /* MethodTrace */,
 				343AE9441FCFFD0100585741 /* AntiAntiDebug */,
 				343AE9471FCFFD0100585741 /* fishhook */,
@@ -240,6 +243,7 @@
 				343AE9501FCFFD0100585741 /* Test_weworkDylib.h in Headers */,
 				343AE94B1FCFFD0100585741 /* fishhook.h in Headers */,
 				34C2A5B81FEC34940099983A /* HookFunction.h in Headers */,
+				34C8787E1FED795B005B7AB7 /* HookTool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,8 +428,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				34C2A5B71FEC2E9E0099983A /* HookFunction.m in Sources */,
-				34CAE4831FE8EEAE0019BA8D /* HookWWKMessageListController.m in Sources */,
 				343AE9461FCFFD0100585741 /* AntiAntiDebug.m in Sources */,
+				34C8787F1FED795B005B7AB7 /* HookTool.m in Sources */,
 				343AE9411FCFFD0100585741 /* MethodTrace.m in Sources */,
 				343AE9491FCFFD0100585741 /* fishhook.c in Sources */,
 				343AE9521FCFFD0100585741 /* Test_weworkDylib.m in Sources */,

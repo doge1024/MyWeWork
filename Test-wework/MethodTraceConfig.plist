@@ -4,7 +4,7 @@
 <dict>
 	<key>ENABLE_METHODTRACE</key>
 	<true/>
-	<key>TARGET_CLASS_LIST</key>
+	<key>TARGET_CLASS_LIST1</key>
 	<dict>
 		<key>WWRedEnvOpenHongBaoWindow</key>
 		<string></string>
@@ -36,5 +36,7 @@
 		<key>WWKMessageListController</key>
 		<string></string>
 	</dict>
+	<key>TARGET_CLASS_LIST</key>
+	<dict/>
 </dict>
 </plist>
