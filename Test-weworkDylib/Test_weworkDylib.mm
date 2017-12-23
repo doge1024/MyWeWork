@@ -3,9 +3,10 @@
 
 #import <UIKit/UIKit.h>
 #import "HookTool.h"
-#import "HookFunction.h"
+#import "HookFunctionsAndPropertys.h"
 
 @class WWKMessageRedEnvelopes;
+@class WWKConversationRedEnvelopesBubbleView;
 
 
 #include <substrate.h>
@@ -28,25 +29,34 @@
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class WWKConversationViewController; @class WWKMessage; 
-static WWKConversationViewController* (*_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$)(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationViewController$initWithConversation$(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$observe$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; 
-
-#line 9 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
+@class WWKConversationViewController; @class WWKMessage; @class WWKMessageRedEnvelopes; @class WWRedEnvOpenHongBaoWindow; @class WWKConversationRedEnvelopesBubbleView; 
+static WWKConversationViewController* (*_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$)(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationViewController$initWithConversation$(_LOGOS_SELF_TYPE_INIT WWKConversationViewController*, SEL, void *) _LOGOS_RETURN_RETAINED; static void (*_logos_orig$_ungrouped$WWKConversationViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL WWKConversationViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$WWKConversationViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL WWKConversationViewController* _LOGOS_SELF_CONST, SEL); static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *) _LOGOS_RETURN_RETAINED; static WWKMessage* (*_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$)(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$observe$(_LOGOS_SELF_TYPE_INIT WWKMessage*, SEL, void *, BOOL) _LOGOS_RETURN_RETAINED; static void (*_logos_orig$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$)(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST, SEL, NSInteger); static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST, SEL, NSInteger); static void (*_logos_orig$_ungrouped$WWRedEnvOpenHongBaoWindow$startOpenHongbaoAnimation)(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$startOpenHongbaoAnimation(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$playCustomSuccessSound(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST, SEL); 
+static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$WWKMessageRedEnvelopes(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("WWKMessageRedEnvelopes"); } return _klass; }static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$WWKConversationRedEnvelopesBubbleView(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("WWKConversationRedEnvelopesBubbleView"); } return _klass; }
+#line 10 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
 
 
 
 static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationViewController$initWithConversation$(_LOGOS_SELF_TYPE_INIT WWKConversationViewController* __unused self, SEL __unused _cmd, void * arg1) _LOGOS_RETURN_RETAINED {
     id conversationViewController = _logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$(self, _cmd, arg1);
+    [HookTool sharedInstance].startSnatchHB = NO;
     [HookTool sharedInstance].currentConversationViewController = conversationViewController;
     return conversationViewController;
 }
 
-
-
-
-
-
-
+static void _logos_method$_ungrouped$WWKConversationViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL WWKConversationViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+    _logos_orig$_ungrouped$WWKConversationViewController$viewDidLoad(self, _cmd);
+    
+    
+    UIViewController *viewController = (UIViewController *)self;
+    UIBarButtonItem *conversationMsgItems = viewController.navigationItem.rightBarButtonItem;
+    
+    UISwitch *swt = [[UISwitch alloc] init];
+    UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
+    viewController.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
+    [[[swt rac_newOnChannel] takeUntil:viewController.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
+        [HookTool sharedInstance].startSnatchHB = [x boolValue];
+    }];
+}
 
 
 
@@ -55,23 +65,25 @@ static WWKConversationViewController* _logos_method$_ungrouped$WWKConversationVi
 
 static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$(_LOGOS_SELF_TYPE_INIT WWKMessage* __unused self, SEL __unused _cmd, void * arg1) _LOGOS_RETURN_RETAINED {
     
-    id wkMessage = _logos_orig$_ungrouped$WWKMessage$initWithMessage$(self, _cmd, arg1);
+    WWKMessage *wkMessage = _logos_orig$_ungrouped$WWKMessage$initWithMessage$(self, _cmd, arg1);
     
     
-    NSArray *messageItems = [wkMessage messageItems];
-    id redEnvelopes = [messageItems firstObject]; 
-    if (redEnvelopes && [redEnvelopes isKindOfClass:NSClassFromString(@"WWKMessageRedEnvelopes")]) {
+    id redEnvelopes = [wkMessage.messageItems firstObject]; 
+    
+    if ([HookTool sharedInstance].startSnatchHB && redEnvelopes && [redEnvelopes isKindOfClass:_logos_static_class_lookup$WWKMessageRedEnvelopes()]) {
+        HBLogDebug(@"-[<WWKMessage: %p> initWithMessage:%p]: %@", self, arg1, (redEnvelopes));
+        
         if ([HookTool sharedInstance].currentConversationViewController) { 
-            id view = [[NSClassFromString(@"WWKConversationRedEnvelopesBubbleView") alloc] init];
-            [view performSelector:@selector(setMessage:) withObject:wkMessage];
-            [view performSelector:@selector(setDelegate:) withObject:[HookTool sharedInstance].currentConversationViewController]; 
-            [view performSelector:NSSelectorFromString(@"tony_onClickHongbaoMessage")];
+            WWKConversationRedEnvelopesBubbleView *bubbleView = [[_logos_static_class_lookup$WWKConversationRedEnvelopesBubbleView() alloc] init];
+            bubbleView.message = wkMessage;
+            bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; 
+            [bubbleView tony_onClickHongbaoMessage];
             
-            [HookTool sharedInstance].redEnvelopesBubbleView = view;
+            [HookTool sharedInstance].redEnvelopesBubbleView = bubbleView;
         }
     }
     
-    return wkMessage;
+    return (WWKMessage *)wkMessage;
 }
 
 
@@ -80,6 +92,34 @@ static WWKMessage* _logos_method$_ungrouped$WWKMessage$initWithMessage$observe$(
 }
 
 
+
+
+
+
+static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, NSInteger type) {
+    _logos_orig$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$(self, _cmd, type);
+    
+    if (self.mHongbaoStatus == 2) {
+        [self onOpenBtnClick:self.mOpenBtn];
+        [self playCustomSuccessSound];
+    }
+}
+
+
+static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$startOpenHongbaoAnimation(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+    return;
+}
+
+
+
+static void _logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$playCustomSuccessSound(_LOGOS_SELF_TYPE_NORMAL WWRedEnvOpenHongBaoWindow* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"hongbaoopensuccess" ofType:@"mp3"];
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
+    AudioServicesPlaySystemSound (soundID);
+}
+
+
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$WWKConversationViewController = objc_getClass("WWKConversationViewController"); MSHookMessageEx(_logos_class$_ungrouped$WWKConversationViewController, @selector(initWithConversation:), (IMP)&_logos_method$_ungrouped$WWKConversationViewController$initWithConversation$, (IMP*)&_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$);Class _logos_class$_ungrouped$WWKMessage = objc_getClass("WWKMessage"); MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$);MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:observe:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$observe$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$);} }
-#line 57 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"
+{Class _logos_class$_ungrouped$WWKConversationViewController = objc_getClass("WWKConversationViewController"); MSHookMessageEx(_logos_class$_ungrouped$WWKConversationViewController, @selector(initWithConversation:), (IMP)&_logos_method$_ungrouped$WWKConversationViewController$initWithConversation$, (IMP*)&_logos_orig$_ungrouped$WWKConversationViewController$initWithConversation$);MSHookMessageEx(_logos_class$_ungrouped$WWKConversationViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$WWKConversationViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$WWKConversationViewController$viewDidLoad);Class _logos_class$_ungrouped$WWKMessage = objc_getClass("WWKMessage"); MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$);MSHookMessageEx(_logos_class$_ungrouped$WWKMessage, @selector(initWithMessage:observe:), (IMP)&_logos_method$_ungrouped$WWKMessage$initWithMessage$observe$, (IMP*)&_logos_orig$_ungrouped$WWKMessage$initWithMessage$observe$);Class _logos_class$_ungrouped$WWRedEnvOpenHongBaoWindow = objc_getClass("WWRedEnvOpenHongBaoWindow"); MSHookMessageEx(_logos_class$_ungrouped$WWRedEnvOpenHongBaoWindow, @selector(setQyhbSubType:), (IMP)&_logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$, (IMP*)&_logos_orig$_ungrouped$WWRedEnvOpenHongBaoWindow$setQyhbSubType$);MSHookMessageEx(_logos_class$_ungrouped$WWRedEnvOpenHongBaoWindow, @selector(startOpenHongbaoAnimation), (IMP)&_logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$startOpenHongbaoAnimation, (IMP*)&_logos_orig$_ungrouped$WWRedEnvOpenHongBaoWindow$startOpenHongbaoAnimation);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$WWRedEnvOpenHongBaoWindow, @selector(playCustomSuccessSound), (IMP)&_logos_method$_ungrouped$WWRedEnvOpenHongBaoWindow$playCustomSuccessSound, _typeEncoding); }} }
+#line 97 "/Users/lzh/Desktop/test/Test-wework/Test-weworkDylib/Test_weworkDylib.xm"

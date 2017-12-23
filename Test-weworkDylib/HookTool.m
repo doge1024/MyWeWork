@@ -16,9 +16,17 @@
     static dispatch_once_t onceToken = 0;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[HookTool alloc] init];
+        
         // Do any other initialisation stuff here
+        [sharedInstance addObserverLog];
     });
     return sharedInstance;
+}
+
+- (void)addObserverLog {
+    [RACObserve(self, startSnatchHB) subscribeNext:^(NSNumber* x) {
+        NSLog(@"自动抢红包%@", [x boolValue] ? @"打开" : @"关闭");
+    }];
 }
 
 @end
