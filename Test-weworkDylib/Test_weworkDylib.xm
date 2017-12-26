@@ -30,6 +30,8 @@
     [[[swt rac_newOnChannel] takeUntil:viewController.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
         [HookTool sharedInstance].startSnatchHB = [x boolValue];
     }];
+    swt.on = YES;
+    [swt sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 %end
@@ -67,12 +69,56 @@
 
 %end
 
+/*
+%hook WWKGmailOAuthRequester
+
++ (void)setProxyForRequest:(id)arg1 {
+    NSLog(@"======");
+    return %orig;
+}
++ (id)post:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4 {
+    NSLog(@"======");
+    return %orig;
+}
++ (id)get:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4 {
+    NSLog(@"======");
+    return %orig;
+}
++ (void)aync_requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 callback:(void *)arg3 {
+    NSLog(@"======");
+    return %orig;
+}
++ (id)requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
+    NSLog(@"======");
+    return %orig;
+}
++ (id)requestTokensWithCode:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
+    NSLog(@"======");
+    return %orig;
+}
++ (id)requestEmailWithAccessToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
+    NSLog(@"======");
+    return %orig;
+}
+
+%end
+ */
+
+ %hook WXCCommonUtil
+// 强制输出log
+ + (void)_wxc_logConvert:(id)arg1 level:(int)arg2 function:(id)arg3 {
+     NSLog(@"强制输出log-start");
+     %orig(arg1, 2, arg3);
+     NSLog(@"强制输出log-end");
+ }
+ %end
+
 %hook WWRedEnvOpenHongBaoWindow
 
 // 红包window，设置完最后一个属性后，自动打开红包
 - (void)setQyhbSubType:(NSInteger)type {
     %orig;
-    
+    // 如果是未打开的红包
     if (self.mHongbaoStatus == 2) {
         [self onOpenBtnClick:self.mOpenBtn];
         [self playCustomSuccessSound];
@@ -92,5 +138,4 @@
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
     AudioServicesPlaySystemSound (soundID);
 }
-
 %end

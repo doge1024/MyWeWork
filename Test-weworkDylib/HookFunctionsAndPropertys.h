@@ -16,8 +16,19 @@
 #pragma mark - WWRedEnvOpenHongBaoWindow
 @interface WWRedEnvOpenHongBaoWindow : UIWindow
 
-@property(nonatomic, assign) NSInteger qyhbSubType;
-@property(nonatomic, assign) NSInteger mHongbaoStatus;
+@property(copy, nonatomic) NSString *mHongbaoTicket;
+@property(copy, nonatomic) NSString *mHongBaoID;
+@property(retain, nonatomic) NSMutableArray *mToVidList;
+@property(nonatomic) unsigned int qyhbSubType;
+@property(nonatomic) unsigned long long senderCorpAppId;
+@property(nonatomic) unsigned long long itilInviteeVid;
+@property(nonatomic) unsigned int mHongbaoStatus;
+@property(nonatomic) unsigned int mHongbaoSubType;
+@property(nonatomic) unsigned int mHongbaoType;
+@property(nonatomic) unsigned long long mSenderVid;
+@property(nonatomic) unsigned long long mSelfVid;
+@property(nonatomic) _Bool isFullMemberGroupHongbao;
+@property(nonatomic) int mHongbaoVidTicket;
 @property(strong, nonatomic) UIButton *mOpenBtn;
 
 - (void)onOpenBtnClick:(UIButton *)btn;
@@ -45,4 +56,15 @@
 #pragma mark - WWKMessageRedEnvelopes
 @interface WWKMessageRedEnvelopes: NSObject
 
+@end
+
+#pragma mark - WWKMessageRedEnvelopes
+@interface WWKGmailOAuthRequester: NSObject
++ (void)setProxyForRequest:(id)arg1;
++ (id)post:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4;
++ (id)get:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4;
++ (void)aync_requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 callback:(void *)arg3;
++ (id)requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
++ (id)requestTokensWithCode:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
++ (id)requestEmailWithAccessToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
 @end

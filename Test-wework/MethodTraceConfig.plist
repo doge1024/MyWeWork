@@ -37,6 +37,17 @@
 		<string></string>
 	</dict>
 	<key>TARGET_CLASS_LIST</key>
+	<dict>
+		<key>WWRedEnvWxPayUIHelper</key>
+		<string></string>
+		<key>WWRedEnvelopesMgr</key>
+		<string></string>
+		<key>WWKConversationRedEnvelopesBubbleView</key>
+		<string></string>
+		<key>WWKMessageRedEnvelopes</key>
+		<string></string>
+	</dict>
+	<key>TARGET_CLASS_LIST2</key>
 	<dict/>
 </dict>
 </plist>

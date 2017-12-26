@@ -38,7 +38,7 @@
                 [deepString appendString:@"-"];
             }
             NSLog(@"%@[ %@]", deepString , target);
-            NSLog(@"selector: %@", selectorString);
+            NSLog(@"function: %@", selectorString);
             NSLog(@"=====================\n");
         } after:^(id target, SEL sel, NSArray *args, NSTimeInterval interval,int deep, id retValue) {
             NSMutableString *deepString = [NSMutableString new];

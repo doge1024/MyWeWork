@@ -659,14 +659,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5CJEBBFK9A;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.li.app.test.Test-wework";
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -676,14 +676,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5CJEBBFK9A;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.li.app.test.Test-wework";
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
