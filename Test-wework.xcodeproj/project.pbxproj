@@ -580,6 +580,7 @@
 					"$(inherited)",
 					"$(MonkeyDevPath)/Frameworks",
 					"$(MonkeyDevTheosPath)/vendor/lib/**",
+					"$(PROJECT_DIR)",
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
@@ -635,6 +636,7 @@
 					"$(inherited)",
 					"$(MonkeyDevPath)/Frameworks",
 					"$(MonkeyDevTheosPath)/vendor/lib/**",
+					"$(PROJECT_DIR)",
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
@@ -662,6 +664,10 @@
 				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
@@ -679,6 +685,10 @@
 				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Test-wework/Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";

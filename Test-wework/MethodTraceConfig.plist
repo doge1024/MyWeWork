@@ -3,51 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>ENABLE_METHODTRACE</key>
-	<true/>
-	<key>TARGET_CLASS_LIST1</key>
+	<false/>
+	<key>TARGET_CLASS_LIST</key>
 	<dict>
 		<key>WWRedEnvOpenHongBaoWindow</key>
 		<string></string>
-		<key>WWKConversationMessageBubbleView</key>
-		<array>
-			<string>viewDidTap:</string>
-			<string>viewDidLongPress:</string>
-		</array>
-		<key>WWKConversationRedEnvelopesBubbleView</key>
-		<string></string>
-		<key>WWKMessageRedEnvelopes</key>
-		<string></string>
-		<key>WWKMessageMedia</key>
-		<string></string>
-		<key>WWKMessage</key>
-		<string></string>
-		<key>WWKMessageRTXNotify</key>
-		<string></string>
-		<key>WWKMessageNotify</key>
-		<string></string>
-		<key>ConversationHelper</key>
-		<string></string>
-		<key>WAAppMsgItem</key>
-		<string></string>
-		<key>WWKAppMessageContact</key>
-		<string></string>
-		<key>WWKConversationViewController</key>
+		<key>WWKConversationWrapper</key>
 		<string></string>
 		<key>WWKMessageListController</key>
 		<string></string>
-	</dict>
-	<key>TARGET_CLASS_LIST</key>
-	<dict>
-		<key>WWRedEnvWxPayUIHelper</key>
+		<key>WWKNavigationController</key>
 		<string></string>
-		<key>WWRedEnvelopesMgr</key>
+		<key>WWKMessage</key>
 		<string></string>
-		<key>WWKConversationRedEnvelopesBubbleView</key>
-		<string></string>
-		<key>WWKMessageRedEnvelopes</key>
+		<key>WWLishiRedEnvelopesHelper</key>
 		<string></string>
 	</dict>
-	<key>TARGET_CLASS_LIST2</key>
-	<dict/>
 </dict>
 </plist>

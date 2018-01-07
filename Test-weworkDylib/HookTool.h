@@ -20,6 +20,11 @@
 
 @property(nonatomic, assign, getter=isStartSnatchHB) BOOL startSnatchHB;
 
+/**
+ 单个抢红包进程
+ */
+@property(nonatomic, strong) NSString *startSnatchingHBID;
+
 + (instancetype)sharedInstance;
 
 @end

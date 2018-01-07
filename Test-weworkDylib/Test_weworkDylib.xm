@@ -7,34 +7,58 @@
 @class WWKMessageRedEnvelopes;
 @class WWKConversationRedEnvelopesBubbleView;
 
-%hook WWKConversationViewController
+%hook WWKNavigationController
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([HookTool sharedInstance].startSnatchingHBID && [viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
+        WWRedEnvDetailViewController *vc = (WWRedEnvDetailViewController *)viewController;
+        if ([[HookTool sharedInstance].startSnatchingHBID isEqualToString:vc.mHongBaoID]) {
+            [HookTool sharedInstance].startSnatchingHBID = nil;
+            return;
+        }
+    }
+    return %orig;
+}
+%end
 
+#pragma mark - 首页红包提醒
+%hook WWKConversationWrapper
+- (void)___setLastMessageText:(NSString *)arg1 {
+    if ([arg1 containsString:@"[红包]"]) {
+        
+    }
+    return %orig;
+}
+%end
+
+%hook WWKConversationViewController
 // 初始化以后weak持有会话控制器
-- (id)initWithConversation:(void *)arg1 {
-    id conversationViewController = %orig;
+- (WWKConversationViewController *)initWithConversation:(void *)arg1 {
+    WWKConversationViewController *conversationViewController = %orig;
     [HookTool sharedInstance].startSnatchHB = NO;
     [HookTool sharedInstance].currentConversationViewController = conversationViewController;
+    
+    __weak typeof(self) weakSelf = self;
+    [[[weakSelf rac_signalForSelector:@selector(viewDidAppear:)] take:1] subscribeNext:^(RACTuple * _Nullable x) {
+        __strong typeof(self) strongSelf = weakSelf;
+        UIBarButtonItem *conversationMsgItems = strongSelf.navigationItem.rightBarButtonItem;
+        if (conversationMsgItems) {
+            UISwitch *swt = [[UISwitch alloc] init];
+            UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
+            strongSelf.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
+            [[[swt rac_newOnChannel] takeUntil:strongSelf.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
+                [HookTool sharedInstance].startSnatchHB = [x boolValue];
+            }];
+            swt.on = YES;
+            [swt sendActionsForControlEvents:UIControlEventValueChanged];
+        }
+    }];
+    
     return conversationViewController;
 }
-
-- (void)viewDidLoad {
-    %orig;
-    
-    // 添加抢红包按钮
-    UIViewController *viewController = (UIViewController *)self;
-    UIBarButtonItem *conversationMsgItems = viewController.navigationItem.rightBarButtonItem;
-    
-    UISwitch *swt = [[UISwitch alloc] init];
-    UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
-    viewController.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
-    [[[swt rac_newOnChannel] takeUntil:viewController.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
-        [HookTool sharedInstance].startSnatchHB = [x boolValue];
-    }];
-    swt.on = YES;
-    [swt sendActionsForControlEvents:UIControlEventValueChanged];
-}
-
 %end
+
+//%hook WWKConversationRedEnvelopesBubbleView
+//%end
 
 %hook WWKMessage
 
@@ -44,7 +68,7 @@
     WWKMessage *wkMessage = %orig;
     
     // 是红包消息
-    id redEnvelopes = [wkMessage.messageItems firstObject]; // WWKMessageRedEnvelopes
+    WWKMessageRedEnvelopes *redEnvelopes = [wkMessage.messageItems firstObject]; // WWKMessageRedEnvelopes
     
     if ([HookTool sharedInstance].startSnatchHB && redEnvelopes && [redEnvelopes isKindOfClass:%c(WWKMessageRedEnvelopes)]) {
         %log(redEnvelopes);
@@ -58,76 +82,64 @@
             [HookTool sharedInstance].redEnvelopesBubbleView = bubbleView;
         }
     }
-    
     return (WWKMessage *)wkMessage;
 }
 
-// initWithMessage: => initWithMessage:observe: => return initWithMessage:
-- (id)initWithMessage:(void *)arg1 observe:(BOOL)arg2 {
-    return %orig;
-}
-
 %end
-
-/*
-%hook WWKGmailOAuthRequester
-
-+ (void)setProxyForRequest:(id)arg1 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (id)post:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (id)get:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (void)aync_requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 callback:(void *)arg3 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (id)requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (id)requestTokensWithCode:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
-    NSLog(@"======");
-    return %orig;
-}
-+ (id)requestEmailWithAccessToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3 {
-    NSLog(@"======");
-    return %orig;
-}
-
-%end
- */
 
  %hook WXCCommonUtil
 // 强制输出log
  + (void)_wxc_logConvert:(id)arg1 level:(int)arg2 function:(id)arg3 {
+     return %orig(arg1, arg2, arg3);
+     /*
      NSLog(@"强制输出log-start");
      %orig(arg1, 2, arg3);
      NSLog(@"强制输出log-end");
+      */
  }
  %end
+
+/*
+%hook WWRedEnvDetailViewController
+%end
+ */
 
 %hook WWRedEnvOpenHongBaoWindow
 
 // 红包window，设置完最后一个属性后，自动打开红包
 - (void)setQyhbSubType:(NSInteger)type {
     %orig;
+    
     // 如果是未打开的红包
     if (self.mHongbaoStatus == 2) {
+        [HookTool sharedInstance].startSnatchingHBID = self.mHongBaoID;
         [self onOpenBtnClick:self.mOpenBtn];
-        [self playCustomSuccessSound];
+        //[self playCustomSuccessSound];
     }
 }
 
-// 去掉动画
+- (void)onCloseBtnClick:(id)arg1 {
+    if ([HookTool sharedInstance].startSnatchingHBID && [[HookTool sharedInstance].startSnatchingHBID isEqualToString:self.mHongBaoID]) {
+        [HookTool sharedInstance].startSnatchingHBID = nil;
+    }
+    %orig;
+}
+
+- (void)_closeRedEnvWindow {
+    if ([HookTool sharedInstance].startSnatchingHBID && [[HookTool sharedInstance].startSnatchingHBID isEqualToString:self.mHongBaoID]) {
+        [HookTool sharedInstance].startSnatchingHBID = nil;
+    }
+    %orig;
+}
+
+// btn的位置会偏移
 - (void)startOpenHongbaoAnimation {
-    return;
+    CGFloat bgWidth = self.mFrontContainerView.image.size.width;
+    CGFloat bgHeight = self.mFrontContainerView.image.size.height;
+    CGFloat openBtnWidth = self.mOpenBtn.frame.size.width;
+    CGFloat openBtnHeight = self.mOpenBtn.frame.size.height;
+    self.mOpenBtn.frame = CGRectMake((bgWidth - openBtnWidth) * 0.5, bgHeight - openBtnHeight * 0.5, openBtnWidth, openBtnWidth);
+    %orig;
 }
 
 // 自己播放声音，但不要动画

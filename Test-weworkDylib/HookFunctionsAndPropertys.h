@@ -30,9 +30,16 @@
 @property(nonatomic) _Bool isFullMemberGroupHongbao;
 @property(nonatomic) int mHongbaoVidTicket;
 @property(strong, nonatomic) UIButton *mOpenBtn;
+@property(retain, nonatomic) UIButton *mCloseBtn;
+@property(retain, nonatomic) UIImageView *mFrontContainerView;
 
 - (void)onOpenBtnClick:(UIButton *)btn;
+- (void)onCloseBtnClick:(id)arg1;
 - (void)playCustomSuccessSound;
+- (void)onJumpToDetailBtnClick;
+- (void)p_jumpToTargetController:(id)arg1;
+- (void)closeRedEnvWindowWithFlyAnimate;
+- (void)_closeRedEnvWindow;
 
 @end
 
@@ -47,24 +54,42 @@
 @end
 
 #pragma mark - WWKMessage
+
 @interface WWKMessage: NSObject
-
 @property(nonatomic, strong) NSArray *messageItems;
-
+- (id)initWithMessage:(void *)arg1;
+- (id)initWithMessage:(void *)arg1 observe:(BOOL)arg2;
+- (struct Message)getModelMessage;
+- (id)TEXT_MESSAGE_TRUNCATE_TIPS;
 @end
 
 #pragma mark - WWKMessageRedEnvelopes
-@interface WWKMessageRedEnvelopes: NSObject
-
+@interface WWKMessageRedEnvelopes : NSObject
+@property(nonatomic) long long hongbaoSubType;
+@property(nonatomic) long long hongbaoType;
+@property(retain, nonatomic) NSArray *recvVidList;
+@property(copy, nonatomic) NSString *typeWording;
+@property(copy, nonatomic) NSString *detailWording;
+@property(copy, nonatomic) NSString *wishingWording;
+@property(copy, nonatomic) NSString *hongbaoID;
 @end
 
-#pragma mark - WWKMessageRedEnvelopes
-@interface WWKGmailOAuthRequester: NSObject
-+ (void)setProxyForRequest:(id)arg1;
-+ (id)post:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4;
-+ (id)get:(id)arg1 parameters:(id)arg2 useProxy:(_Bool)arg3 error:(id *)arg4;
-+ (void)aync_requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 callback:(void *)arg3;
-+ (id)requestTokenWithRefreshToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
-+ (id)requestTokensWithCode:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
-+ (id)requestEmailWithAccessToken:(id)arg1 useProxy:(_Bool)arg2 error:(id *)arg3;
+#pragma mark - WWKNavigationController
+@interface WWKNavigationController: UINavigationController
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+@end
+
+#pragma mark - WWRedEnvDetailViewController
+@interface WWRedEnvDetailViewController: UIViewController
+@property(copy, nonatomic) NSString *mHongBaoID;
+@end
+
+#pragma mark - WWKConversationViewController
+@interface WWKConversationViewController: UIViewController
+- (id)initWithConversation:(void *)arg1;
+@end
+
+#pragma mark - WWKConversationWrapper
+@interface WWKConversationWrapper: NSObject
+- (void)setLastMessageText:(NSString *)arg1;
 @end
