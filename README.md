@@ -5,7 +5,7 @@
 ### 使用
 
 ###### - 测试使用
-  1. 将脱壳后的企业微信ipa解压取得.app文件放到`Test-wework/TargetApp/wework.app`
+  1. 将脱壳后的企业微信ipa解压取得.app文件放到`Test-wework/TargetApp/wework.app`
   2. 选择自己的BundleID和证书
   3. 插上手机，`cmd+R`
   4. 聊天会话页面右上角有个开关，打开后，新消息如果是红包的话，会自动抢（默认打开）
