@@ -30,3 +30,4 @@
 ### 感谢
 1. 感谢 [MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)，在没有越狱机的情况下还能简单的调试编写
 2. 感谢同事的1分钱测试红包
+3. 感谢各位小白鼠
