@@ -9,10 +9,9 @@
 
 %hook WWKNavigationController
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([HookTool sharedInstance].startSnatchingHBID && [viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
+    if ([HookTool sharedInstance].startSnatchHB && [viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
         WWRedEnvDetailViewController *vc = (WWRedEnvDetailViewController *)viewController;
-        if ([[HookTool sharedInstance].startSnatchingHBID isEqualToString:vc.mHongBaoID]) {
-            [HookTool sharedInstance].startSnatchingHBID = nil;
+        if ([HookTool removeBubbleViewWithHongBaoID:vc.mHongBaoID]) {
             return;
         }
     }
@@ -76,10 +75,10 @@
         if ([HookTool sharedInstance].currentConversationViewController) { // 处在会话
             WWKConversationRedEnvelopesBubbleView *bubbleView = [[%c(WWKConversationRedEnvelopesBubbleView) alloc] init];
             bubbleView.message = wkMessage;
-            bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
+            //bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
             [bubbleView tony_onClickHongbaoMessage];
             // hold 红包view
-            [HookTool sharedInstance].redEnvelopesBubbleView = bubbleView;
+            [[HookTool sharedInstance].redEnvelopesBubbleViews addObject:bubbleView];
         }
     }
     return (WWKMessage *)wkMessage;
@@ -112,34 +111,30 @@
     
     // 如果是未打开的红包
     if (self.mHongbaoStatus == 2) {
-        [HookTool sharedInstance].startSnatchingHBID = self.mHongBaoID;
         [self onOpenBtnClick:self.mOpenBtn];
-        //[self playCustomSuccessSound];
+        // [self playCustomSuccessSound];
     }
 }
 
 - (void)onCloseBtnClick:(id)arg1 {
-    if ([HookTool sharedInstance].startSnatchingHBID && [[HookTool sharedInstance].startSnatchingHBID isEqualToString:self.mHongBaoID]) {
-        [HookTool sharedInstance].startSnatchingHBID = nil;
-    }
+    [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
     %orig;
 }
 
 - (void)_closeRedEnvWindow {
-    if ([HookTool sharedInstance].startSnatchingHBID && [[HookTool sharedInstance].startSnatchingHBID isEqualToString:self.mHongBaoID]) {
-        [HookTool sharedInstance].startSnatchingHBID = nil;
-    }
+    [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
     %orig;
 }
 
 // btn的位置会偏移
 - (void)startOpenHongbaoAnimation {
+    NSLog(@"startOpenHongbaoAnimation");
     CGFloat bgWidth = self.mFrontContainerView.image.size.width;
     CGFloat bgHeight = self.mFrontContainerView.image.size.height;
     CGFloat openBtnWidth = self.mOpenBtn.frame.size.width;
     CGFloat openBtnHeight = self.mOpenBtn.frame.size.height;
     self.mOpenBtn.frame = CGRectMake((bgWidth - openBtnWidth) * 0.5, bgHeight - openBtnHeight * 0.5, openBtnWidth, openBtnWidth);
-    %orig;
+    // %orig;
 }
 
 // 自己播放声音，但不要动画

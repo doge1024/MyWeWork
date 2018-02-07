@@ -40,27 +40,8 @@
 - (void)p_jumpToTargetController:(id)arg1;
 - (void)closeRedEnvWindowWithFlyAnimate;
 - (void)_closeRedEnvWindow;
+- (void)startOpenHongbaoAnimation;
 
-@end
-
-#pragma mark - WWKConversationRedEnvelopesBubbleView
-@interface WWKConversationRedEnvelopesBubbleView: UIView
-
-@property (nonatomic, strong) id message;
-@property (nonatomic, weak) id delegate;
-
-- (void)tony_onClickHongbaoMessage;
-
-@end
-
-#pragma mark - WWKMessage
-
-@interface WWKMessage: NSObject
-@property(nonatomic, strong) NSArray *messageItems;
-- (id)initWithMessage:(void *)arg1;
-- (id)initWithMessage:(void *)arg1 observe:(BOOL)arg2;
-- (struct Message)getModelMessage;
-- (id)TEXT_MESSAGE_TRUNCATE_TIPS;
 @end
 
 #pragma mark - WWKMessageRedEnvelopes
@@ -72,6 +53,25 @@
 @property(copy, nonatomic) NSString *detailWording;
 @property(copy, nonatomic) NSString *wishingWording;
 @property(copy, nonatomic) NSString *hongbaoID;
+@end
+
+#pragma mark - WWKMessage
+@interface WWKMessage: NSObject
+@property(nonatomic, strong) NSArray<WWKMessageRedEnvelopes *> *messageItems;
+- (id)initWithMessage:(void *)arg1;
+- (id)initWithMessage:(void *)arg1 observe:(BOOL)arg2;
+- (struct Message)getModelMessage;
+- (id)TEXT_MESSAGE_TRUNCATE_TIPS;
+@end
+
+#pragma mark - WWKConversationRedEnvelopesBubbleView
+@interface WWKConversationRedEnvelopesBubbleView: UIView
+
+@property (nonatomic, strong) WWKMessage* message;
+@property (nonatomic, weak) id delegate;
+
+- (void)tony_onClickHongbaoMessage;
+
 @end
 
 #pragma mark - WWKNavigationController

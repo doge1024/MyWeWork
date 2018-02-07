@@ -9,22 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "HookFunctionsAndPropertys.h"
 
-@class WWKConversationViewController;
-@class WWKConversationRedEnvelopesBubbleView;
-
 @interface HookTool : NSObject
 
 @property(nonatomic, weak) WWKConversationViewController *currentConversationViewController;
 
-@property(nonatomic, strong) WWKConversationRedEnvelopesBubbleView *redEnvelopesBubbleView;
+@property(nonatomic, strong) NSMutableArray<WWKConversationRedEnvelopesBubbleView *> *redEnvelopesBubbleViews;
 
 @property(nonatomic, assign, getter=isStartSnatchHB) BOOL startSnatchHB;
 
-/**
- 单个抢红包进程
- */
-@property(nonatomic, strong) NSString *startSnatchingHBID;
-
 + (instancetype)sharedInstance;
+
+/**
+ 移除保存的bubbleView
+
+ @param hongBaoID 唯一id
+ @return 移除成功YES
+ */
++ (BOOL)removeBubbleViewWithHongBaoID:(NSString *)hongBaoID;
 
 @end
