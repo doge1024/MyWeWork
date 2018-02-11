@@ -1,14 +1,14 @@
 //  weibo: http://weibo.com/xiaoqing28
 //  blog:  http://www.alonemonkey.com
 //
-//  Test_weworkDylib.m
-//  Test-weworkDylib
+//  MyWeWorkDylib.m
+//  MyWeWorkDylib
 //
-//  Created by lzh on 2017/11/30.
-//  Copyright (c) 2017年 lzh. All rights reserved.
+//  Created by lzh on 2018/2/11.
+//  Copyright (c) 2018年 harddog. All rights reserved.
 //
 
-#import "Test_weworkDylib.h"
+#import "MyWeWorkDylib.h"
 #import <UIKit/UIKit.h>
 #import "HookFunctionsAndPropertys.h"
 #ifdef DEBUG
@@ -18,7 +18,7 @@
 #endif
 
 static __attribute__((constructor)) void entry(){
-
+    
 #ifdef DEBUG
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         

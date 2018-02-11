@@ -37,20 +37,16 @@
             for (int i = 0; i < deep; i++) {
                 [deepString appendString:@"-"];
             }
-            NSLog(@"%@[ %@]", deepString , target);
-            NSLog(@"function: %@", selectorString);
-            NSLog(@"=====================\n");
+            NSLog(@"%@[%@ %@]", deepString , target, selectorString);
         } after:^(id target, SEL sel, NSArray *args, NSTimeInterval interval,int deep, id retValue) {
             NSMutableString *deepString = [NSMutableString new];
             for (int i = 0; i < deep; i++) {
                 [deepString appendString:@"-"];
             }
             NSLog(@"%@ret:%@", deepString, retValue);
-            NSLog(@"=====================\n");
         }];
     }else{
         NSLog(@"canot find class %@", className);
-        NSLog(@"=====================\n");
     }
 }
 

@@ -1,0 +1,723 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C69A90969F2E729495BC1C3 /* Pods_MyWeWorkDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */; };
+		34523323203059D90032EF93 /* MethodTraceConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34523322203059D90032EF93 /* MethodTraceConfig.plist */; };
+		34523326203059D90032EF93 /* put ipa or app here in Resources */ = {isa = PBXBuildFile; fileRef = 34523325203059D90032EF93 /* put ipa or app here */; };
+		3452332E203059D90032EF93 /* libMyWeWorkDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		34523333203059D90032EF93 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34523332203059D90032EF93 /* JavaScriptCore.framework */; };
+		34523335203059D90032EF93 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34523334203059D90032EF93 /* Foundation.framework */; };
+		34523337203059D90032EF93 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34523336203059D90032EF93 /* UIKit.framework */; };
+		3452333B203059D90032EF93 /* ANYMethodLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452333A203059D90032EF93 /* ANYMethodLog.h */; };
+		3452333D203059D90032EF93 /* ANYMethodLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3452333C203059D90032EF93 /* ANYMethodLog.m */; };
+		3452333F203059D90032EF93 /* MethodTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452333E203059D90032EF93 /* MethodTrace.h */; };
+		34523341203059D90032EF93 /* MethodTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523340203059D90032EF93 /* MethodTrace.m */; };
+		34523346203059D90032EF93 /* AntiAntiDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523345203059D90032EF93 /* AntiAntiDebug.m */; };
+		34523349203059D90032EF93 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 34523348203059D90032EF93 /* fishhook.c */; };
+		3452334B203059D90032EF93 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452334A203059D90032EF93 /* fishhook.h */; };
+		3452334E203059D90032EF93 /* MyWeWorkDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3452334D203059D90032EF93 /* MyWeWorkDylib.mm */; };
+		34523350203059D90032EF93 /* MyWeWorkDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452334F203059D90032EF93 /* MyWeWorkDylib.h */; };
+		34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523351203059D90032EF93 /* MyWeWorkDylib.m */; };
+		3452335C20305A410032EF93 /* HookFunctionsAndPropertys.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452335B20305A410032EF93 /* HookFunctionsAndPropertys.h */; };
+		3452335F20305A510032EF93 /* HookTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3452335D20305A510032EF93 /* HookTool.m */; };
+		3452336020305A510032EF93 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452335E20305A510032EF93 /* HookTool.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3452332F203059D90032EF93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34523314203059D90032EF93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3452332C203059D90032EF93;
+			remoteInfo = MyWeWorkDylib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3452331C203059D90032EF93 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3452332E203059D90032EF93 /* libMyWeWorkDylib.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3452331F203059D90032EF93 /* MyWeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34523322203059D90032EF93 /* MethodTraceConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MethodTraceConfig.plist; sourceTree = "<group>"; };
+		34523325203059D90032EF93 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
+		34523327203059D90032EF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMyWeWorkDylib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		34523332203059D90032EF93 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		34523334203059D90032EF93 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		34523336203059D90032EF93 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3452333A203059D90032EF93 /* ANYMethodLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ANYMethodLog.h; path = MethodTrace/ANYMethodLog.h; sourceTree = "<group>"; };
+		3452333C203059D90032EF93 /* ANYMethodLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ANYMethodLog.m; path = MethodTrace/ANYMethodLog.m; sourceTree = "<group>"; };
+		3452333E203059D90032EF93 /* MethodTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MethodTrace.h; path = MethodTrace/MethodTrace.h; sourceTree = "<group>"; };
+		34523340203059D90032EF93 /* MethodTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MethodTrace.m; path = MethodTrace/MethodTrace.m; sourceTree = "<group>"; };
+		34523343203059D90032EF93 /* MyWeWorkDylib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyWeWorkDylib-Prefix.pch"; sourceTree = "<group>"; };
+		34523345203059D90032EF93 /* AntiAntiDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AntiAntiDebug.m; path = AntiAntiDebug/AntiAntiDebug.m; sourceTree = "<group>"; };
+		34523348203059D90032EF93 /* fishhook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
+		3452334A203059D90032EF93 /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
+		3452334C203059D90032EF93 /* MyWeWorkDylib.xm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyWeWorkDylib.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3452334D203059D90032EF93 /* MyWeWorkDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyWeWorkDylib.mm; sourceTree = "<group>"; };
+		3452334F203059D90032EF93 /* MyWeWorkDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWeWorkDylib.h; sourceTree = "<group>"; };
+		34523351203059D90032EF93 /* MyWeWorkDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWeWorkDylib.m; sourceTree = "<group>"; };
+		3452335B20305A410032EF93 /* HookFunctionsAndPropertys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookFunctionsAndPropertys.h; sourceTree = "<group>"; };
+		3452335D20305A510032EF93 /* HookTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HookTool.m; sourceTree = "<group>"; };
+		3452335E20305A510032EF93 /* HookTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
+		5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.release.xcconfig"; sourceTree = "<group>"; };
+		AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWeWorkDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34523319203059D90032EF93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3452332A203059D90032EF93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34523333203059D90032EF93 /* JavaScriptCore.framework in Frameworks */,
+				34523337203059D90032EF93 /* UIKit.framework in Frameworks */,
+				34523335203059D90032EF93 /* Foundation.framework in Frameworks */,
+				0C69A90969F2E729495BC1C3 /* Pods_MyWeWorkDylib.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34523313203059D90032EF93 = {
+			isa = PBXGroup;
+			children = (
+				34523321203059D90032EF93 /* MyWeWork */,
+				34523338203059D90032EF93 /* MyWeWorkDylib */,
+				34523331203059D90032EF93 /* Frameworks */,
+				34523320203059D90032EF93 /* Products */,
+				5AFDB845A0D066B876880CB0 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		34523320203059D90032EF93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3452331F203059D90032EF93 /* MyWeWork.app */,
+				3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34523321203059D90032EF93 /* MyWeWork */ = {
+			isa = PBXGroup;
+			children = (
+				34523322203059D90032EF93 /* MethodTraceConfig.plist */,
+				34523327203059D90032EF93 /* Info.plist */,
+				34523324203059D90032EF93 /* TargetApp */,
+			);
+			path = MyWeWork;
+			sourceTree = "<group>";
+		};
+		34523324203059D90032EF93 /* TargetApp */ = {
+			isa = PBXGroup;
+			children = (
+				34523325203059D90032EF93 /* put ipa or app here */,
+			);
+			name = TargetApp;
+			sourceTree = "<group>";
+		};
+		34523331203059D90032EF93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34523332203059D90032EF93 /* JavaScriptCore.framework */,
+				34523334203059D90032EF93 /* Foundation.framework */,
+				34523336203059D90032EF93 /* UIKit.framework */,
+				AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		34523338203059D90032EF93 /* MyWeWorkDylib */ = {
+			isa = PBXGroup;
+			children = (
+				3452334C203059D90032EF93 /* MyWeWorkDylib.xm */,
+				3452334D203059D90032EF93 /* MyWeWorkDylib.mm */,
+				3452335B20305A410032EF93 /* HookFunctionsAndPropertys.h */,
+				3452335E20305A510032EF93 /* HookTool.h */,
+				3452335D20305A510032EF93 /* HookTool.m */,
+				3452334F203059D90032EF93 /* MyWeWorkDylib.h */,
+				34523351203059D90032EF93 /* MyWeWorkDylib.m */,
+				34523339203059D90032EF93 /* MethodTrace */,
+				34523344203059D90032EF93 /* AntiAntiDebug */,
+				34523347203059D90032EF93 /* fishhook */,
+				34523342203059D90032EF93 /* Supporting Files */,
+			);
+			path = MyWeWorkDylib;
+			sourceTree = "<group>";
+		};
+		34523339203059D90032EF93 /* MethodTrace */ = {
+			isa = PBXGroup;
+			children = (
+				3452333A203059D90032EF93 /* ANYMethodLog.h */,
+				3452333C203059D90032EF93 /* ANYMethodLog.m */,
+				3452333E203059D90032EF93 /* MethodTrace.h */,
+				34523340203059D90032EF93 /* MethodTrace.m */,
+			);
+			name = MethodTrace;
+			sourceTree = "<group>";
+		};
+		34523342203059D90032EF93 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				34523343203059D90032EF93 /* MyWeWorkDylib-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34523344203059D90032EF93 /* AntiAntiDebug */ = {
+			isa = PBXGroup;
+			children = (
+				34523345203059D90032EF93 /* AntiAntiDebug.m */,
+			);
+			name = AntiAntiDebug;
+			sourceTree = "<group>";
+		};
+		34523347203059D90032EF93 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				34523348203059D90032EF93 /* fishhook.c */,
+				3452334A203059D90032EF93 /* fishhook.h */,
+			);
+			name = fishhook;
+			sourceTree = "<group>";
+		};
+		5AFDB845A0D066B876880CB0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */,
+				5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3452332B203059D90032EF93 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3452333B203059D90032EF93 /* ANYMethodLog.h in Headers */,
+				3452333F203059D90032EF93 /* MethodTrace.h in Headers */,
+				34523350203059D90032EF93 /* MyWeWorkDylib.h in Headers */,
+				3452336020305A510032EF93 /* HookTool.h in Headers */,
+				3452334B203059D90032EF93 /* fishhook.h in Headers */,
+				3452335C20305A410032EF93 /* HookFunctionsAndPropertys.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3452331E203059D90032EF93 /* MyWeWork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34523358203059D90032EF93 /* Build configuration list for PBXNativeTarget "MyWeWork" */;
+			buildPhases = (
+				34523318203059D90032EF93 /* Sources */,
+				34523319203059D90032EF93 /* Frameworks */,
+				3452331A203059D90032EF93 /* ShellScript */,
+				3452331B203059D90032EF93 /* Resources */,
+				3452331C203059D90032EF93 /* CopyFiles */,
+				3452331D203059D90032EF93 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34523330203059D90032EF93 /* PBXTargetDependency */,
+			);
+			name = MyWeWork;
+			productName = MyWeWork;
+			productReference = 3452331F203059D90032EF93 /* MyWeWork.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3452332C203059D90032EF93 /* MyWeWorkDylib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34523355203059D90032EF93 /* Build configuration list for PBXNativeTarget "MyWeWorkDylib" */;
+			buildPhases = (
+				98B054E32CEABC540A18DCFA /* [CP] Check Pods Manifest.lock */,
+				34523328203059D90032EF93 /* ShellScript */,
+				34523329203059D90032EF93 /* Sources */,
+				3452332A203059D90032EF93 /* Frameworks */,
+				3452332B203059D90032EF93 /* Headers */,
+				EB0B0C0A1CEBA8DD032F0DC8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyWeWorkDylib;
+			productName = MyWeWorkDylib;
+			productReference = 3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34523314203059D90032EF93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = harddog;
+				TargetAttributes = {
+					3452331E203059D90032EF93 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					3452332C203059D90032EF93 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 34523317203059D90032EF93 /* Build configuration list for PBXProject "MyWeWork" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 34523313203059D90032EF93;
+			productRefGroup = 34523320203059D90032EF93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3452331E203059D90032EF93 /* MyWeWork */,
+				3452332C203059D90032EF93 /* MyWeWorkDylib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3452331B203059D90032EF93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34523326203059D90032EF93 /* put ipa or app here in Resources */,
+				34523323203059D90032EF93 /* MethodTraceConfig.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3452331A203059D90032EF93 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = /opt/MonkeyDev/Tools/pack.sh;
+		};
+		3452331D203059D90032EF93 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/Tools/pack.sh codesign";
+		};
+		34523328203059D90032EF93 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
+		};
+		98B054E32CEABC540A18DCFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyWeWorkDylib-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB0B0C0A1CEBA8DD032F0DC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34523318203059D90032EF93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34523329203059D90032EF93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3452335F20305A510032EF93 /* HookTool.m in Sources */,
+				34523346203059D90032EF93 /* AntiAntiDebug.m in Sources */,
+				34523341203059D90032EF93 /* MethodTrace.m in Sources */,
+				3452334E203059D90032EF93 /* MyWeWorkDylib.mm in Sources */,
+				34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */,
+				34523349203059D90032EF93 /* fishhook.c in Sources */,
+				3452333D203059D90032EF93 /* ANYMethodLog.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34523330203059D90032EF93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3452332C203059D90032EF93 /* MyWeWorkDylib */;
+			targetProxy = 3452332F203059D90032EF93 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		34523353203059D90032EF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		34523354203059D90032EF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		34523356203059D90032EF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyWeWorkDylib/MyWeWorkDylib-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libMyWeWorkDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"MyWeWorkDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-lsubstrate",
+					"-framework",
+					Cycript,
+					"-framework",
+					RevealServer,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		34523357203059D90032EF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks/**",
+					"$(MonkeyDevPath)/Librarys/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyWeWorkDylib/MyWeWorkDylib-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = "@executable_path/Frameworks/libMyWeWorkDylib.dylib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(MonkeyDevPath)/Frameworks",
+					"$(MonkeyDevTheosPath)/vendor/lib/**",
+				);
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DTHEOS_INSTANCE_NAME=\"\\\"MyWeWorkDylib\\\"\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-weak_library",
+					"/usr/lib/libstdc++.dylib",
+					"-lsubstrate",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		34523359203059D90032EF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = MyWeWork/Info.plist;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3452335A203059D90032EF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = MyWeWork/Info.plist;
+				MONKEYDEV_CLASS_DUMP = NO;
+				MONKEYDEV_RESTORE_SYMBOL = NO;
+				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34523317203059D90032EF93 /* Build configuration list for PBXProject "MyWeWork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34523353203059D90032EF93 /* Debug */,
+				34523354203059D90032EF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34523355203059D90032EF93 /* Build configuration list for PBXNativeTarget "MyWeWorkDylib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34523356203059D90032EF93 /* Debug */,
+				34523357203059D90032EF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34523358203059D90032EF93 /* Build configuration list for PBXNativeTarget "MyWeWork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34523359203059D90032EF93 /* Debug */,
+				3452335A203059D90032EF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34523314203059D90032EF93 /* Project object */;
+}

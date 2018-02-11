@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'Test-weworkDylib' target in the 'Test-weworkDylib' project
+// Prefix header for all source files of the 'MyWeWorkDylib' target in the 'MyWeWorkDylib' project
 //
 
 #ifdef __OBJC__

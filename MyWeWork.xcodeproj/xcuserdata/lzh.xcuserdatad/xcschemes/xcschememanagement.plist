@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Test-wework.xcscheme</key>
+		<key>MyWeWork.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
-		<key>Test-weworkDylib.xcscheme</key>
+		<key>MyWeWorkDylib.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
@@ -17,7 +17,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>343AE91A1FCFFD0000585741</key>
+		<key>3452331E203059D90032EF93</key>
 		<dict>
 			<key>primary</key>
 			<true/>
