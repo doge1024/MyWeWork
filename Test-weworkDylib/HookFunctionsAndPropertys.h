@@ -35,7 +35,7 @@
 
 - (void)onOpenBtnClick:(UIButton *)btn;
 - (void)onCloseBtnClick:(id)arg1;
-- (void)playCustomSuccessSound;
+- (void)playOpenSuccessVoice;
 - (void)onJumpToDetailBtnClick;
 - (void)p_jumpToTargetController:(id)arg1;
 - (void)closeRedEnvWindowWithFlyAnimate;

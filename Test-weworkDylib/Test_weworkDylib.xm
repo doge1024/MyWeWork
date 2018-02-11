@@ -9,7 +9,7 @@
 
 %hook WWKNavigationController
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([HookTool sharedInstance].startSnatchHB && [viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
+    if ([viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
         WWRedEnvDetailViewController *vc = (WWRedEnvDetailViewController *)viewController;
         if ([HookTool removeBubbleViewWithHongBaoID:vc.mHongBaoID]) {
             return;
@@ -112,7 +112,7 @@
     // 如果是未打开的红包
     if (self.mHongbaoStatus == 2) {
         [self onOpenBtnClick:self.mOpenBtn];
-        // [self playCustomSuccessSound];
+        NSLog(@"打开红包");
     }
 }
 
@@ -128,21 +128,16 @@
 
 // btn的位置会偏移
 - (void)startOpenHongbaoAnimation {
-    NSLog(@"startOpenHongbaoAnimation");
     CGFloat bgWidth = self.mFrontContainerView.image.size.width;
     CGFloat bgHeight = self.mFrontContainerView.image.size.height;
     CGFloat openBtnWidth = self.mOpenBtn.frame.size.width;
     CGFloat openBtnHeight = self.mOpenBtn.frame.size.height;
     self.mOpenBtn.frame = CGRectMake((bgWidth - openBtnWidth) * 0.5, bgHeight - openBtnHeight * 0.5, openBtnWidth, openBtnWidth);
-    // %orig;
+    %orig;
 }
 
-// 自己播放声音，但不要动画
-%new
-- (void)playCustomSuccessSound {
-    NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"hongbaoopensuccess" ofType:@"mp3"];
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
-    AudioServicesPlaySystemSound (soundID);
+// 不播放声音
+- (void)playOpenSuccessVoice {
+    return;
 }
 %end

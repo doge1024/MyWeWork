@@ -25,6 +25,7 @@
 		343AE94E1FCFFD0100585741 /* Test_weworkDylib.mm in Sources */ = {isa = PBXBuildFile; fileRef = 343AE94D1FCFFD0100585741 /* Test_weworkDylib.mm */; };
 		343AE9501FCFFD0100585741 /* Test_weworkDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 343AE94F1FCFFD0100585741 /* Test_weworkDylib.h */; };
 		343AE9521FCFFD0100585741 /* Test_weworkDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 343AE9511FCFFD0100585741 /* Test_weworkDylib.m */; };
+		345232F9203035DC0032EF93 /* wework.app in Resources */ = {isa = PBXBuildFile; fileRef = 345232F8203035DC0032EF93 /* wework.app */; };
 		34C2A5B81FEC34940099983A /* HookFunctionsAndPropertys.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C2A5B41FEC2E9E0099983A /* HookFunctionsAndPropertys.h */; };
 		34C8787E1FED795B005B7AB7 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C8787C1FED795B005B7AB7 /* HookTool.h */; };
 		34C8787F1FED795B005B7AB7 /* HookTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C8787D1FED795B005B7AB7 /* HookTool.m */; };
@@ -77,6 +78,7 @@
 		343AE94D1FCFFD0100585741 /* Test_weworkDylib.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_weworkDylib.mm; sourceTree = "<group>"; };
 		343AE94F1FCFFD0100585741 /* Test_weworkDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test_weworkDylib.h; sourceTree = "<group>"; };
 		343AE9511FCFFD0100585741 /* Test_weworkDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_weworkDylib.m; sourceTree = "<group>"; };
+		345232F8203035DC0032EF93 /* wework.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = wework.app; path = TargetApp/wework.app; sourceTree = "<group>"; };
 		34C2A5B41FEC2E9E0099983A /* HookFunctionsAndPropertys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookFunctionsAndPropertys.h; sourceTree = "<group>"; };
 		34C8787C1FED795B005B7AB7 /* HookTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
 		34C8787D1FED795B005B7AB7 /* HookTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookTool.m; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		343AE9201FCFFD0000585741 /* TargetApp */ = {
 			isa = PBXGroup;
 			children = (
+				345232F8203035DC0032EF93 /* wework.app */,
 				343AE9211FCFFD0000585741 /* put ipa or app here */,
 			);
 			name = TargetApp;
@@ -328,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				343AE9221FCFFD0000585741 /* put ipa or app here in Resources */,
+				345232F9203035DC0032EF93 /* wework.app in Resources */,
 				343AE91F1FCFFD0000585741 /* MethodTraceConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,7 +555,7 @@
 			baseConfigurationReference = 6672E14A19382F038626019E /* Pods-Test-weworkDylib.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5CJEBBFK9A;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_BITCODE = NO;
@@ -608,7 +612,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 5CJEBBFK9A;
+				DEVELOPMENT_TEAM = 2DX3VC5E33;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_BITCODE = NO;
