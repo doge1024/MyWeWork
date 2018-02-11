@@ -75,7 +75,7 @@
         if ([HookTool sharedInstance].currentConversationViewController) { // 处在会话
             WWKConversationRedEnvelopesBubbleView *bubbleView = [[%c(WWKConversationRedEnvelopesBubbleView) alloc] init];
             bubbleView.message = wkMessage;
-            //bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
+            // bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
             [bubbleView tony_onClickHongbaoMessage];
             // hold 红包view
             [[HookTool sharedInstance].redEnvelopesBubbleViews addObject:bubbleView];
