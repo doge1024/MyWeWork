@@ -29,4 +29,24 @@
     }];
 }
 
+- (NSMutableArray<WWKConversationRedEnvelopesBubbleView *> *)redEnvelopesBubbleViews {
+    if (!_redEnvelopesBubbleViews) {
+        _redEnvelopesBubbleViews = [NSMutableArray array];
+    }
+    return _redEnvelopesBubbleViews;
+}
+
++ (BOOL)removeBubbleViewWithHongBaoID:(NSString *)hongBaoID {
+    HookTool *tool = [self sharedInstance];
+    NSArray *array = [tool.redEnvelopesBubbleViews copy];
+    for (WWKConversationRedEnvelopesBubbleView *bubbleView in array) {
+        if ([bubbleView.message.messageItems.firstObject isKindOfClass:NSClassFromString(@"WWKMessageRedEnvelopes")]
+            && [bubbleView.message.messageItems.firstObject.hongbaoID isEqualToString:hongBaoID]) {
+            [tool.redEnvelopesBubbleViews removeObject:bubbleView];
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end
