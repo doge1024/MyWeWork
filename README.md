@@ -29,6 +29,14 @@
 1. 感谢 [MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)，在没有越狱机的情况下还能简单的调试编写
 2. 感谢同事的1分钱测试红包
 
-简书：<https://www.jianshu.com/u/a0e2f8047033>   
+### 版权及免责声明
+本插件所有代码都由本人完成。
+
+外挂有风险，使用需谨慎。
+
+要使用本插件，请使用者自行承担各种状况。
+
+
+>简书：<https://www.jianshu.com/u/a0e2f8047033>   
 github：<https://github.com/harddog>
 
