@@ -38,5 +38,6 @@
 
 
 >简书：<https://www.jianshu.com/u/a0e2f8047033>   
-github：<https://github.com/harddog>
+github：<https://github.com/harddog>  
+qq: 867129306
 
