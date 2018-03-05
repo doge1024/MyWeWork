@@ -1,17 +1,13 @@
 //
-//  HookFunction.h
-//  Test-weworkDylib
+//  HookFunctionsAndPropertys.h
+//  MyWeWorkDylib
 //
-//  Created by lzh on 2017/12/22.
-//  Copyright © 2017年 lzh. All rights reserved.
+//  Created by lzh on 2018/3/4.
+//  Copyright © 2018年 harddog. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <CaptainHook/CaptainHook.h>
-#import <Cycript/Cycript.h>
 #import <ReactiveObjC/ReactiveObjC.h>
-#import <AVFoundation/AVFoundation.h>
 
 #pragma mark - WWRedEnvOpenHongBaoWindow
 @interface WWRedEnvOpenHongBaoWindow : UIWindow
@@ -92,4 +88,7 @@
 #pragma mark - WWKConversationWrapper
 @interface WWKConversationWrapper: NSObject
 - (void)setLastMessageText:(NSString *)arg1;
+@end
+
+@interface HookFunctionsAndPropertys : NSObject
 @end

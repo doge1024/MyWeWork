@@ -19,6 +19,8 @@
 
 + (instancetype)sharedInstance;
 
++ (void)saveBubbleView:(WWKConversationRedEnvelopesBubbleView *)view;
+
 /**
  移除保存的bubbleView
 

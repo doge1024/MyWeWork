@@ -35,29 +35,31 @@
     WWKConversationViewController *conversationViewController = %orig;
     [HookTool sharedInstance].startSnatchHB = NO;
     [HookTool sharedInstance].currentConversationViewController = conversationViewController;
-    
-    __weak typeof(self) weakSelf = self;
-    [[[weakSelf rac_signalForSelector:@selector(viewDidAppear:)] take:1] subscribeNext:^(RACTuple * _Nullable x) {
-        __strong typeof(self) strongSelf = weakSelf;
-        UIBarButtonItem *conversationMsgItems = strongSelf.navigationItem.rightBarButtonItem;
-        if (conversationMsgItems) {
-            UISwitch *swt = [[UISwitch alloc] init];
-            UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
-            strongSelf.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
-            [[[swt rac_newOnChannel] takeUntil:strongSelf.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
-                [HookTool sharedInstance].startSnatchHB = [x boolValue];
-            }];
-            swt.on = YES;
-            [swt sendActionsForControlEvents:UIControlEventValueChanged];
-        }
-    }];
-    
     return conversationViewController;
 }
-%end
 
-//%hook WWKConversationRedEnvelopesBubbleView
-//%end
+%new
+- (void)my_swtAction:(UISwitch *)swt {
+    [HookTool sharedInstance].startSnatchHB = swt.isOn;
+}
+
+- (void)viewDidLoad {
+    %orig;
+    UIBarButtonItem *conversationMsgItems = self.navigationItem.rightBarButtonItem;
+    if (conversationMsgItems) {
+        UISwitch *swt = [[UISwitch alloc] init];
+        UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
+        self.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
+        [swt.rac_newOnChannel subscribeNext:^(NSNumber * _Nullable x) {
+            [HookTool sharedInstance].startSnatchHB = [x boolValue];
+            NSLog(@"抢红包：%@", [x boolValue] ? @"开" : @"关");
+        }];
+        swt.on = YES;
+        [swt sendActionsForControlEvents:UIControlEventValueChanged];
+    }
+}
+
+%end
 
 %hook WWKMessage
 
@@ -75,10 +77,10 @@
         if ([HookTool sharedInstance].currentConversationViewController) { // 处在会话
             WWKConversationRedEnvelopesBubbleView *bubbleView = [[%c(WWKConversationRedEnvelopesBubbleView) alloc] init];
             bubbleView.message = wkMessage;
-            // bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
+            bubbleView.delegate = [HookTool sharedInstance].currentConversationViewController; // 代理是会话控制器
             [bubbleView tony_onClickHongbaoMessage];
             // hold 红包view
-            [[HookTool sharedInstance].redEnvelopesBubbleViews addObject:bubbleView];
+            [HookTool saveBubbleView:bubbleView];
         }
     }
     return (WWKMessage *)wkMessage;
@@ -86,24 +88,28 @@
 
 %end
 
- %hook WXCCommonUtil
-// 强制输出log
- + (void)_wxc_logConvert:(id)arg1 level:(int)arg2 function:(id)arg3 {
-     return %orig(arg1, arg2, arg3);
-     /*
-     NSLog(@"强制输出log-start");
-     %orig(arg1, 2, arg3);
-     NSLog(@"强制输出log-end");
-      */
- }
- %end
-
 /*
-%hook WWRedEnvDetailViewController
+%hook WXCCommonUtil
+// 强制输出log
++ (void)_wxc_logConvert:(id)arg1 level:(int)arg2 function:(id)arg3 {
+ return %orig(arg1, arg2, arg3);
+
+ NSLog(@"强制输出log-start");
+ %orig(arg1, 2, arg3);
+ NSLog(@"强制输出log-end");
+ 
+}
 %end
- */
+*/
 
 %hook WWRedEnvOpenHongBaoWindow
+
+- (void)_initUI {
+    %orig;
+    [self.rac_willDeallocSignal subscribeCompleted:^{
+        [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
+    }];
+}
 
 // 红包window，设置完最后一个属性后，自动打开红包
 - (void)setQyhbSubType:(NSInteger)type {
@@ -114,16 +120,6 @@
         [self onOpenBtnClick:self.mOpenBtn];
         NSLog(@"打开红包");
     }
-}
-
-- (void)onCloseBtnClick:(id)arg1 {
-    [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
-    %orig;
-}
-
-- (void)_closeRedEnvWindow {
-    [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
-    %orig;
 }
 
 // btn的位置会偏移
