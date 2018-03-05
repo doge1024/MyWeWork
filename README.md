@@ -5,6 +5,7 @@
 ![wwk](./wework.gif)
 
 ### 使用
+先安装[MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)
 
 ###### - 测试使用
 1. 将脱壳后的企业微信ipa解压取得.app文件放到`MyWeWork/TargetApp/wework.app`  
