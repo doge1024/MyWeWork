@@ -1,6 +1,8 @@
 # 免越狱企业微信抢红包功能
 
-写这个，主要是为了：认真工作的时候却错过了老板的红包，心里不爽😂
+写这个，主要是为了：认真工作的时候却错过了老板的红包，心里不爽😂  
+
+附[MyWeWork_Tweak越狱版](https://github.com/harddog/MyWeWork_Tweak.git)
 
 ![wwk](./wework.gif)
 
