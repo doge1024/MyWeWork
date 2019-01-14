@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        var getQueryVariable = function (variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return (false);
+        };
+        var i18n = {
+            zh: {
+                title: '成员使用分析',
+                all: '全部',
+                client: '企业微信客户端',
+                wxPlugin: '微工作台',
+                used: '使用人数',
+                notUsed: '未使用',
+                total: '总人数',
+                record: '成员使用记录',
+                today: '今天',
+                weekuse: '一周小结',
+                weekuseTips: '关闭后，成员将无法收到一周工作时长统计'
+            },
+            en: {
+                title: 'Usage in the last 7 days',
+                all: 'All',
+                client: 'WeChat Work',
+                wxPlugin: 'We Workplace',
+                used: 'Used',
+                notUsed: 'Not used',
+                total: 'Total',
+                record: 'Usage record of members',
+                today: 'today',
+                weekuse: 'Weekly Summary',
+                weekuseTips: 'If disabled, members will not receive the weekly statistics of working hours'
+            },
+            'zh_HK': {
+                title: '成員使用分析',
+                all: '全部',
+                client: 'WeChat Work客户端',
+                wxPlugin: '微工作台',
+                used: '使用人數',
+                notUsed: '未使用',
+                total: '總人數',
+                record: '成員使用記錄',
+                today: '今天',
+                weekuse: '一週小結',
+                weekuseTips: '關閉後，成員將無法收到一週工作時長統計'
+            }
+        }
+
+        var G_data = $content$;
+        var usejs = $usejs$ || false;
+        var JobSummaryOpenState = $JobSummaryOpenState$ || 0;
+        var language = i18n.$language$ || i18n.zh
+
+//        var usejs = 2;
+//        var JobSummaryOpenState = 1;
+//        var G_data = {
+//                "data": {
+//                    "part": {
+//                        "total": [16, 14, 10, 301, 10, 11, 13, 9],
+//                        "wework": [1, 1, 10, 0, 0, 1, 2, 2],
+//                        "wechat": [0, 0, 0, 0, 0, 90, 0, 0]
+//                    },
+//                    "total": 3000,
+//                    "wxPluginfollowMembers": 1
+//                }
+//            };
+//        var language = i18n['zh_HK'];
+
+    </script>
+    <title class='i18n' name='title'></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: hidden;
+            height: 100%;
+            background: #F5F5F5;
+            font-family: "Microsoft YaHei", sans-serif ;
+        }
+
+        li, ol, ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+        }
+
+        .ww_horizontalTab {
+            font-size: 13px;
+        }
+
+        .ww_horizontalTab_tabNav {
+            margin: 0 auto;
+            width: 328px;
+            /*width: 352px;*/
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .ww_horizontalTab_Nav_item_Curr {
+            background-color: #2D78CB;
+            color: #fff;
+        }
+
+        .ww_horizontalTab_Nav_item {
+            float: left;
+            border: 1px solid #2D78CB;
+        }
+
+        .ww_horizontalTab_Nav_item:first-of-type {
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .ww_horizontalTab_Nav_item:last-of-type {
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .ww_horizontalTab_Nav_item_Curr .ww_horizontalTab_Nav_itemLink {
+            color: #fff;
+        }
+
+        .ww_horizontalTab_Nav_itemLink {
+            display: table-cell;
+            height: 26px;
+            width: 52px;
+            text-align: center;
+            line-height: 26px;
+            font-size: 12px;
+            vertical-align: middle;
+            padding: 0px 26px 0px;
+            color: #2D78CB;
+            white-space: nowrap;
+        }
+
+        .log_count_chart {
+            margin: 0 0 12px 0;
+        }
+
+        .log_chartPanel {
+            display: block;
+            z-index: 10000;
+        }
+        .log_chartPanel_item {
+            color: #747F8B;
+            display: inline-block;
+        }
+
+        .log_chartPanel_item {
+            vertical-align: top;
+            margin-top: 0;
+        }
+
+        .log_chartPanel_item_label {
+            display: inline-block;
+            padding: 0 5px;
+            font-size: 12px;
+            text-align: left;
+            transform: scale(0.875);
+            margin-left: -3px;
+        }
+        .log_chartPanel_item_value {
+            text-align: left;
+            font-size: 16px;
+            padding: 0 5px;
+            font-weight: 300;
+            margin-top: -3px;
+        }
+
+        .log_chartPanel_item_Use {
+            position: relative;
+            color: #000;
+            padding: 0 2px 0 2px;
+            text-align: left;
+        }
+
+        .analysisTitle {
+            position: relative;
+            /*margin: 0 0 17px 18px;*/
+            margin-left: 18px;
+            font-size: 18px;
+            padding: 12px 0;
+        }
+
+        .main {
+            position: relative;
+            display: block;
+            background: #fff;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .weekuse_btn:before, .main:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: auto;
+            bottom: 0;
+            right: auto;
+            width: 100%;
+            height: 1px;
+            background-color: #D9D9D9;
+            display: block;
+            z-index: 1;
+            transform: scaleY(0.5);
+        }
+        .weekuse_btn:after, .main:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: auto;
+            right: auto;
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            display: block;
+            z-index: 1;
+            transform: scaleY(0.5);
+        }
+
+        .record_btn, .weekuse_btn{
+            display: block;
+            position: relative;
+            height: 46px;
+            line-height:46px;
+            color: #000;
+            font-size: 17px;
+            margin-left: 18px;
+        }
+        .record_btn:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: auto;
+            right: auto;
+            width: 100%;
+            height: 1px;
+            background-color: #D9D9D9;
+            display: block;
+            z-index: 1;
+            transform: scaleY(0.5);
+        }
+
+        .weekuse_btn {
+            background: #fff;
+            margin-top: 18px;
+            margin-left: 0;
+            padding-left: 18px;
+        }
+
+        .weekuse_btn_tips {
+            color: #888888;
+            font-size: 14px;
+            padding-left: 18px;
+            margin-top: 6px;
+        }
+
+        .arrow {
+            float: right;
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            vertical-align: top;
+            margin-top: 18px;
+            margin-right: 10px;
+            background: #fff;
+            border-color: #C7C7CC;
+            border-width: 0 2px 2px 0;
+            border-style: solid;
+            transform:rotateZ(-45deg);
+        }
+
+        .arrow-wrap {
+            display: inline-block;
+            height: 32px;
+            line-height: 32px;
+        }
+
+        .arrow-wrap .arrow{
+            float: none;
+            margin-right: 5px;
+            margin-top: 14px;
+            margin-left: 4px;
+        }
+        .highcharts-tooltip {
+            pointer-events: auto !important;
+        }
+        .highcharts-root {
+            pointer-events: none;
+        }
+        .ww_switch {
+            display: inline-block;
+            position: relative;
+            padding: 2px;
+            border-radius: 4px;
+            background-color: #4C84C4;
+            width: 44px;
+            height: 19px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .ww_switch_Small {
+            border-radius: 2px;
+            width: 31px;
+            height: 12px;
+        }
+
+        .ios .ww_switch_Small{
+            width: 52px;
+            height: 32px;
+            border-radius: 16px;
+            box-sizing: border-box;
+            border: 2px solid #4C84C4;
+        }
+
+        .android .ww_switch_Small {
+            width: 34px;
+            height: 14px;
+            border-radius: 10px;
+            background: #BFD3EC;
+        }
+
+        .ww_switch_Small .ww_commonImg_SmallSwitch {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+        }
+        .ww_commonImg_SmallSwitch {
+            background: #fff;
+            border-radius: 2px;
+            width: 18px;
+            height: 12px;
+            box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, .1);
+        }
+
+        .ios .ww_commonImg_SmallSwitch {
+            width: 28px;
+            height: 28px;
+            border-radius: 100%;
+            right: 0;
+            top: 0;
+        }
+
+        .android .ww_commonImg_SmallSwitch {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            top: -3px;
+            right: -1px;
+            background: #5287CC;
+        }
+
+        .android .ww_switch_Gray .ww_commonImg_SmallSwitch {
+            right: 16px;
+            background: #fff;
+        }
+
+        .ios .ww_switch_Gray.ww_switch {
+            background: #fff;
+            border: 2px solid #EBEBEB;
+        }
+
+        .ww_switch_Gray.ww_switch {
+            background-color: #DFDFDF;
+        }
+        .ww_switch_Gray .ww_commonImg_SmallSwitch {
+            position: absolute;
+            right: 20px;
+        }
+        .ww_switch, .ww_switch .ww_switch_Small .ww_commonImg_SmallSwitch {
+            transition: all .3s ease-in-out;
+        }
+        .weekuse_switch {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            right: 13px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main" style="display: none;">
+    <div class="analysisTitle"><label class='i18n' name='title'></label></div>
+    <div id='js_partSwitchTab' class="ww_horizontalTab" style="margin-bottom: 16px; ">
+        <div class="ww_horizontalTab_title">
+            <ul class="ww_horizontalTab_tabNav">
+                <li id='js_allData'
+                    class="ww_horizontalTab_Nav_item ww_horizontalTab_Nav_item_Curr js_allChoose js_nowChoose"
+                >
+                    <a href="javascript:;" class="ww_horizontalTab_Nav_itemLink"><label class='i18n' name='all'></label></a>
+                </li>
+                <li id='js_wework' class="ww_horizontalTab_Nav_item js_weworkChoose">
+                    <a href="javascript:;" class="ww_horizontalTab_Nav_itemLink" style="padding: 0 12px; width: auto"><label class='i18n' name='client'></label></a>
+                </li>
+                <li id='js_wechat' class="ww_horizontalTab_Nav_item js_wechatChoose">
+                    <a href="javascript:;" class="ww_horizontalTab_Nav_itemLink"><label class='i18n' name='wxPlugin'></label></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="log_count_chart" id="use_analysis_container" style="height:300px;"></div>
+    <a class="record_btn" href="wework://openAnalysisDetail"><label class='i18n' name='record'></label> <i class="arrow"></i></a>
+</div>
+
+<!--<div class="main_bottom" style="display: none">-->
+    <!--<a class="weekuse_btn" href="javascript:;">-->
+        <!--<label class='i18n' name='weekuse'></label>-->
+        <!--<span class="ww_switch ww_switch_Small weekuse_switch " ><span class="ww_commonImg ww_commonImg_SmallSwitch"></span></span>-->
+    <!--</a>-->
+    <!--<div class="weekuse_btn_tips i18n" name="weekuseTips"></div>-->
+<!--</div>-->
+
+
+<a href="#" id="scheme"></a>
+
+<script type="text/javascript">
+
+    var loadJS = function (url, success) {
+        var domScript = document.createElement('script');
+        domScript.src = url;
+        success = success || function () {
+        };
+        domScript.onload = domScript.onreadystatechange = function () {
+            if (!this.readyState || 'loaded' === this.readyState || 'complete' === this.readyState) {
+                success();
+                this.onload = this.onreadystatechange = null;
+                this.parentNode.removeChild(this);
+            }
+        }
+        document.getElementsByTagName('head')[0].appendChild(domScript);
+    }
+
+    var lock = false;
+    var invoke = function (name, params, callback, error) {
+        if (typeof(MiJSBridge) != 'undefined') {
+            if (!lock) {
+
+                lock = true;
+
+                MiJSBridge.invoke(name, params, function (res) {
+                    lock = false;
+                    if (res.err_code == 0) {
+                        callback && callback(res);
+                    }
+                    else {
+                        error && error(res);
+                    }
+                });
+
+                setTimeout(function () {
+                    lock = false;
+                }, 800);
+            }
+        } else {
+            error && error();
+        }
+    }
+
+
+    if (usejs == 1) {
+        loadJS('jquery-3.2.1.min.js', function () {
+            loadJS('highcharts.js', function () {
+                $('.weekuse_btn').addClass('ios');
+                analysisFun();
+            })
+        })
+    } else if (usejs == 2) {
+        loadJS('https://code.jquery.com/jquery-3.2.1.min.js', function () {
+            loadJS('https://code.highcharts.com/highcharts.js', function () {
+                $('.weekuse_btn').addClass('ios');
+                analysisFun();
+            })
+        })
+    } else {
+        loadJS('file:///android_asset/js/jquery-3.2.1.min.js', function () {
+            loadJS('file:///android_asset/js/highcharts.js', function () {
+                $('.weekuse_btn').addClass('android');
+                analysisFun();
+            })
+        })
+    }
+
+    function analysisFun() {
+        $('.i18n').each(function () {
+            var key = $(this).attr('name');
+            $(this).html(language[key]);
+        });
+
+        if (language == i18n.en) {
+            $('.ww_horizontalTab_tabNav').css('width', '352px');
+        } else if (language == i18n.zh_HK) {
+            $('.ww_horizontalTab_tabNav').css('width', '356px');
+        }
+
+        $('.main').show();
+        $('.main_bottom').show();
+
+
+        if (!G_data.data.wxPluginfollowMembers) {
+            $('#js_partSwitchTab').hide();
+        }
+
+        (function () {
+            var defaultOptions = {
+                chart: {
+                    type: 'areaspline',
+//                marginBottom: 100,
+                },
+                credits: {
+                    enabled: false // 禁用版权信息
+                },
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    tickmarkPlacement: 'on',
+                    gridLineDashStyle: 'ShortDash',
+                    gridLineWidth: 0,
+                    gridLineColor: "#E4E6E9",
+                    lineColor: "#E4E6E9",
+                    tickLength: 0,
+                    labels: {
+                        style: {
+                            color: "#979797"
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    gridLineDashStyle: 'solid',
+                    gridLineWidth: 0.5,
+                    gridLineColor: "#E4E6E9",
+                    lineColor: "#e4e6e9",
+                    labels: {
+                        style: {
+                            color: '#979797'
+                        }
+                    }
+                },
+                tooltip: {
+                    shape: 'circlepin',
+                    backgroundColor: "#FFFFFF",
+                    borderWidth: 0.5,
+                    borderRadius: 4,
+                    borderColor: '#E4E6E9',
+                    useHTML: true,
+                    stickyTracking: false,
+                    hideDelay: 0,
+                    padding: 4,
+                    paddingBottom: 3,
+                    crosshairs: {
+                        width: 1,
+                        color: 'rgba(45, 120, 203, 0.4)',
+                        dashStyle: 'LongDash'
+                    },
+                    style: {
+                        color: '#000000',
+                        fontFamily: '"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", sans-serif',
+                        'z-index': 10000
+                    }
+                },
+                plotOptions: {
+                    area: {},
+                    series: {
+                        lineWidth: 2,
+                        states: {
+                            hover: {
+                                lineWidth: 2
+                            }
+                        },
+                        marker: {
+                            radius: 4,
+                            lineWidth: 2,
+                            states: {
+                                hover: {
+                                    radius: 4
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 1000
+                        },
+                        fillColor: {
+                            linearGradient: [0, 0, 0, 100],
+                        }
+                    }
+                }
+            }
+
+            var getDate = function (offset, prefix) {
+                var thatday = new Date(new Date() - 0 + offset * 86400000),
+                    date = {
+                        year: thatday.getFullYear().toString(),
+                        month: (thatday.getMonth() + 1).toString(),
+                        day: thatday.getDate().toString()
+                    }
+
+                if ((thatday.getMonth() + 1) < 10 && prefix !== false) {
+                    date.month = '0' + date.month;
+                }
+
+                if (thatday.getDate() < 10 && prefix !== false) {
+                    date.day = '0' + date.day;
+                }
+                return date;
+            };
+
+            var getTickOption = function (yData) {
+                var useMax = Math.max.apply(null, yData);
+
+                var yTick = 2;
+                var yMax = 10;
+                if (useMax < 10) {
+                    yTick = 2;
+                    yMax = 10;
+                } else if (useMax < 100) {
+                    yTick = 10;
+                    yMax = Math.ceil(useMax / 10) * 10;
+                } else if (useMax < 1000) {
+                    yTick = 100;
+                    yMax = Math.ceil(useMax / 100) * 100;
+                } else {
+                    yTick = 1000;
+                    yMax = Math.ceil(useMax / 1000) * 1000;
+                }
+                return {
+                    x_Tick: 1,
+                    y_Tick: yTick,
+                    y_Max: yMax + yTick
+                }
+            };
+
+            var chartOption = {
+                xAxisArray: [],
+                tickOption: [],
+                initdata: G_data.data.part.total,
+                weworkdata: G_data.data.part.wework,
+                wechatdata: G_data.data.part.wechat,
+                total: G_data.data.total,
+                animation: 1000,
+            }
+
+
+            chartOption.tickOption = getTickOption(G_data.data.part.total);
+
+            for (var i = 7; i >= 0; i--) {
+                var tdate = getDate(-i, false);
+                if (i == 0) {
+                    chartOption.xAxisArray.push(language.today);
+                } else {
+                    chartOption.xAxisArray.push(tdate.month + "-" + tdate.day);
+                }
+            }
+
+
+            var theChart;
+            var initCharts = function (chartOption) {
+
+                var option = $.extend(true, defaultOptions, {
+                    chart: {
+                        renderTo: 'use_analysis_container',
+                    },
+                    xAxis: {
+                        categories: chartOption.xAxisArray,
+                        tickInterval: chartOption.tickOption.x_Tick,
+                        tickmarkPlacement: "on",
+                        labels: {}
+                    },
+                    yAxis: {
+                        max: chartOption.tickOption.y_Max,
+                        tickInterval: chartOption.tickOption.y_Tick,
+                        title: ""
+                    },
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        positioner: function (x, y, point) {
+                            var x = point.plotX;
+                            if (point.plotX + theChart.tooltip.label.width + 20 > window.innerWidth) {
+                                x = window.innerWidth - theChart.tooltip.label.width - 20;
+                            }
+
+                            return {
+                                x: x,
+                                y: 0
+                            }
+                        },
+                        formatter: function (data) {
+                            return '<div class="log_chartPanel" id="log_chartPanel" data-url="wework://openAnalysisDetail/' + this.point.x + '"><div class="log_chartPanel_item log_chartPanel_item_Use"><div class="log_chartPanel_item_label">' + language.used + '</div><div class="log_chartPanel_item_value">'
+                                + this.point.y +
+                                '</div></div><div class="log_chartPanel_item "><div class="log_chartPanel_item_label">' + language.notUsed + '</div><div class="log_chartPanel_item_value">'
+                                + (chartOption.total - this.point.y) +
+                                '</div></div><div class="log_chartPanel_item"><div class="log_chartPanel_item_label">' + language.total + '</div><div class="log_chartPanel_item_value">'
+                                + chartOption.total +
+                                '</div></div><div class="arrow-wrap"><i class="arrow"></i></div></div>'
+                        }
+                    },
+
+                    series: [{
+                        type: 'area',
+                        data: chartOption.initdata
+                    }],
+                    plotOptions: {
+                        area: {
+                            lineColor: "#2D78CB",
+
+                            marker: {
+                                fillColor: "#fff",
+                                lineColor: "#2D78CB",
+                                states: {
+                                    hover: {
+                                        fillColor: "#2D78CB"
+                                    }
+                                }
+                            },
+                        },
+                        series: {
+                            animation: chartOption.animation,
+                            fillColor: {
+                                linearGradient: [0, 0, 0, 300],
+                                stops: [
+                                    [0, "rgba(45,120,203, .2)"],
+                                    [1, "rgba(84, 131, 181, 0)"]
+                                ]
+                            },
+
+                            events: {
+                                click: function (e) {
+                                    console.log(e);
+                                }
+                            }
+                        },
+                    }
+                });
+                theChart = new Highcharts.Chart(option);
+
+                var points = theChart.series[0].points,
+                    lastPoint = points[points.length - 1];
+                theChart.tooltip.refresh(lastPoint);
+                lastPoint.setState('hover');
+
+                var opt = $.extend(true, theChart.xAxis[0].crosshair, {           //在x轴上增加
+                    value: lastPoint.x,                           //在值为2的地方
+                    id: 'plot-line-1'                  //标示线的id，在删除该标示线的时候需要该id标示
+                })
+                theChart.xAxis[0].addPlotLine(opt);
+
+            };
+
+            initCharts(chartOption);
+
+            if (JobSummaryOpenState) {
+                $('.weekuse_switch').removeClass('ww_switch_Gray');
+            } else {
+                $('.weekuse_switch').addClass('ww_switch_Gray');
+            }
+            $('.weekuse_switch').on('touchstart', function (e) {
+                var target = $(e.currentTarget);
+                if (target.hasClass('ww_switch_Gray')) {
+                    target.removeClass('ww_switch_Gray');
+                    invoke('utility.modifyJobSummaryOpenState', {isEnable: 1}, function (data) {})
+                } else {
+                    target.addClass('ww_switch_Gray');
+                    invoke('utility.modifyJobSummaryOpenState', {isEnable: 0}, function (data) {})
+                }
+            })
+
+            $('.ww_horizontalTab_Nav_item').on('touchstart', function (e) {
+
+                e.preventDefault();
+
+                var $target = $(e.currentTarget);
+                if ($target.hasClass('js_nowChoose')) {
+                    return;
+                }
+
+                $('.js_nowChoose').removeClass('js_nowChoose ww_horizontalTab_Nav_item_Curr');
+                $target.addClass('js_nowChoose ww_horizontalTab_Nav_item_Curr');
+
+                $('#log_chartPanel').unbind('touchstart');
+//            $(".highcharts-tooltip").remove();
+                theChart.tooltip.destroy();
+
+                if ($(this).hasClass('js_allChoose')) {
+                    chartOption.initdata = G_data.data.part.total;
+                    chartOption.animation = 0;
+                    setTimeout(function () {
+                        initCharts(chartOption);
+                    }, 0);
+                    setTimeout(function () {
+                        firstClick = true;
+                    }, 100)
+                } else if ($(this).hasClass('js_weworkChoose')) {
+                    chartOption.initdata = G_data.data.part.wework;
+                    chartOption.animation = 0;
+                    setTimeout(function () {
+                        initCharts(chartOption);
+                    }, 0);
+
+                    setTimeout(function () {
+                        firstClick = true;
+                    }, 100)
+                } else if ($(this).hasClass('js_wechatChoose')) {
+                    chartOption.initdata = G_data.data.part.wechat;
+                    chartOption.animation = 0;
+                    initCharts(chartOption);
+                    setTimeout(function () {
+                        firstClick = true;
+                    }, 100)
+                }
+
+                setTimeout(function () {
+                    $(".highcharts-tooltip").unbind('touchstart').unbind('touchmove');
+                    $(".highcharts-tooltip").on("touchmove", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                    $(".highcharts-tooltip").on("touchstart", function (e) {
+                        var panel = $(e.currentTarget).find('#log_chartPanel');
+                        var href = panel.attr('data-url');
+
+                        $('#scheme').attr('href', href);
+                        $('#scheme')[0].click();
+                        console.log(href);
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+
+                }, 1000);
+
+            })
+
+            var firstClick = true;
+
+            /*去掉手机滑动默认行为*/
+            $('body').on('touchmove', function (event) {
+                if (theChart.xAxis[0].cross && firstClick) {
+                    theChart.xAxis[0].removePlotLine('plot-line-1');
+                    theChart.xAxis[0].series[0].points[7].setState();
+                    firstClick = false;
+                }
+
+//                event.preventDefault();
+            });
+
+            setTimeout(function () {
+                if (document.body.clientHeight > $('body').outerHeight()) {
+                    $('body').css('overflow-y', 'hidden');
+                    $('.main').css('overflow', 'hidden');
+                } else {
+                    $('body').css('overflow-y', 'auto');
+                    $('.main').css('overflow', 'auto');
+                }
+            }, 500);
+
+
+            $('body').on('touchstart', function (event) {
+
+                setTimeout(function () {
+                    if (theChart.xAxis[0].cross && firstClick) {
+                        theChart.xAxis[0].removePlotLine('plot-line-1');
+                        theChart.xAxis[0].series[0].points[7].setState();
+                        theChart.xAxis[0].series[0].points[7].setState();
+                        firstClick = false;
+                    }
+                }, 460);
+
+                if ($(event.target).parents('#use_analysis_container').length) {
+                    return;
+                } else if ($(event.target).parents('#js_partSwitchTab').length || $(event.target).parents('.log_chartPanel').length) {
+//                event.stopPropagation();
+//                theChart.xAxis[0].series[0].points[7].setState('');
+                    return;
+                }
+                else {
+                    theChart.tooltip.hide();
+                    theChart.xAxis[0].hideCrosshair();
+                    theChart.xAxis[0].series[0].points.forEach(function (point) {
+                        point.setState('');
+                    });
+                    theChart.xAxis[0].removePlotLine('plot-line-1');
+                }
+
+            });
+
+            setTimeout(function () {
+                $(".highcharts-tooltip").on("touchmove", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                $(".highcharts-tooltip").on("touchstart", function (e) {
+                    var panel = $(e.currentTarget).find('#log_chartPanel');
+                    var href = panel.attr('data-url');
+
+                    $('#scheme').attr('href', href);
+                    $('#scheme')[0].click();
+                    console.log(href);
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
+            }, 1000);
+
+        })();
+    }
+</script>
+</body>
+</html>

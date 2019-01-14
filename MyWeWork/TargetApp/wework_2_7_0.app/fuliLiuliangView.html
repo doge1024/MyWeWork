@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+
+        var getQueryVariable = function (variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return (false);
+        };
+
+        var i18n = {
+            zh: {
+                title: '规则详情',
+                total_time: '本周移动办公时长',
+                min: '分钟'
+
+            },
+            en: {
+                title: 'Rules',
+                total_time: 'Mobile work duration this week',
+                min: ' Mins'
+            },
+            zh_HK: {
+                title: '規則詳情',
+                total_time: '本週移動辦公時長',
+                min: '分鐘'
+            }
+        }
+
+        // var language = i18n.en;
+        var language = i18n.$language$ || i18n.zh
+
+    </script>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: hidden;
+            height: 100%;
+            background: #fff;
+            font-family: "Microsoft YaHei", sans-serif ;
+        }
+
+        li, ol, ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+        }
+
+        .log_count_chart {
+            /*height: 191px;*/
+            margin: 0 0 12px 0;
+        }
+
+        .mt-42 {
+            margin-top: 42px;;
+        }
+
+        .main {
+            position: relative;
+            display: block;
+            background: #fff;
+            overflow: hidden;
+            padding: 68px 24px 0;
+            /*height: 100%;*/
+        }
+
+        .rule_title {
+            font-size: 18px;
+            color: #000000;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        .rule_detail {
+            font-family: PingFangSC-Regular;
+            font-size: 15.5px;
+            color: #5C5C5C;
+            letter-spacing: 0.1px;
+        }
+        .rule_detail li {
+            list-style-type: decimal;
+            margin-left: 23px;
+            margin-bottom: 6px;
+        }
+        .rule_icon {
+            position: absolute;
+            right: 22px;
+            top: 22px;
+            width: 70px;
+            height: 70px;
+            background: url('data:image/png;base64,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');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="main" style="display: none;">
+    <div class="rule_title i18n" name='title'>
+    </div>
+    <div class="rule_icon"></div>
+    <ol class="rule_detail"></ol>
+    <div class="rule_title mt-42 i18n" name='total_time'></div>
+    <div class="log_count_chart" id="use_analysis_container"></div>
+</div>
+
+<a href="#" id="scheme"></a>
+
+<script type="text/javascript">
+
+    var loadJS = function (url, success) {
+        var domScript = document.createElement('script');
+        domScript.src = url;
+        success = success || function () {
+        };
+        domScript.onload = domScript.onreadystatechange = function () {
+            if (!this.readyState || 'loaded' === this.readyState || 'complete' === this.readyState) {
+                success();
+                this.onload = this.onreadystatechange = null;
+                this.parentNode.removeChild(this);
+            }
+        }
+        document.getElementsByTagName('head')[0].appendChild(domScript);
+    }
+
+    var usejs = $usejs$ || false;
+
+    if (usejs == 1) {
+        loadJS('jquery-3.2.1.min.js', function () {
+            loadJS('highcharts.js', function () {
+                analysisFun();
+            })
+        })
+    } else if (usejs == 2) {
+        loadJS('https://code.jquery.com/jquery-3.2.1.min.js', function () {
+            loadJS('https://code.highcharts.com/highcharts.js', function () {
+                analysisFun();
+            })
+        })
+    } else {
+        loadJS('file:///android_asset/js/jquery-3.2.1.min.js', function () {
+            loadJS('file:///android_asset/js/highcharts.js', function () {
+                analysisFun();
+            })
+        })
+    }
+
+    function analysisFun() {
+        $('.i18n').each(function () {
+            var key = $(this).attr('name');
+            $(this).html(language[key]);
+        });
+
+//        var G_data = {
+//            "rules": ["流量规则", "规则1", "规则2", "规则3"],
+//            "data": {
+//                "total": 366652,
+//                "list": [{"day": 1522166400, "duration": 38700}, {
+//                    "day": 1522252800,
+//                    "duration": 64425
+//                }, {"day": 1522339200, "duration": 8592}, {"day": 1522425600, "duration": 205641}, {
+//                    "day": 1522512000,
+//                    "duration": 49294
+//                }]
+//            }
+//        };
+
+        var G_data = $content$;
+
+        var detailHtml = '';
+        for (var i = 0; i < G_data.rules.length; i++) {
+            detailHtml += '<li>' + G_data.rules[i] + '</li>';
+        }
+
+        for (var i = 0; i < G_data.data.list.length; i++) {
+            G_data.data.list[i].day = G_data.data.list[i].day * 1000;
+        }
+
+        $('.rule_detail').html(detailHtml);
+        $('.main').show();
+
+        (function () {
+
+            var getDate = function (date) {
+                var thatday = new Date(date);
+                var date = {
+                    month: (thatday.getMonth() + 1).toString(),
+                    day: thatday.getDate().toString()
+                }
+
+                return date;
+            }
+
+            var getDurationHourAndMinute = function (duration) {
+                // var hour = Math.floor(duration / 3600);
+                // var min = Math.floor(duration % 3600 / 60);
+
+                // return (hour ? hour + '小时' : '') + (min ? min + '分' : '') || '0分';
+
+                var min = Math.floor(duration / 60);
+                return min ? min + language.min : '0' + language.min;
+            }
+
+            var getDayOffset = function (date, offset) {
+                var d = new Date(date);
+                d.setDate(d.getDate() + offset);
+                return d.getTime();
+            }
+
+            var getFirstDayOfWeek = function (date) {
+
+                date = new Date(+date);
+
+                date.setDate(date.getDate() - (date.getDay() || 7) + 1);
+
+                return date.getTime();
+            }
+
+            if (G_data.data.list.length < 7) {
+                var dateOfWeeks = [],
+                    i = 0,
+                    firstDayOfWeek = getFirstDayOfWeek(G_data.data.list[0].day);
+                for (i = 0; i < G_data.data.list.length; i++) {
+                    // getDate(G_data.data.list[i].day)
+                    var date = new Date(G_data.data.list[i].day);
+                    dateOfWeeks.push(date.getDay() == 0 ? 7 : date.getDay());
+                }
+                for (i = 1; i <= 7; i++) {
+                    if (dateOfWeeks.indexOf(i) < 0) {
+                        var day = getDayOffset(firstDayOfWeek, i);
+                        G_data.data.list.push({
+                            day: day,
+                            duration: 0
+                        })
+                    }
+                }
+            }
+
+            G_data.data.list = G_data.data.list.sort(function (a, b) {
+                return a.day > b.day
+            })
+
+
+            var defaultOptions = {
+                chart: {
+                    type: 'spline',
+                    backgroundColor: '#E7F2FE',
+                    borderRadius: 8,
+                    height: 200
+//                marginBottom: 100,
+                },
+                title: {
+                    // float: true,
+                    text: getDurationHourAndMinute(G_data.data.total),
+                    align: 'left',
+                    style: {
+                        color: '#2D78CB',
+                        'border-bottom': '1px solid #B6CFEE',
+                        display: 'block',
+                        height: '40px',
+                        'line-height': '40px'
+                    },
+                    margin: 20,
+                    useHTML: true,
+                    formatter: function () {
+                        return '<div></div>'
+                    }
+                },
+                credits: {
+                    enabled: false // 禁用版权信息
+                },
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    tickmarkPlacement: 'on',
+                    gridLineDashStyle: 'ShortDash',
+                    gridLineWidth: 0,
+                    gridLineColor: "#E4E6E9",
+                    lineColor: "#E4E6E9",
+                    tickLength: 0,
+                    labels: {
+                        style: {
+                            color: "#B6CFEE"
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    gridLineDashStyle: 'solid',
+                    gridLineWidth: 0,
+                    gridLineColor: "#E4E6E9",
+                    lineColor: "#e4e6e9",
+                    labels: {
+                        enabled: false
+                    }
+                },
+                tooltip: {
+                    shape: 'circlepin',
+                    backgroundColor: "rgba(0,0,0,0)",
+                    borderWidth: 0,
+                    borderRadius: 0,
+                    borderColor: '#E4E6E9',
+                    useHTML: true,
+                    shadow: false,
+                    stickyTracking: false,
+                    hideDelay: 0,
+                    crosshairs: {
+                        className: 'crosshairs',
+                        width: 1,
+                        color: 'rgba(45, 120, 203, 0.4)',
+                        dashStyle: 'ShortDash',
+                    },
+                    style: {
+                        color: '#B6CFEE',
+                        fontFamily: '"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", sans-serif',
+                        'z-index': 10000
+                    }
+                },
+                plotOptions: {
+                    area: {},
+                    series: {
+                        lineWidth: 2,
+                        states: {
+                            hover: {
+                                lineWidth: 2
+                            }
+                        },
+                        marker: {
+                            radius: 4,
+                            lineWidth: 2,
+                            states: {
+                                hover: {
+                                    radius: 4
+                                }
+                            }
+                        },
+                    }
+                }
+            }
+
+            var chartOption = {
+                xAxisArray: [],
+                tickOption: [],
+                initdata: [],
+                total: G_data.data.total,
+                animation: 1000,
+            }
+
+
+            // chartOption.tickOption = getTickOption(G_data.data.part.total);
+
+            for (var i = 0; i < G_data.data.list.length; i++) {
+                var tdate = getDate(G_data.data.list[i].day);
+                chartOption.xAxisArray.push(tdate.month + "." + tdate.day);
+                chartOption.initdata.push(G_data.data.list[i].duration)
+            }
+
+
+            var theChart;
+            var initCharts = function (chartOption) {
+
+                var option = $.extend(true, defaultOptions, {
+                    chart: {
+                        renderTo: 'use_analysis_container',
+                    },
+                    xAxis: {
+                        categories: chartOption.xAxisArray,
+                        // tickInterval: chartOption.tickOption.x_Tick,
+                        // tickmarkPlacement: "on",
+                        labels: {}
+                    },
+                    yAxis: {
+                        // max: chartOption.tickOption.y_Max,
+                        // tickInterval: chartOption.tickOption.y_Tick,
+                        title: ""
+                    },
+                    tooltip: {
+                        positioner: function (x, y, point) {
+
+                            var _x = point.plotX - theChart.tooltip.label.width / 3;
+
+                            return {
+                                x: _x > 0 ? _x : 0,
+                                y: 44
+                            }
+                        },
+                        formatter: function (data) {
+                            return '<div>' + getDurationHourAndMinute(this.point.y) + '</div>'
+                        }
+                    },
+
+                    series: [{
+                        type: 'areaspline',
+                        data: chartOption.initdata
+                    }],
+                    plotOptions: {
+                        areaspline: {
+                            lineColor: "#2D78CB",
+
+                            marker: {
+                                fillColor: "#fff",
+                                lineColor: "#2D78CB",
+                                states: {
+                                    hover: {
+                                        fillColor: "#2D78CB"
+                                    }
+                                }
+                            },
+                        },
+                        series: {
+                            animation: chartOption.animation,
+                            fillColor: {
+                                linearGradient: [0, 0, 0, 300],
+                                stops: [
+                                    [0, "rgba(45,120,203, .2)"],
+                                    [1, "rgba(84, 131, 181, 0)"]
+                                ]
+                            },
+                        },
+                    }
+                });
+                theChart = new Highcharts.Chart(option);
+
+            };
+
+            initCharts(chartOption);
+
+            if (document.body.clientHeight > $('.main').outerHeight()) {
+                /*去掉手机滑动默认行为*/
+                $('body').on('touchmove', function (event) {
+                    event.preventDefault();
+                });
+            } else {
+                $('body').css('overflow-y', 'auto');
+                $('.main').css('overflow', 'auto');
+            }
+
+        })();
+    }
+</script>
+</body>
+</html>

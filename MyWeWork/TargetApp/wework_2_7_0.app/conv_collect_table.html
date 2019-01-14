@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>$collect_title$</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/wework_admin/static/style/css/reset.css" /> -->
+    <script>var RES_CDN = '';</script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        .table {
+            margin: 0;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            /*width: 100%;*/
+            width: max-content;
+            min-width: 100%;
+            /*table-layout: fixed;*/
+            border-spacing: 0;
+        }
+
+        .table td {
+            display: table-cell;
+            font-size: 14px;
+            border: 1px solid #E5E5E5;
+            padding: 8px 10px;
+            color: #2C343D;
+            /*min-width: 100px;*/
+            max-width: 200px;
+            line-height: 1.6;
+            /*overflow: hidden;*/
+            /*white-space: nowrap;*/
+            /*-o-text-overflow: ellipsis;*/
+            /*text-overflow: ellipsis;*/
+            word-break: break-all;
+            word-wrap: normal;
+        }
+
+        .table .headerRow {
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #828285;
+            border: 1px solid #E5E5E5;
+            /*background: #EEEEEE;*/
+        }
+
+
+        .table th {
+            text-align: left;
+            font-weight: normal;
+            line-height: 1.6;
+            padding: 4px 12px;
+            border-left: 1px solid #E5E5E5;
+            background: #F5F5F5;
+            word-break: break-all;
+            word-wrap: normal;
+        }
+
+        .table .col {
+            /*min-width: 100px;*/
+            max-width: 200px;
+            /*width: max-content;*/
+        }
+
+        .table .headerRow .col {
+            max-width: 200px;
+            min-width: auto;
+        }
+
+        .table thead .col-0 {
+            max-width: 87px;
+            min-width: auto;
+        }
+        .table tbody .col-0 {
+            max-width: 87px;
+            min-width: auto;
+            font-family: PingFangSC-Semibold;
+        }
+
+        .table tbody tr:nth-child(even) td {
+            background: #FBFBFB;
+        }
+
+        .table tr.unfill td {
+            color: #828285;
+            background-color: #FBFBFB;
+        }
+
+        .table tr.unfill td:not(:first-child) {
+            color: #D9DAD9;
+        }
+
+        .table tr.fill td {
+            color: #000;
+            background-color: #FFFFFF;
+        }
+
+        .title {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #2D3034;
+            letter-spacing: 0;
+            margin: 20px 15px 5px 15px;
+        }
+
+        .subtitle {
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: #B2B2B2;
+            margin: 0 15px 17px 15px;
+        }
+
+        .subtitle span {
+            display: inline-block;
+        }
+        .subtitle-person {
+            max-width: 120px;
+            overflow: hidden;
+            white-space: nowrap;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            word-wrap: normal;
+            vertical-align: top;
+        }
+
+        .container {
+            position: relative;
+            margin-left: 15px;
+        }
+        .table-wrap {
+            position: relative;
+            overflow-x: scroll;
+            /*margin-right: 15px;*/
+        }
+
+        .leftFixedTable {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 74px;
+        }
+        .leftFixedTable .headerRow {
+            border-right: none;
+        }
+        .leftFixedTable td {
+            border-right: none;
+        }
+        .scroll-shadow {
+            box-shadow: 6px 0 6px -5px rgba(0, 0, 0, .1);
+            transition: box-shadow .3s ease;
+        }
+        .table-bottom {
+            margin: 32px;
+
+        }
+        .btn-filltable {
+            display: block;
+            margin: 0 auto;
+            width: 88px;
+            height: 24px;
+            line-height: 24px;
+            /*border: 1px solid #879097;*/
+            border: 1px solid rgba(135,144,151, 0.7);
+            border-radius: 13px;
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #879097;
+            letter-spacing: 0.3px;
+            text-align: center;
+            text-decoration: none;
+            /*opacity: 0.5;*/
+            background-clip: padding-box;
+        }
+        .btn-filltable:active {
+            opacity: 0.5;
+        }
+        .hairlines .btn-filltable {
+            border: 0.5px solid #879097;
+        }
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+        }
+    </style>
+</head>
+
+<body ontouchstart="">
+<h3 class='title'></h3>
+<div class="subtitle">
+    <span class="subtitle-person js-person"></span> · <span class="js-date"></span> · <span class="js-filledNum"></span>
+</div>
+
+<div class="container">
+    <div class="table-wrap">
+        <div class="table-inner-wrap" style="padding-right: 15px; width: max-content;">
+            <table class="table mainTable" id="customers"></table>
+        </div>
+    </div>
+    <table class="table leftFixedTable" id='left-fixed-table' style="min-width: 0"></table>
+
+    <div class="table-bottom" style="display: none">
+        <a class="btn-filltable" href="collection://filltable">我要填表</a>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    //     var G_data = $content$;
+    var G_data = {
+        title: $title$,
+        person: $person$,
+        date: $date$,
+        filledNum: $filledNum$,
+        tableHeader: [$tableHeader$],
+        tableData: [$tableData$],
+        showFillBtn: $showFillBtn$, //是否显示填表按钮
+    }
+
+    document.querySelector('.title').innerHTML = G_data.title;
+    document.querySelector('.js-person').innerHTML = G_data.person;
+    document.querySelector('.js-date').innerHTML = G_data.date;
+    document.querySelector('.js-filledNum').innerHTML = G_data.filledNum;
+
+    if (G_data.showFillBtn) {
+        document.querySelector('.table-bottom').style.display = 'block';
+    }
+
+    var tableHTML = '';
+    var leftFixedTableHTML = '';
+    var headerHtml = '';
+    G_data.tableHeader.forEach(function(header, index) {
+//        headerHtml += '<th>' + header + '</th>'
+        var className = 'col col-' + index;
+        headerHtml += appendTag('th', header, className);
+
+        if (index == 0) {
+            leftFixedTableHTML = appendTag('th', header, className);
+        }
+    })
+
+    headerHtml = appendTag('tr', headerHtml, 'headerRow');
+    headerHtml = appendTag('thead', headerHtml);
+    tableHTML += headerHtml;
+
+    leftFixedTableHTML = appendTag('tr', leftFixedTableHTML, 'headerRow');
+    leftFixedTableHTML = appendTag('thead', leftFixedTableHTML);
+
+    if (!G_data.tableData) {
+        G_data.tableData = [];
+    }
+    if (!G_data.tableData.length) {
+        for (var i=0; i<3; i++) {
+            var data = [];
+            G_data.tableHeader.forEach(function(t) {
+                data.push('');
+            });
+
+            G_data.tableData.push({
+                status: 0,
+                data: data
+            });
+        }
+    }
+
+    G_data.tableData.forEach(function(data) {
+        var rowHtml = '';
+        var leftFiexRowHTML = '';
+        data.data.forEach(function(rowItem, index) {
+            var className = 'col col-' + index;
+            rowHtml += '<td class="' + className + '">' + rowItem + '</td>'
+
+            if (index == 0) {
+                leftFiexRowHTML = appendTag('td', rowItem, className);
+            }
+        })
+        var className = data.status == 0 ? 'fill' : 'unfill';
+        tableHTML += appendTag('tr', rowHtml, className);
+        leftFixedTableHTML += appendTag('tr', leftFiexRowHTML, className);
+    });
+
+    document.querySelector('#customers').innerHTML = tableHTML;
+    document.querySelector('#left-fixed-table').innerHTML = leftFixedTableHTML;
+
+    if (G_data.tableHeader.length <= 2) {
+        document.querySelector('.table-wrap').style.overflow = 'hidden';
+    }
+
+    function appendTag(tagName, innerHTML, className) {
+        className = className || '';
+        var str = '<' + tagName + ' class=" ' + className + ' ">';
+        str += innerHTML
+        str += '</' + tagName + '>';
+        return str;
+    }
+
+
+    var $lTable = document.querySelector('#left-fixed-table');
+    var $table = document.querySelector('#customers');
+
+    $lTable.style.width = ($table.querySelector('.col-0').clientWidth + 1) + 'px';
+
+    var lTableTrs =$lTable.querySelectorAll('tr');
+
+    var tableTrs = $table.querySelectorAll('tr');
+    for (var i=0; i<tableTrs.length; i++) {
+        var item = tableTrs[i];
+        var index = i;
+        if (!lTableTrs[index] || !item) continue;
+
+        item = item.querySelector('td') || item.querySelector('th');
+
+        var lItem = lTableTrs[index].querySelector('td') || lTableTrs[index].querySelector('th');
+        var tHight = item.clientHeight;
+        var lHight = lItem.clientHeight;
+        var h = Math.max(tHight, lHight);
+
+        lItem.style.height = h + 'px';
+        item.style.height = h + 'px';
+    }
+
+    var $tableWrap = document.querySelector('.table-wrap');
+    var $container = document.querySelector('.container');
+
+    $tableWrap.addEventListener('scroll', function(e) {
+        var $el = e.currentTarget;
+        var sLeft = $el.scrollLeft;
+        var viewW = $el.clientWidth, // 可见宽度
+            contentW = $el.scrollWidth; // 内容宽度
+        var w = contentW - viewW;
+
+        var currentTarget = e.currentTarget;
+
+        if (sLeft == 0) {
+            $lTable.classList.remove('scroll-shadow');
+        } else {
+            $lTable.classList.add('scroll-shadow');
+        }
+
+//        if (sLeft >= w) {
+//            console.log('right');
+//            $container.style.paddingRight = '15px';
+//        } else if (sLeft < w) {
+//            console.log('middle');
+//            $container.style.paddingRight = '0';
+//        }
+    }, false);
+
+
+    if ($tableWrap.scrollWidth > $tableWrap.clientWidth) {
+        $container.style.paddingRight = '0';
+    } else {
+        $container.style.paddingRight = '15px';
+        var wrap = document.querySelector('.table-inner-wrap');
+        wrap.style.paddingRight = '0';
+        wrap.style.width = 'auto';
+    }
+
+
+    //    if (window.devicePixelRatio && devicePixelRatio >= 2) {
+    //        var testElem = document.createElement('div');
+    //        testElem.style.border = '.5px solid transparent';
+    //        document.body.appendChild(testElem);
+    //        if (testElem.offsetHeight == 1) {
+    //            document.querySelector('html').classList.add('hairlines');
+    //        }
+    //        document.body.removeChild(testElem);
+    //    }
+
+</script>
+
+
+</html>

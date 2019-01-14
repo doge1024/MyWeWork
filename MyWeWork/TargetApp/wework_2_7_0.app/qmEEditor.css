@@ -1,0 +1,198 @@
+html{
+    background:#fff!important;padding:12px 0px 2px;
+}
+body {
+    font-family: sans-serif;    
+    padding: 0;
+    margin: 0 !important;
+    height: 100%;
+    line-height:1.5;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* prevent default highlight style */
+    /*-webkit-user-select: auto;*/
+    /*background-color: green;*/
+    word-wrap:break-word; 
+    font-size: 17px;
+}
+
+#QMEditor {
+    /*background-color: red;*/
+    width: auto;
+    min-height: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-bottom: 20px;
+}
+
+@media screen and (max-device-width: 320px) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 292px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 294px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 454px !important;
+    }
+
+    .editordidload img{ 
+        max-width:294px!important; 
+        max-height:none; 
+        height:auto!important;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 347px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 349px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 621px !important;
+    }
+
+    .editordidload img{ 
+        max-width:349px!important; 
+        max-height:none; 
+        height:auto!important;
+    }
+}
+
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 388px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 390px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 710px !important;
+    }
+
+    .editordidload img{ 
+        max-width:390px!important; 
+        max-height:none; 
+        height:auto!important;
+    }
+}
+
+.ios-upload-audio, .app-upload-audio {
+    display: none;
+    hidden: true;
+    visibility: hidden;
+}
+
+#QMEditor .qm-preloader {
+    margin:3px 5px 3px 5px !important;
+    width: 39px !important;
+    height: 30px !important;
+    Background: url(icon_pic_loading@2x.png);
+    background-size: 39px 30px;
+}
+
+/*
+ 删除节点时的占位class
+*/
+.qm-minHeightPlace {
+    min-height: 20px;
+}
+
+.origin-mail-header, .mail-footer{
+    color:#444;
+    font-size:88%;
+}
+
+.origin-mail-header strong, .mail-footer strong{
+    font-weight: bold;
+}
+
+textarea {
+    display:none !important;
+}   
+
+div {
+    min-height: 20px;
+}
+
+
+/* webkit puts cursor against the left edge of checkboxes when in contentEditable mode
+   which is confusing as it appears to be before the checkbox, this fixes the appearance */
+input[type=checkbox]:after {
+    content: ' ';
+}
+input[type=checkbox] {
+    padding-right: 16px;
+}
+
+/************** audio **************/
+object.ios-upload-qmaudio {
+    border:1px solid #cbcbcb;
+    border-radius:6px;
+    -webkit-border-radius: 6px;
+    margin: 8px 4px 0px 4px;
+    opacity: 1;
+    max-width: 290px;
+    max-height: 60px;
+}
+
+/*********** debug *******************/
+.qm-debug.qm-debug-padded {
+    position: absolute;
+    border:1px solid red;
+}
+
+.qm-debug.qm-debug-paddedinfo {
+    color: red;
+    position: absolute;
+    right: 10px;
+}
+
+.qm-debug.qm-debug-visibleinfo {
+    color: green;
+    position: absolute;
+    right: 10px;
+}
+
+.qm-debug.qm-debug-visible{
+    position: absolute;
+    border:3px solid green;
+}
+
+iframe {
+    position: absolute;
+    top:  -9999px;
+}
+
+

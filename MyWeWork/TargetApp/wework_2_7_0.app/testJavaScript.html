@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://meishi.qq.com/qr/13373091173084?ticket=Kk81jzgBAACoEA5Q -->
+<html lang="zh-CN">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" /> 
+  <title>jsDemo</title>
+ </head> 
+ <body> 
+  <article> 
+   <header>ABC</header>
+   <div id="test">
+       <img id="fuck" src="" width="300" height="300"></img>
+    </div>
+   <div id="card">
+<!--       <a href="javascript:void(0)" id="pick">hello world</a>-->
+<!--       <a href="javascript:void(0)" id="testSelectOneUser">testSelectOneUser</a>-->
+
+<!--      <a href="javascript:void(0)" id="testChooseImage">testChooseImage</a>-->
+      <a href="javascript:void(0)" id="testSelectTime">testSelectTime</a>
+      <a href="javascript:void(0)" id="testPublishPos">testPublishPos</a>
+
+<!--      <a href="javascript:void(0)" id="testGetWorkflowSessionKey">testGetWorkflowSessionKey</a>-->
+<!--      <a href="javascript:void(0)" id="\n"></a>-->
+
+<!--      <a href="javascript:void(0)" id="testshowAlert0">testshowAlert0</a>-->
+<!--      <a href="javascript:void(0)" id="testshowAlert1">testshowAlert1</a>-->
+<!--      <a href="javascript:void(0)" id="testshowwebmenuText">testshowwebmenuText</a>-->
+<!--      <a href="javascript:void(0)" id="testshowwebmenuimage">testshowwebmenuimage</a>-->
+<!--      <a href="javascript:void(0)" id="testshowwebmenuimage">testshowwebmenuimage</a>-->
+<!--      <a href="javascript:void(0)" id="testSelectMultiUsersByDepartmentId">testSelectMultiUsersByDepartmentId</a>-->
+
+      <a href="javascript:void(0)" id="testShowListDialog">testShowListDialog</a>
+      <a href="javascript:void(0)" id="testShowMultipleSelectorListDialog">testShowMultipleSelectorListDialog</a>
+      <a href="javascript:void(0)" id="testShowForwardApprovalDataEntrance">testShowForwardApprovalDataEntrance</a>
+      <a href="javascript:void(0)" id="testShowApprovalRecordListEntrance">testShowApprovalRecordListEntrance</a>
+      <a href="javascript:void(0)" id="testOpenContactProfile">testOpenContactProfile</a>
+   </div>
+  </article>
+  <script>
+      
+      
+      
+      var testshowwebmenuimage =function(){
+          MiJSBridge.invoke("utility.showWebviewRightMenu", {
+                            "menuKey":"image",
+                            "menuInfo":"menuNew",
+                            }, function(res) {
+                            oc_showTips(JSON.stringify(res));
+                            var eventName = "webView.menuKey.menuNew";
+                            MiJSBridge.on(eventName, function(arg){
+                                          oc_showTips(JSON.stringify(arg));
+
+                                          }
+                                          )
+                            });
+      }
+  
+var testshowAlert0 =function(){
+    MiJSBridge.invoke('utility.showAlert',{
+                      "type" : 0,
+                      "title":"test",
+                      "message":"msg",
+                      "button_descs":["cancel"]
+                      },function(res){
+                      oc_showTips(JSON.stringify(res));
+                 
+                      });
+}
+  
+var testshowAlert1 =function(){
+      MiJSBridge.invoke('utility.showAlert',{
+                        "type" : 1,
+                        "title":"test",
+                        "message":"msg",
+                        "button_descs":["YES","NO"]
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        
+                        });
+  }
+  
+  
+var oc_showTips =function(tips){
+    MiJSBridge.invoke('utility.showTips',{
+                      "data" : tips
+                      },function(res){
+
+                      });
+}
+  
+var oc_log =function(msg, callback){
+      MiJSBridge.invoke('utility.log',{
+                        "msg" : msg,
+                        },function(res){
+                        if(callback){
+                        callback(res.err_msg);
+                        }
+                        });
+}
+  
+var testSelectOneUser = function(){
+    MiJSBridge.invoke('utility.selectOneUserByDepartmentId',{
+                        "msg" : "helloworld",
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+}
+  
+var testMultiSelectUsers = function(){
+      MiJSBridge.invoke('utility.selectUsers',{
+                        "max_user_cnt":20,
+                        "navToUserDeptByVid": 0, // uint64_t，编辑当前企业联系人 id，可能为 0
+                        "selected_vid": [1688853017294224], // uint64_t，已选联系人列表 id，包含 fixed_vid
+                        "fixed_vid":[1688853017294224], // unit64，固定已选联系人列表 id
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+  }
+    
+  var testPublishPos = function(){
+      MiJSBridge.invoke('utility.didPublishWorkLog',{
+                        "journalid":100002, //uint64_t
+                        "createtime":183923712843, // uint32_t
+                        "shareurl":"http://www.qq.com", // string，当前工作日志分享消息跳转的url，用于PC、MAC，以及不支持工作日志的终端老版本
+                        "event_type": 40000005, //模板type， 参见EventType
+                        "detailurl" : "http://www.qq.com",  //自定义模板详情跳转url
+                        "showinfo" :["the first one", "the second one"], // 展示的摘要，保证有序
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+  }
+  
+  var testChooseImage = function(){
+      MiJSBridge.invoke('utility.chooseImage',{
+                        "maxSelectCount" : 6,
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+  }
+  
+  var testSelectTime = function(){
+      MiJSBridge.invoke('utility.selectTime',{
+                        "time": 0, // uint64_t，编辑的当前时间，毫秒级
+                        "data_type":3, // 时间选择器类型
+                        "tips_wording":"请选择具体的发生时间（并非报销时间）",  //string,传入的注释文字(选填)
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+  }
+  
+  var testGetWorkflowSessionKey = function(){
+      MiJSBridge.invoke('workflow.getWorkflowSessionKey',{
+                        
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+  }
+  
+  var testShowListDialog = function(){
+      MiJSBridge.invoke('utility.showListDialog', {
+                        "title":"", // string, 选填
+                        "position_selected":0, // uint32_t，当前选项 position，选填
+                        "items":["报销类型A","报销类型B","很长很长很长很长很长很长很长很长很长的报销类型C"], // string[], 列表项值
+                        "tips_wording":"请选择需要报销的类型很长很长很长很长很长很长",  //string,传入的注释文字(选填)
+                        },function(res){
+                            oc_showTips(JSON.stringify(res));
+                        });
+  }
+
+  var testShowMultipleSelectorListDialog = function(){
+      MiJSBridge.invoke('utility.showMultipleSelectorListDialog', {
+                        "title":"", // string, 选填
+                        "selected_positions":[1, 3], // uint32_t，当前已选的items的position列表(第一个元素从0开始计算index)
+                        "items":["车牌A","车牌B","车牌C","车牌D","车牌E","车牌F","车牌G","车牌H","车牌J","车牌K","车牌L","车牌M","车牌N","车牌O"], // string[], 列表项值
+                        "tips_wording":"请选择你需要车牌号的类型",  //string,传入的注释文字(选填)
+                        },function(res){
+                            oc_showTips(JSON.stringify(res));
+                      });
+  }
+  
+<!--  var testSelectMultiUsersByDepartmentId = function(){-->
+<!--      MiJSBridge.invoke('utility.selectMultiUsersByDepartmentId', {-->
+<!--                        "onevid": 0, // uint64_t，编辑当前企业联系人 id，可能为 0-->
+<!--                        "selected_vids": [], // uint64_t，已选的联系人列表id-->
+<!--                        "navToParent": TRUE // bool，是否导航到当前企业联系人的上一级部门，选填-->
+<!--                        },function(res){-->
+<!--                            oc_showTips(JSON.stringify(res));-->
+<!--                        });-->
+<!--  }-->
+<!-- -->
+
+    var testShowForwardApprovalDataEntrance = function(){
+        MiJSBridge.invoke('utility.showForwardApprovalDataEntrance', {
+                          "title":"bobby的请假申请",         // string, 必填
+                          "detail":"共请假3天\n合理",  // string，必填
+                          "link_url":"https://app.work.weixin.qq.com/wework_admin/approval_mdetail?vid=1688853564293828&host_vid=1688853564293828&corpid=1970324996983027&sp_no=201705260001&event_type=2&isShowClose=1&termid=131074",       // string, 必填，会话中点击该条审批数据消息的跳转url
+                          "icon_url":"http://rescdn.qqmail.com/node/ww/wwapp/UI_app/journal-share/img/icon-journal.png",      // string, 选填，会话中显示审批消息icon(可配置）
+                          },function(res){
+                          oc_showTips(JSON.stringify(res));
+                          });
+    }
+  
+    var testShowApprovalRecordListEntrance = function(){
+        MiJSBridge.invoke('utility.showApprovalRecordListEntrance', {
+                        "link_url":"https://app.work.weixin.qq.com/wework_admin/approval_mdetail?vid=1688853564293828&host_vid=1688853564293828&corpid=1970324996983027&sp_no=201705260001&event_type=2&isShowClose=1&termid=131074", // string, 必填，点击该条消息的跳转url
+                        },function(res){
+                        oc_showTips(JSON.stringify(res));
+                        });
+    }
+  
+   var testOpenContactProfile = function(){
+          MiJSBridge.invoke('utility.openContactProfile', {
+                            "vid":"1688853564293828",
+                            },function(res){
+                            oc_showTips(JSON.stringify(res));
+                            });
+    }
+  
+
+  var readyFunc = function onBridgeReady() {
+    // 绑定关注事件
+<!--    document.querySelector('#pick').addEventListener('click', function(e){-->
+<!--            oc_log("helloworld", oc_showTips)-->
+<!--    });-->
+<!--    -->
+<!--                                                     -->
+<!--    document.querySelector('#testSelectOneUser').addEventListener('click', function(e){-->
+<!--            testSelectOneUser();-->
+<!--      });-->
+
+<!--    document.querySelector('#testSelectTime').addEventListener('click', function(e){ -->
+<!--             testSelectTime(); -->
+<!--     }); -->
+    
+    document.querySelector('#testPublishPos').addEventListener('click', function(e){
+                                                               testPublishPos();
+                                                               });
+<!--    document.querySelector('#testChooseImage').addEventListener('click', function(e){-->
+<!--            testChooseImage();-->
+<!--    });-->
+<!--    -->
+<!--    document.querySelector('#testGetWorkflowSessionKey').addEventListener('click', function(e){-->
+<!--                                                                testGetWorkflowSessionKey();-->
+<!--                                                                });-->
+<!--                                                                -->
+<!--     document.querySelector('#testshowAlert0').addEventListener('click', function(e){-->
+<!--                                                               testshowAlert0();-->
+<!--                               });-->
+<!--      document.querySelector('#testshowAlert1').addEventListener('click', function(e){-->
+<!--                                                    testshowAlert1();-->
+<!--                                              });-->
+<!--                                              -->
+<!--       document.querySelector('#testshowwebmenuimage').addEventListener('click', function(e){-->
+<!--                                                    testshowwebmenuimage();-->
+<!--                                                });-->
+
+      document.querySelector('#testShowListDialog').addEventListener('click', function(e){
+                                                    testShowListDialog();
+                                                    });
+     document.querySelector('#testShowMultipleSelectorListDialog').addEventListener('click', function(e){
+                                                    testShowMultipleSelectorListDialog();
+                                                    });
+<!--     document.querySelector('#testSelectMultiUsersByDepartmentId').addEventListener('click', function(e){-->
+<!--                                                    testSelectMultiUsersByDepartmentId();-->
+<!--                                                    });-->
+
+    document.querySelector('#testShowForwardApprovalDataEntrance').addEventListener('click', function(e){
+                                                                               testShowForwardApprovalDataEntrance();
+                                                                               });
+    document.querySelector('#testShowApprovalRecordListEntrance').addEventListener('click', function(e){
+                                                                                testShowApprovalRecordListEntrance();
+                                                                               });
+    document.querySelector('#testOpenContactProfile').addEventListener('click', function(e){
+                                                                       
+                                                                                testOpenContactProfile();
+                                                                                });
+}
+
+
+if (typeof MiJSBridge === "undefined") {
+  document.addEventListener('MiJSBridgeReady', readyFunc, false);
+} else {
+  readyFunc();
+}
+
+
+</script> 
+ </body>
+</html>

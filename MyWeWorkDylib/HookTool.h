@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "HookFunctionsAndPropertys.h"
+#import <MSWeakTimer/MSWeakTimer.h>
+
+@interface NSObject (TTTTTT)
+
+@property(nonatomic, assign) BOOL start;
+
+- (void)p__startOpenRedPackage;
+
+@end
 
 @interface HookTool : NSObject
 
@@ -16,6 +25,8 @@
 @property(nonatomic, strong) NSMutableArray<WWKConversationRedEnvelopesBubbleView *> *redEnvelopesBubbleViews;
 
 @property(nonatomic, assign, getter=isStartSnatchHB) BOOL startSnatchHB;
+
+@property(nonatomic, assign) BOOL stopToRedPackageVC;
 
 + (instancetype)sharedInstance;
 

@@ -1,15 +1,24 @@
 PODS:
   - FLEX (2.4.0)
+  - MSWeakTimer (1.1.0)
   - ReactiveObjC (3.0.0)
 
 DEPENDENCIES:
   - FLEX (~> 2.0)
+  - MSWeakTimer (~> 1.1.0)
   - ReactiveObjC (= 3.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FLEX
+    - MSWeakTimer
+    - ReactiveObjC
 
 SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  MSWeakTimer: 9426150f933b80ed3acf3f6d228e4b61f0e303c8
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
 
-PODFILE CHECKSUM: 12914d469a3a2e76084aaf6f933b191e85722976
+PODFILE CHECKSUM: 2ed36c2ad880843c39b8b7ee47cff7a5fa9cbcda
 
-COCOAPODS: 1.4.0.rc.1
+COCOAPODS: 1.6.0.beta.2

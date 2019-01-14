@@ -1,0 +1,234 @@
+China	86	11	C
+HK China	852	8	H
+Macao China	853	8	M
+Taiwan China	886	10	T
+Albania	355	7	A
+Algeria	213	6	A
+Afghanistan	93	6	A
+Argentina	54	7	A
+UAE	971	11	U
+Aruba	297	7	A
+Azerbaijan	994	9	A
+Ascension	247	4	A
+Egypt	20	8	E
+Ethiopia	251	7	E
+Ireland	353	9	I
+Estonia	372	7|8	E
+Andorra	376	6	A
+Angola	244	6	A
+Anguilla	1264	7	A
+Antigua&Barbuda	1268	7	A
+Austria	43	8	A
+Australia	61	10	A
+Barbados	1246	7	B
+Papua New Guinea	675	7	P
+Bahamas	1242	7	B
+Pakistan	92	11	P
+Bahrain	973	8	B
+Panama	507	7	P
+Brazil	55	8	B
+Belarus	375	9	B
+Bermuda	1441	7	B
+Bulgaria	359	7	B
+Benin	229	8	B
+Belgium	32	8	B
+Iceland	354	7	I
+Puerto Rico	1	10	P
+Poland	48	10	P
+Bolivia	591	7	B
+Belize	501	7	B
+Botswana	267	7	B
+Bhutan	975	5	B
+Burkina Faso	226	6	B
+Burundi	257	8	B
+Denmark	45	8	D
+Germany	49	11	G
+American Samoa	1684	7	A
+Togo	228	7	T
+Dominica	1767	7	D
+Dominican Rep.	1809	9	D
+Russia	7	10	R
+Ecuador	593	7	E
+France	33	10	F
+French Polynesia	689	6	F
+French Guiana	594	10	F
+Philippines	63	11	P
+Fiji	679	7	F
+Finland	358	7	F
+Gambia	220	7	G
+The Rep. of Congo	242	7	T
+Colombia	57	10	C
+Costa Rica	506	8	C
+Grenada	1473	7	G
+Georgia	995	8	G
+Cuba	53	7	C
+Guam	1671	7	G
+Guyana	592	12	G
+Kazakhstan	7	10	K
+Haiti	509	8	H
+Korea	82	11	K
+Honduras	504	7	H
+Djibouti	253	6	D
+Kyrgyzstan	996	9	K
+Guinea	224	6	G
+Canada	1	7	C
+Ghana	233	10	G
+Gabon	241	6	G
+Cambodia	855	9	C
+Czech	420	9	C
+Zimbabwe	263	9	Z
+Cameroon	237	8	C
+Qatar	974	7	Q
+Cayman Islands	1345	7	C
+Cote d'Ivoire	225	8	C
+Kuwait	965	8	K
+Kenya	254	7	K
+Cook Islands	682	5	C
+Latvia	371	8	L
+Lesotho	266	8	L
+Laos	856	10	L
+Lebanon	961	7	L
+Lithuania	370	5	L
+Liberia	231	7|8	L
+Libya	218	10	L
+Liechtenstein	423	7	L
+Mayotte	262	6	M
+Luxembourg	352	9	L
+Romania	40	9	R
+Madagascar	261	7	M
+Maldives	960	7	M
+Malta	356	8	M
+Malawi	265	9	M
+Malaysia	60	10	M
+Mali	223	8	M
+Mariana Islands	596	10	M
+Martinique	596	10	M
+Mauritius	230	7	M
+USA	1	10	U
+American Samoa	1684	7	A
+Bangladesh	880	7	B
+Myanmar	95	6	M
+Moldova	373	5	M
+Monaco	377	8	M
+Mozambique	258	9	M
+Mexico	52	8	M
+South Africa	27	7	S
+South Sudan	211	9	S
+Nauru	674	7	N
+Niger	227	6	N
+Nigeria	234	11	N
+Norway	47	8	N
+Portugal	351	9	P
+Japan	81	11	J
+Sweden	46	6	S
+Switzerland	41	10	S
+El Salvador	503	7	E
+Sierra Leone	232	6	S
+Senegal	221	7	S
+Cyprus	357	6	C
+Seychelles	248	6	S
+Saudi Arabia	966	9	S
+Sao Tome&Principe	239	6	S
+Saint Lucia	1758	7	S
+San Marino	378	10	S
+St. Vincent&The Grenadines	1784	7	S
+Sri Lanka	94	7|8	S
+Slovakia	421	7	S
+Slovenia	386	7	S
+Swaziland	268	7	S
+Sudan	249	9	S
+Suriname	597	6	S
+Solomon Islands	677	7	S
+Somalia	252	7	S
+Tajikistan	992	6	T
+Thailand	66	10	T
+Tanzania	255	11	T
+Tonga	676	7	T
+Trinidad&Tobago	1868	7	T
+Tunisia	216	8	T
+Turkey	90	10	T
+Turkmenistan	993	6	T
+Guatemala	502	8	G
+Venezuela	58	7	V
+Brunei	673	7	B
+Uganda	256	9	U
+Ukraine	380	10	U
+Uruguay	598	7	U
+Uzbekistan	998	7	U
+Spain	34	9	S
+Samoa	685	7	S
+Greece	30	10	G
+Singapore	65	8	S
+New Zealand	64	8	N
+Hungary	36	9	H
+Syria	963	9	S
+Jamaica	1876	7	J
+Armenia	374	8	A
+Yemen	967	6	Y
+Iraq	964	8	I
+Iran	98	8	I
+Israel	972	9	I
+Italy	39	10	I
+India	91	10	I
+Indonesia	62	10|11|12	I
+UK	44	10	U
+Jordan	962	7	J
+Vietnam	84	10	V
+Zambia	260	9	Z
+D.R.Congo	243	8	D
+Chad	235	7	C
+Gibraltar	350	8	G
+Chile	56	7	C
+CAR	236	6	C
+British Virgin Islands	1284	10	B
+US Virgin Islands	1340	10	U
+Saint Martin	1599	9	S
+Turks&Caicos Islands	1649	9	T
+Montserrat	1664	9	M
+Northern Mariana Islands	1670	9	N
+Saint Kitts&Nevis	1869	9	S
+Morocco	212	9	M
+Mauritania	222	9	M
+Cape Verde	238	9	C
+Equatorial Guinea	240	9	E
+Guinea-Bissau	245	9	G
+Namibia	264	9	N
+Comoros	269	9	C
+Saint Helena	290	9	S
+Eritrea	291	9	E
+Faroe Islands	298	9	F
+Greenland	299	9	G
+Netherlands	31	9	N
+Serbia	381	9	S
+Montenegro	382	9	M
+Croatia	385	9	C
+Bosnia&Herzegovina	387	9	B
+Macedonia	389	9	M
+Vatican	39	9	V
+Isle of Man	44	9	I
+Falkland Islands	500	9	F
+Nicaragua	505	9	N
+Saint Pierre&Miquelon	508	9	S
+Peru	51	9	P
+Saint Barthelemy	590	9	S
+Paraguay	595	9	P
+Netherlands Antilles	599	9	N
+Cocos Islands	61	9	C
+Christmas Island	61	9	C
+East Timor	670	9	E
+Antarctica	672	9	A
+Vanuatu	678	9	V
+Palau	680	9	P
+Wallis&Futuna	681	9	W
+Niue	683	9	N
+Kiribati	686	9	K
+New Caledonia	687	9	N
+Tuvalu	688	9	T
+French Polynesia	689	9	F
+Tokelau	690	9	T
+FSM	691	9	F
+Marshall Islands	692	9	M
+Oman	968	9	O
+Mongolia	976	9	M
+Nepal	977	9	N
+North Korea	850	9	N

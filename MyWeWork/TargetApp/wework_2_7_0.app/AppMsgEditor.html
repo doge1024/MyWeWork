@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" id="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1.5, minimum-scale=0.1">
+            <meta name="format-detection" content="telephone=no">
+                <link href="qmEEditor.css" type="text/css" rel="stylesheet">
+                    <link href="qmEBusiEditor.css" type="text/css" rel="stylesheet">
+                        <meta http-equiv="X-WebKit-CSP" id＝"XWebKitCSP" content = "$XWebKitContent$">
+                            <style type="text/css">
+                                
+                                #hidedetail {
+                                    display: none;
+                                }
+                            
+                            body {
+                                font-size: $prefrenceFontSize$ !important;
+                            }
+                            
+                            .qmEditorContentLoading, .qmEditorContentError {
+                                width: 130px;
+                                height: 16px;
+                                margin: -30px auto 0;
+                                display: none;
+                            }
+                            
+                            .qmEditorContentLoading.show, .qmEditorContentError.show {
+                                display: block;
+                            }
+                            
+                            .qmEditorContentLoading span{
+                                display: inline-block;
+                                float: left;
+                            }
+                            
+                            .qmEditorContentLoading .spin{
+                                margin-right:10px;
+                                width: 16px;
+                                height: 16px;
+                                background-image: url(activity_indicator@2x.gif);
+                                background-size:16px 16px;
+                            }
+                            .qmEditorContentLoading p, .qmEditorContentError p{
+                                height: 16px;
+                                line-height: 16px;
+                                font-size:15px;
+                                text-align:center;
+                                color:#999;
+                            }
+                            
+                            object.ios-upload-qmaudio {
+                                display: none !important;
+                                height:0px !important;
+                            }
+                            
+                            object.app-upload-audio {
+                                display: none !important;
+                                height:0px !important;
+                            }
+                            
+                            audio {
+                                display: none !important;
+                                height:0px !important;
+                            }
+                            
+                            a {
+                                pointer-events: none !important;
+                            }
+                            
+                                </style>
+                            <script src="qmEDefines.js"></script>
+                            <script src="qmEDebug.js"></script>
+                            <script src="qmEHtmlAddtions.js"></script>
+                            <script src="qmEUtil.js"></script>
+                            <script src="qmEEvents.js"></script>
+                            <script src="qmENotify.js"></script>
+                            <script src="qmEEditor.js"></script>
+                            <script src="qmEEditorCommand.js"></script>
+                            <script src="qmEViewport.js"></script>
+                            <script src="qmEImgpreloader.js"></script>
+                            <script src="qmEViewer.js"></script>
+                            <script src="qmEEvaluator.js"></script>
+                            <script src="qmECanvasUI.js"></script>
+                            <script src="qmEUIComponents.js"></script>
+                            <script src="qmEAttachmentManager.js"></script>
+                            <script src="qmEDiffs.js"></script>
+                            <!-- custom -->
+                            <script src="qmEBusiEditor.js"></script>
+                            <script src="qmEBusiAttachmentManager.js"></script>
+                            <script src="qmEBusiEvaluator.js"></script>
+                            <script src="qmAppMsgInitial.js"></script>
+                            <script src="qmEBusiEntrance.js"></script>
+    </head>
+    <body>
+        <div id="QMEditor" class="editordidload" contenteditable="false">$HTML_CONTENT$</div>
+    </body>
+</html>

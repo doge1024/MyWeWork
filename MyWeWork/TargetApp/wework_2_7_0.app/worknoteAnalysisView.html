@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            
+            var getQueryVariable = function (variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1];
+                    }
+                }
+                return (false);
+            };
+        
+        var i18n = {
+            zh: {
+                historyTrend: '历史趋势',
+                summarize: '概览',
+                totalCnt: '总量',
+                memberCnt: '人数',
+                memberAvarage: '人均',
+                ren: '人',
+                max: '最高',
+                min: '最低',
+                today: '今日',
+                allmember: '所有人',
+                nodata: '暂无数据',
+                cancel: '取消',
+                nearlyweek: '近一周',
+                nearlymonth: '近一个月',
+                nearlyThreemonth: '近三个月',
+                nearlyHalfYear: '近半年',
+                nearlyYear: '近一年',
+                customtime: '自定义区间',
+                etc: '等',
+                netErrMsg: '网络出错，请重新加载',
+                date: '日期',
+                LimitExceeded: '超出展示上限'
+            },
+            en: {
+                historyTrend: 'Historical Trend',
+                summarize: 'Overview',
+                totalCnt: 'Total',
+                memberCnt: 'Member Count',
+                memberAvarage: 'Average',
+                ren: '',
+                max: 'Maximum',
+                min: 'Minimum',
+                today: 'Today',
+                allmember: 'All members',
+                nodata: 'No data',
+                cancel: 'Cancel',
+                nearlyweek: 'Last 1 week',
+                nearlymonth: 'Last 1 month',
+                nearlyThreemonth: 'Last 3 months',
+                nearlyHalfYear: 'Last 6 months',
+                nearlyYear: 'Last 12 months',
+                customtime: 'Custom',
+                etc: 'etc.',
+                netErrMsg: 'Network error. Load again',
+                date: 'Date',
+                LimitExceeded: 'Limit exceeded'
+            },
+            zh_HK : {
+                historyTrend: '歷史趨勢',
+                summarize: '概覽',
+                totalCnt: '總量',
+                memberCnt: '人數',
+                memberAvarage: '人均',
+                ren: '人',
+                max: '最高',
+                min: '最低',
+                today: '今日',
+                allmember: '所有人',
+                nodata: '暫無資料',
+                cancel: '取消',
+                nearlyweek: '近一週',
+                nearlymonth: '近一個月',
+                nearlyThreemonth: '近三個月',
+                nearlyHalfYear: '近半年',
+                nearlyYear: '近一年',
+                customtime: '自定義區間',
+                etc: '等',
+                netErrMsg: '網路出錯，請重新載入',
+                date: '日期',
+                LimitExceeded: '超出展示上限'
+            }
+        }
+        
+        var language = i18n[getQueryVariable('language')] || i18n.zh
+            </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+            <meta charset="UTF-8">
+                <meta name="format-detection" content="telephone=no">
+                    <style type="text/css">
+                        * {
+                            -webkit-touch-callout: none;
+                            -webkit-user-select: none;
+                            user-select: none;
+                        }
+                    
+                    html {
+                        height: 100%;
+                    }
+                    
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        height: 100%;
+                        overflow-y: hidden;
+                        background: #F5F5F5;
+                        font-family: "Microsoft YaHei", sans-serif;
+                    }
+                    
+                    a {
+                        text-decoration: none;
+                        -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+                    }
+                    
+                    .log_count_chart {
+                        margin: 0 0 12px 0;
+                        box-shadow: 0px 1px 0px 0px #E9E9E9;
+                    }
+                    
+                    .main {
+                        position: relative;
+                        display: block;
+                        overflow: hidden;
+                    }
+                    
+                    .worknote_summarize {
+                        background: #fff;
+                        margin-bottom: 15px;
+                        text-align: center;
+                        box-shadow: 0px 1px 0px 0 #E9E9E9;
+                    }
+                    
+                    .worknote_summarize_title {
+                        padding: 16px 20px 0;
+                        text-align: left;
+                        color: #373E45;
+                        font-weight: bold;
+                        box-shadow: 0px -1px 1px 0 #E9E9E9;
+                    }
+                    
+                    .worknote_summarize_details {
+                        margin: 14px 21px 0px;
+                        box-shadow: inset 0px -1px 1px -1px #E0E0E0;
+                    }
+                    
+                    .worknote_summarize_item {
+                        display: inline-block;
+                        position: relative;
+                        font-size: 14px;
+                        color: #9B9B9B;
+                    }
+                    
+                    .worknote_summarize_item_total {
+                        box-sizing: border-box;
+                        margin-bottom: 23px;
+                        margin-top: -8px;
+                    }
+                    
+                    .worknote_summarize_item_max .worknote_summarize_totalNum {
+                        color: #2F7DCD;
+                    }
+                    
+                    .worknote_summarize_item_min .worknote_summarize_totalNum {
+                        color: #FF4B4F;
+                    }
+                    
+                    .worknote_summarize_item_max .worknote_summarize_totalNum, .worknote_summarize_item_min .worknote_summarize_totalNum {
+                        font-size: 20px;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        display: inline-block;
+                        width: 100%;
+                    }
+                    
+                    .worknote_summarize_totalNum {
+                        font-size: 30px;
+                        color: #373E45;
+                    }
+                    
+                    .worknote_summarize_item_sub {
+                        font-size: 14px;
+                        color: #9B9B9B;
+                    }
+                    
+                    .worknote_summarize_item_max, .worknote_summarize_item_min {
+                        width: 45%;
+                        height: 84px;
+                    }
+                    
+                    .worknote_topbar {
+                        height: 40px;
+                        background: #fff;
+                        color: #9C9D9F;
+                        margin-bottom: 15px;
+                        font-size: 15px;
+                        text-align: center;
+                        box-shadow: 0px 1px 0px 0px #E9E9E9;
+                    }
+                    
+                    .worknote_topbar span {
+                        display: inline-block;
+                        max-width: 90%;
+                        word-wrap: normal;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    
+                    .worknote_datePicker, .worknote_memberSelect {
+                        display: inline-block;
+                        width: 49%;
+                        text-align: center;
+                        height: 40px;
+                        line-height: 40px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        box-sizing: border-box;
+                    }
+                    
+                    .worknote_memberSelect_disable {
+                        pointer-events: none;
+                    }
+                    
+                    .worknote_memberSelect_disable span, .worknote_memberSelect_disable i {
+                        opacity: 0.3;
+                    }
+                    
+                    .worknote_memberSelect:active, .worknote_datePicker:active {
+                        background: #E7E8EC;
+                    }
+                    
+                    .active {
+                        color: #2F7DCD;
+                    }
+                    
+                    @keyframes mrotate {
+                        from {
+                            transform: rotate(180deg);
+                        }
+                        to {
+                            transform: rotate(0deg);
+                        }
+                    }
+                    
+                    .active .arrow {
+                        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAYAAAC5Sw6hAAAAAXNSR0IArs4c6QAAAXpJREFUKBVjZMAD9BsuuDH++zeV4T/DMWYZw5Sz6Yy/cSlnxCVh2HAu5N8/hqUM//+zgdQAFW5gljEKw2UYEzaDDBrOpwANWcnA8P8fEyNjHCMj45n/DAwBf5+cXxPacBVsMLo+DIMMas+X/P/7bzbQJV8ZGJi9zjcZLWbm4ncBGnbqP8N/v9v/fqzznHSbHa9BBnXn2v4z/OsGeuMtEzOj08Umg/0gDWcrlD+yM/G6Av134v9/Bu/nbz6vRzcMHEYNDf+Z1v8/P5Xh3/8MRgbGp0xs/13P1RpfR7fVuvMG79ev37b////fGmjoTkEmoYADDYo/QOoYjWf+Z/3z5PwiYHhEAJ1/h5GNweV8jdFDdENgfIeGqzzv//3YBoxJW6D63ZwCov7Hi2S/M/19en4p2BAGxovs7Kw2+AwBGXagQfuLOC+LJ9CQg0CXuX7/8Ho5SJwJGIASIGcyMDM6nKzWfQkSJAR2lep/ZWaS8AIGwyagy/gJqSdJHgBItZAgvxOUGQAAAABJRU5ErkJggg==") no-repeat;
+                        transform: rotate(0deg);
+                        animation: mrotate 0.15s;
+                        background-size: contain;
+                    }
+                    
+                    .worknote_dateSelect_item:active {
+                        background: #E7E8EC;
+                    }
+                    
+                    .arrow {
+                        display: inline-block;
+                        width: 9px;
+                        height: 5px;
+                        vertical-align: top;
+                        margin-top: 18px;
+                        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAYAAAC5Sw6hAAAAAXNSR0IArs4c6QAAAWBJREFUKBVjnDdv3iEGBoZvjIyMEYmJiR+AbKLA5s2buV69erUcqI8vKSnJkQmo68X////dgfjAsmXLxIkxZdGiRdyvX7/eBlTrB8QfQXqY9PT0ooH0CqBB+t+/fz8yf/58BZAELrBq1SqeP3/+bAeqtwe6ZjcPD08kSC0jiAAKMgG9OBXIzABKPmVhYXGNi4u7DpJDBhs3buR98+bNdqCYNVDdTiAOAAbHD5AasEEwxUDD2oCGVgIVvAViT6Ci0zC5JUuW8P38+XMHkG8JlNsuISER6OXl9RMmDwojOAAGWhVQUSnQMOF///7tXbhwoSNIEugd/l+/fu0CMi2BeCu6ISA1KC4CCYDA3Llzk4HULCD+DcRpQJwLxCZAvImXlzc0LCzsF5CNArAaBFIB9GYIkFoKdB0bVMcGfX39MBMTE5DhGACnQSCVCxYscPv79+9UoHePAWM3BZchGKZSIgAAEgGER7quT28AAAAASUVORK5CYII=") no-repeat;
+                        background-size: contain;
+                    }
+                    
+                    .worknote_dateSelect_item:after {
+                        content: '';
+                        float: right;
+                        display: none;
+                        margin-top: 15px;
+                        margin-right: 13px;
+                        width: 17px;
+                        height: 12px;
+                        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAaCAYAAADfcP5FAAAAAXNSR0IArs4c6QAAA39JREFUSA3FV11IFFEUvueuWiGh/UgUEUb0YxFBD1FRD9VsEUFIUrtaGUVK0H8ZWbOBkbut9iMZBUKGCZK7ZfhU0GxaplnQSw9BDz30LEQIpa4zc09nlBlmx3FdydZ52HvuN98955tz7z33LrBpfI7VdM/+MzzYjIwVeDI9RU8rt3/l06XnaKgr7/fwQCcyLGQMV+qqVmVoyZgOQf6bnfkDWvw1xV5uxAcAlQF/bNhpz9DBsLJW6OoHysyIGJKj0ZQVR+Qdr9IuyB+KbVVV1sWQLTSCM2A6BzgUDXjbRvr0k7YM+UOv96KONE2YO6qFCWD8SGtAiphijDYtgvxB5ZgQ7AVN00xTDONwNBKQWuxi0iLIV61UCoGNNE2ekeAACBzKIrK32SnG6I+S3N78I4aI8C1zSx21AcsViaE1c6JV9j6yMIcBjv6UdMsbPmf29/1qoikqsTsE4Cdpmh7aMac95YIO3/qSPRzva6PM7LIH48DP0gKut2NuNvjCHeuYprXTHvw+g4O/+ar0042YClYais0bEuIlrZcNdj5l5iJl5q4dG8/mqGnPEVk+fZEU17HXd+PNsvHIyfDSsLIkLkS3UwxV4MupijH8c3Lw0QxkVE8EvZd2xkYTS6UtDnesGVKxhz5slZ1PuykQDUi1dmwimy/IWXqcKqZiEZHlUSnv8IWUfRaWxCgOxTYJTXtPlMUJNA5VtLWDCVgKHX7/zPJ4bt7cQlrdPRYfcRbT8Rll6pyFuRhU8PbouohRZubYX9PWro7K3ut2LFXb2mXlYSWnX2MdtJbWJwwGVr9a9p6vAhB23BdUSlGwRjoKHDcGXhO9JlXauZOxLUHGoOLbnfP1Ie0dQ1xtdwIM2hdlZ5fUXdg8aOD+aqWC1NUSL2E8nU13ItekCvvYydoJDo3Bh4JdC1WMv6dMJew2In4CD79E+H4UeNoZiMTcIzFJp9g5xq0/RpBBMi5QQlPHLlQ3DwbG2YOovPPUeK8ng7ue9q1Xtv3IysqQyFHfRM6As4bIVe+YjE00brz3rhkyyUYVR1V/a95hTNxsAVgjHZRldAWlSjE1j2uGTNeRyu1fKOhuOlZ+m5jVAntSIHvLp1KM4TtphszgB4KxbSDwpXXBAmgpkKVSZykw+f/SJs2Q6TgqS53MA/vp70E/ZaypaIV05H+IMeOl3FYhpvQBKTt0If4FRJk49cuDFU8AAAAASUVORK5CYII=") no-repeat;
+                        background-size: contain;
+                    }
+                    
+                    .worknote_dateSelect_item_checked:after {
+                        display: inline-block;
+                    }
+                    
+                    .worknote_dateSelect {
+                        position: fixed;
+                        width: 100%;
+                        bottom: 0;
+                        height: 368px;
+                        background: #fff;
+                        font-size: 16px;
+                        z-index: 10;
+                    }
+                    
+                    .worknote_dateSelect_actionbar {
+                        background: #F6F6F8;
+                        height: 46px;
+                        font-weight: 500;
+                        line-height: 46px;
+                        padding-left: 15px;
+                    }
+                    
+                    .worknote_dateSelect_item {
+                        height: 46px;
+                        border-left: 15px solid transparent;
+                        box-shadow: inset 0px -1px 1px -1px #E0E0E0;
+                        line-height: 46px;
+                    }
+                    
+                    .worknote_dateSelect_item:first-of-type {
+                        box-shadow: none;
+                    }
+                    
+                    .mask {
+                        position: fixed;
+                        height: 100%;
+                        width: 100%;
+                        background: rgba(0, 0, 0, 0.3);
+                        top: 0;
+                        z-index: 9;
+                    }
+                    
+                    .empty, .showErrorMsg {
+                        position: relative;
+                        display: none;
+                        text-align: center;
+                        line-height: 56px;
+                        background: #fff;
+                        padding-bottom: 36px;
+                        font-size: 18px;
+                        color: #C4C5C9;
+                    }
+                    
+                    .showErrorMsg {
+                        background: none;
+                        margin-top: 30%;
+                    }
+                    
+                    .chart_title {
+                        padding: 20px;
+                        background: #fff;
+                        font-weight: bold;
+                        color: #373E45;
+                        box-shadow: 0px -1px 0px 0px #E9E9E9;
+                    }
+                    
+                    .worknote_summarize_item_content {
+                        margin-top: 16px;
+                    }
+                    
+                    .highcharts-tooltip div {
+                        margin-bottom: 6px;
+                        max-width: 250px;
+                        overflow: hidden;
+                    }
+                    
+                    .highcharts-tooltip div:last-of-type {
+                        margin-bottom: 0;
+                    }
+                    
+                    .js_trendEmpty {
+                        box-shadow: inset 0px -1px 0px 0px #E9E9E9;
+                        padding-bottom: 0px;
+                    }
+                    
+                    .trendEmpty_img {
+                        width: 90%;
+                        background-size: contain;
+                        margin: 0 12px;
+                    }
+                    
+                    .trendEmpty_txt {
+                        position: absolute;
+                        display: block;
+                        width: 100%;
+                        top: 40px;
+                        left: 0;
+                    }
+                    
+                    .tooltips_title {
+                        color: #a2a2a2;
+                    }
+                    
+                    .dateSelect_cancel {
+                        display: inline-block;
+                        width: 100%;
+                    }
+                    </style>
+    </head>
+    <body>
+        <div class="main" style="display: none;">
+            <div class="worknote_topbar">
+                <div class="worknote_datePicker js_datePicker"><span class="js_datePicker_text i18n" name="today"></span> <i
+                    class="arrow"></i>
+                </div>
+                <div class="worknote_memberSelect js_memberSelect"><span class="js_memberSelect_text i18n"
+                    name="allmember"></span> <i
+                        class="arrow"></i></div>
+            </div>
+            <div class="worknote_summarize">
+                <div class="worknote_summarize_title i18n" name="summarize">
+                </div>
+                <div class="worknote_summarize_details">
+                    <div class="worknote_summarize_item worknote_summarize_item_total">
+                        <div class="worknote_summarize_totalNum js_total">56900</div>
+                        <div class="worknote_summarize_item_sub">
+                            <span class="i18n" name="memberCnt"></span>:<span class="js_member_cnt"></span>&nbsp;&nbsp;
+                            <span class="js_avarage"><span class="i18n" name="memberAvarage"></span>:<span
+                                class="js_member_avarage"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="worknote_summarize_item worknote_summarize_item_max">
+                    <div class="worknote_summarize_item_content">
+                        <span class="worknote_summarize_totalNum js_max_value">56900</span>
+                        <br>
+                        <span class="worknote_summarize_item_title i18n" name="max"></span> · <span
+                            class="worknote_summarize_item_sub js_max_member"></span>
+                    </div>
+                </div>
+                
+                <div class="worknote_summarize_item worknote_summarize_item_min">
+                    <div class="worknote_summarize_item_content">
+                        <span class="worknote_summarize_totalNum js_min_value">56900</span>
+                        <br>
+                        <span class="worknote_summarize_item_title i18n" name="min"></span> · <span
+                            class="worknote_summarize_item_sub js_min_member">
+                        </span>
+                    </div>
+                </div>
+                <div class="empty js_summaryEmpty i18n" name="nodata"></div>
+            </div>
+            <div class="chart_title i18n" name="historyTrend"></div>
+            <div class="empty js_trendEmpty">
+                <img class="trendEmpty_img"
+                    src="data:image/png;base64,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">
+                    <span class="trendEmpty_txt i18n" name="nodata"></span>
+                    </div>
+            <div class="log_count_chart" id="use_analysis_container"></div>
+            
+            <div class="worknote_dateSelect" style="display: none;">
+                <div class="worknote_dateSelect_actionbar"><span class="dateSelect_cancel i18n" name="cancel"></span></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n worknote_dateSelect_item_checked" data-value="7"
+                    name="today"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="7" name="nearlyweek"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="30" name="nearlymonth"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="90" name="nearlyThreemonth"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="180" name="nearlyHalfYear"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="365" name="nearlyYear"></div>
+                <div class="worknote_dateSelect_item js_range_btn i18n" data-value="0" name="customtime"></div>
+            </div>
+        </div>
+        <div class="mask" style="display:none;"></div>
+        
+        <div class="showErrorMsg i18n" name="netErrMsg">
+        </div>
+        
+        <script type="text/javascript">
+            
+            var loadJS = function (url, success) {
+                var domScript = document.createElement('script');
+                domScript.src = url;
+                success = success || function () {
+                };
+                domScript.onload = domScript.onreadystatechange = function () {
+                    if (!this.readyState || 'loaded' === this.readyState || 'complete' === this.readyState) {
+                        success();
+                        this.onload = this.onreadystatechange = null;
+                        this.parentNode.removeChild(this);
+                    }
+                }
+                document.getElementsByTagName('head')[0].appendChild(domScript);
+            }
+        
+        if (getQueryVariable('usejs') == 1) {
+            loadJS('jquery-3.2.1.min.js', function () {
+                   loadJS('highcharts.js', function () {
+                          worknoteFun();
+                          })
+                   })
+        } else if (getQueryVariable('usejs') == 2) {
+            loadJS('https://code.jquery.com/jquery-3.2.1.min.js', function () {
+                   loadJS('https://code.highcharts.com/highcharts.js', function () {
+                          worknoteFun();
+                          })
+                   })
+        } else {
+            loadJS('file:///android_asset/js/jquery-3.2.1.min.js', function () {
+                   loadJS('file:///android_asset/js/highcharts.js', function () {
+                          worknoteFun();
+                          })
+                   })
+        }
+        
+        var worknoteFun = function () {
+            $('.i18n').each(function () {
+                            var key = $(this).attr('name');
+                            $(this).html(language[key]);
+                            });
+                            
+                            if (getQueryVariable('iphonex')) {
+                                $('head style').append('@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {\n' +
+                                                       '\n' +
+                                                       '{ padding-top: 44px; }\n' +
+                                                       '{ padding-bottom: 34px; }\n' +
+                                                       '.worknote_dateSelect {padding-bottom: 34px;}' +
+                                                       '\n' +
+                                                       '}')
+                            }
+                            
+                            
+                            var G_debug = getQueryVariable('debug');
+                            //        var G_debug = true;
+                            var G_params = {
+                                dateRange: {
+                                    startTime: 0,
+                                    endTime: 0
+                                },
+                                members: {
+                                    vidlist: [],
+                                    selectedVidlist: []
+                                },
+                                tempId: '',
+                                itemId: '',
+                                useDefault: true
+                            };
+                            
+                            var G_members = [];
+                            
+                            var G_data = {
+                                "starttime": 1524758400,
+                                "dayinfo": [{
+                                            "daytime": 1524758400,
+                                            "tailsum": 369852147123456896,
+                                            "vidnum": 1,
+                                            "dayhasreport": true,
+                                            "sum": 369852147123456896,
+                                            "toplist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "taillist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "topsum": 369852147123456896,
+                                            "tailsumstr": "369852147123456896",
+                                            "sumstr": "369852147123456896",
+                                            "topsumstr": "369852147123456896"
+                                            }, {
+                                            "daytime": 1524844800,
+                                            "tailsum": 3000000084444000,
+                                            "vidnum": 1,
+                                            "dayhasreport": true,
+                                            "sum": 3000000084444000,
+                                            "toplist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "taillist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "topsum": 3000000084444000,
+                                            "tailsumstr": "3000000084444000",
+                                            "sumstr": "3000000084444000",
+                                            "topsumstr": "3000000084444000"
+                                            }, {
+                                            "daytime": 1524931200,
+                                            "tailsum": 0,
+                                            "vidnum": 0,
+                                            "sum": 0,
+                                            "topsum": 0,
+                                            "tailsumstr": "0",
+                                            "sumstr": "0",
+                                            "topsumstr": "0"
+                                            }, {
+                                            "daytime": 1525017600,
+                                            "tailsum": 0,
+                                            "vidnum": 0,
+                                            "sum": 0,
+                                            "topsum": 0,
+                                            "tailsumstr": "0",
+                                            "sumstr": "0",
+                                            "topsumstr": "0"
+                                            }, {
+                                            "daytime": 1525104000,
+                                            "tailsum": 0,
+                                            "vidnum": 0,
+                                            "sum": 0,
+                                            "topsum": 0,
+                                            "tailsumstr": "0",
+                                            "sumstr": "0",
+                                            "topsumstr": "0"
+                                            }, {
+                                            "daytime": 1525190400,
+                                            "tailsum": 888888800,
+                                            "vidnum": 1,
+                                            "dayhasreport": true,
+                                            "sum": 888888800,
+                                            "toplist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "taillist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "topsum": 888888800,
+                                            "tailsumstr": "888888800",
+                                            "sumstr": "888888800",
+                                            "topsumstr": "888888800"
+                                            }, {
+                                            "daytime": 1525276800,
+                                            "tailsum": 66666600,
+                                            "vidnum": 1,
+                                            "dayhasreport": true,
+                                            "sum": '9589541511150103988',
+                                            "toplist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "taillist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "topsum": 66666600,
+                                            "tailsumstr": "66666600",
+                                            "sumstr": "9589541511150103988",
+                                            "topsumstr": "66666600"
+                                            }],
+                                            "endtime": 1525363199,
+                                            "vidlist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                            "rangeinfo": {
+                                                "tailsum": 372852148163456296,
+                                                "vidnum": 1,
+                                                "dayhasreport": true,
+                                                "sum": 372852148163456296,
+                                                "toplist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                                "taillist": [{"vid": 1688850462333481, "name": "newpersonal"}],
+                                                "topsum": 372852148163456296,
+                                                "tailsumstr": "372852148163456296",
+                                                "sumstr": "372852148163456296",
+                                                "topsumstr": "372852148163456296"
+                                            }
+                            };
+                            
+                            var lock = false;
+                            
+                            var invoke = function (name, params, callback, error) {
+                                if (typeof(WeixinJSBridge) != 'undefined') {
+                                    if (!lock) {
+                                        
+                                        lock = true;
+                                        
+                                        WeixinJSBridge.invoke(name, params, function (res) {
+                                                              lock = false;
+                                                              var errMsg = res.err_msg;
+                                                              var index = errMsg.indexOf(':');
+                                                              var keyword = errMsg.substring(index + 1);
+                                                              
+                                                              if (keyword == 'ok') {
+                                                              callback && callback(res);
+                                                              }
+                                                              else {
+                                                              error && error(res);
+                                                              }
+                                                              });
+                                                              
+                                                              setTimeout(function () {
+                                                                         lock = false;
+                                                                         }, 800);
+                                    }
+                                } else {
+                                    error && error();
+                                }
+                            }
+                            
+                            var convertNumber = function (num, hasMax, convert) {
+                                num = num + '';
+                                
+                                if (num.length < 16) {
+                                    return (num / 100) - 0;
+                                }
+                                
+                                if (hasMax && num > Number.MAX_SAFE_INTEGER) {
+                                    return Number.MAX_SAFE_INTEGER / 100;
+                                }
+                                
+                                var a = num.split('');
+                                a.splice(a.length - 2, 0, '.');
+                                
+                                if (a[a.length - 1] == '0') {
+                                    a.splice(a.length - 1, 1);
+                                }
+                                
+                                if (a[a.length - 1] == '0') {
+                                    a.splice(a.length - 1, 1);
+                                }
+                                
+                                if (a[a.length - 1] == '.') {
+                                    a.splice(a.length - 1, 1);
+                                }
+                                
+                                if(convert) {
+                                    return a.join('');
+                                } else {
+                                    return a.join('') - 0;
+                                }
+                            }
+                            
+                            var unique = function (array) {
+                                var ret = [];
+                                for (var i = 0; i < array.length; i++) {
+                                    var item = array[i];
+                                    var f = ret.filter(function (t) {
+                                                       return t.vid == item.vid;
+                                                       });
+                                                       if (!f.length) {
+                                                           ret.push(item);
+                                                       }
+                                }
+                                return ret;
+                            };
+                            
+                            var getNames = function (list) {
+                                if (!list) {
+                                    return '';
+                                }
+                                var names = list[0].name;
+                                
+                                if (list.length > 1) {
+                                    
+                                    names += (language.etc + list.length + language.ren);
+                                    
+                                }
+                                return names;
+                            }
+                            
+                            var DateFormat = function (newDate, format) {
+                                var date = {
+                                    "M+": newDate.getMonth() + 1,
+                                    "d+": newDate.getDate(),
+                                    "h+": newDate.getHours(),
+                                    "m+": newDate.getMinutes(),
+                                    "s+": newDate.getSeconds(),
+                                    "q+": Math.floor((newDate.getMonth() + 3) / 3),
+                                    "S+": newDate.getMilliseconds()
+                                };
+                                if (/(y+)/i.test(format)) {
+                                    format = format.replace(RegExp.$1, (newDate.getFullYear() + "").substr(4 - RegExp.$1.length));
+                                }
+                                for (var k in date) {
+                                    if (new RegExp("(" + k + ")").test(format)) {
+                                        //                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                                        format = format.replace(RegExp.$1, date[k]);
+                                    }
+                                }
+                                return format;
+                            };
+                            
+                            var getDate = function (offset, targetDate) {
+                                var offsetDate = new Date - 0;
+                                if (targetDate) {
+                                    offsetDate = targetDate - 0;
+                                }
+                                
+                                var thatday = new Date(offsetDate + offset * 86400000),
+                                date = {
+                                    year: thatday.getFullYear().toString(),
+                                    month: (thatday.getMonth() + 1).toString(),
+                                    day: thatday.getDate().toString(),
+                                    date: thatday
+                                };
+                                return date;
+                            };
+                            
+                            var showDateSelect = function () {
+                                $(".worknote_dateSelect").slideDown(150);
+                                $('.mask').show();
+                                //            $('.js_datePicker').addClass('active')
+                                
+                            };
+                            var hideDateSelect = function () {
+                                $(".worknote_dateSelect").slideUp(150);
+                                $('.mask').hide();
+                                //            $('.js_datePicker').removeClass('active');
+                            };
+                            
+                            $('.js_datePicker').on('touchend', function (e) {
+                                                   e.stopPropagation();
+                                                   showDateSelect();
+                                                   });
+                                                   
+                                                   $('.mask, .dateSelect_cancel').on('touchend', function (e) {
+                                                                                     e.preventDefault();
+                                                                                     hideDateSelect();
+                                                                                     });
+                                                                                     
+                                                                                     $('.js_range_btn').on('touchend', function (e) {
+                                                                                                           e.stopPropagation();
+                                                                                                           var range = $(e.currentTarget).data('value') - 0;
+                                                                                                           var datePicker_text;
+                                                                                                           
+                                                                                                           $('.js_range_btn').removeClass('worknote_dateSelect_item_checked');
+                                                                                                           $(this).addClass('worknote_dateSelect_item_checked');
+                                                                                                           
+                                                                                                           hideDateSelect();
+                                                                                                           if (range == 0) {
+                                                                                                           
+                                                                                                           if ($('.js_datePicker_text').html() == language.today) {
+                                                                                                           var relateDate = getDate(0).date;
+                                                                                                           relateDate.setHours(0, 0, 0, 0);
+                                                                                                           
+                                                                                                           var endDate = new Date(relateDate).setHours(23, 59, 59, 999);
+                                                                                                           
+                                                                                                           var startDate = getDate(0, relateDate).date.getTime();
+                                                                                                           
+                                                                                                           var params = JSON.parse(JSON.stringify(G_params));
+                                                                                                           
+                                                                                                           params.dateRange = {
+                                                                                                           startTime: parseInt(startDate / 1000),
+                                                                                                           endTime: parseInt(endDate / 1000)
+                                                                                                           };
+                                                                                                           } else {
+                                                                                                           params = G_params.dateRange;
+                                                                                                           }
+                                                                                                           
+                                                                                                           invoke('wwapp.journal.selectWorknoteTime', params, function (timeData) {
+                                                                                                                  G_params.dateRange = timeData;
+                                                                                                                  //                    alert(JSON.stringify(timeData));
+                                                                                                                  var startTime = new Date(timeData.startTime * 1000);
+                                                                                                                  var endTime = new Date(timeData.endTime * 1000);
+                                                                                                                  var formatType;
+                                                                                                                  if (startTime.getFullYear() == endTime.getFullYear() && startTime == new Date().getFullYear()) {
+                                                                                                                  formatType = 'MM/dd';
+                                                                                                                  $('.worknote_topbar').css('font-size', '15px')
+                                                                                                                  } else {
+                                                                                                                  formatType = 'yyyy/MM/dd';
+                                                                                                                  $('.worknote_topbar').css('font-size', '14px')
+                                                                                                                  }
+                                                                                                                  
+                                                                                                                  var s = DateFormat(startTime, formatType);
+                                                                                                                  var e = DateFormat(endTime, formatType);
+                                                                                                                  datePicker_text = s + '-' + e;
+                                                                                                                  $('.js_datePicker_text').html(datePicker_text);
+                                                                                                                  
+                                                                                                                  var params = JSON.parse(JSON.stringify(G_params));
+                                                                                                                  if (params.members.selectedVidlist.length == params.members.vidlist.length) {
+                                                                                                                  delete params.members.selectedVidlist;
+                                                                                                                  }
+                                                                                                                  
+                                                                                                                  invoke('wwapp.journal.getWorknoteChartData', params, function (data) {
+                                                                                                                         if (data.vidlist) {
+                                                                                                                         G_members = unique(G_members.concat(data.vidlist));
+                                                                                                                         for (var i = 0; i < data.vidlist.length; i++) {
+                                                                                                                         if (G_params.members.vidlist.indexOf(data.vidlist[i].vid + '') < 0) {
+                                                                                                                         G_params.members.vidlist.push(data.vidlist[i].vid + '');
+                                                                                                                         }
+                                                                                                                         }
+                                                                                                                         }
+                                                                                                                         
+                                                                                                                         G_data = data;
+                                                                                                                         
+                                                                                                                         renderView();
+                                                                                                                         invoke('wwapp.osslog', {
+                                                                                                                                itemKey: '78502885',
+                                                                                                                                itemName: 'subtemplet_change_time'
+                                                                                                                                }, function () {
+                                                                                                                                });
+                                                                                                                         })
+                                                                                                                  });
+                                                                                                           } else {
+                                                                                                           var relateDate = getDate(0).date;
+                                                                                                           relateDate.setHours(0, 0, 0, 0);
+                                                                                                           
+                                                                                                           var endDate = new Date(relateDate).setHours(23, 59, 59, 999);
+                                                                                                           
+                                                                                                           var startDate = getDate(range * -1 + 1, relateDate).date.getTime();
+                                                                                                           
+                                                                                                           G_params.dateRange = {
+                                                                                                           startTime: parseInt(startDate / 1000),
+                                                                                                           endTime: parseInt(endDate / 1000)
+                                                                                                           };
+                                                                                                           
+                                                                                                           $('.js_datePicker_text').html($(e.currentTarget).html());
+                                                                                                           
+                                                                                                           var params = JSON.parse(JSON.stringify(G_params));
+                                                                                                           if (params.members.selectedVidlist.length == params.members.vidlist.length) {
+                                                                                                           delete params.members.selectedVidlist;
+                                                                                                           }
+                                                                                                           invoke('wwapp.journal.getWorknoteChartData', params, function (data) {
+                                                                                                                  G_data = data;
+                                                                                                                  if (data.vidlist) {
+                                                                                                                  G_members = unique(G_members.concat(data.vidlist));
+                                                                                                                  for (var i = 0; i < data.vidlist.length; i++) {
+                                                                                                                  if (G_params.members.vidlist.indexOf(data.vidlist[i].vid + '') < 0) {
+                                                                                                                  G_params.members.vidlist.push(data.vidlist[i].vid + '');
+                                                                                                                  }
+                                                                                                                  }
+                                                                                                                  }
+                                                                                                                  
+                                                                                                                  renderView();
+                                                                                                                  invoke('wwapp.osslog', {itemKey: '78502885', itemName: 'subtemplet_change_time'}, function () {
+                                                                                                                         });
+                                                                                                                  })
+                                                                                                           }
+                                                                                                           
+                                                                                                           });
+                                                                                                           
+                                                                                                           $('.js_memberSelect').on('touchend', function (e) {
+                                                                                                                                    e.preventDefault();
+                                                                                                                                    invoke('wwapp.selectContacts', { limitVidRangeList: G_params.members.vidlist, selectedVid: G_params.members.selectedVidlist}, function (data) {
+                                                                                                                                           var selectedVidlist = [];
+                                                                                                                                           data.selectedContacts.forEach(function(item) {
+                                                                                                                                                                         selectedVidlist.push(item.vid);
+                                                                                                                                                                         });
+                                                                                                                                           G_params.members.selectedVidlist = selectedVidlist;
+                                                                                                                                           
+                                                                                                                                           var name = [],
+                                                                                                                                           renderName = '';
+                                                                                                                                           
+                                                                                                                                           for (var i = 0; i < G_params.members.selectedVidlist.length; i++) {
+                                                                                                                                           for (var j = 0; j < G_members.length; j++) {
+                                                                                                                                           if (G_params.members.selectedVidlist[i] == G_members[j].vid) {
+                                                                                                                                           name.push(G_members[j].name);
+                                                                                                                                           }
+                                                                                                                                           }
+                                                                                                                                           }
+                                                                                                                                           
+                                                                                                                                           renderName = name[0];
+                                                                                                                                           
+                                                                                                                                           if (name.length > 1) {
+                                                                                                                                           if (renderName.length > 8) {
+                                                                                                                                           renderName = renderName.substring(0, 8) + '...';
+                                                                                                                                           }
+                                                                                                                                           
+                                                                                                                                           if (renderName) {
+                                                                                                                                           renderName = renderName + language.etc + name.length + language.ren;
+                                                                                                                                           }
+                                                                                                                                           }
+                                                                                                                                           
+                                                                                                                                           if (name.length == G_params.members.vidlist.length) {
+                                                                                                                                           renderName = language.allmember;
+                                                                                                                                           }
+                                                                                                                                           
+                                                                                                                                           $('.js_memberSelect_text').html(renderName);
+                                                                                                                                           
+                                                                                                                                           var params = JSON.parse(JSON.stringify(G_params));
+                                                                                                                                           if (G_data.vidlist && params.members.selectedVidlist.length == params.members.vidlist) {
+                                                                                                                                           delete params.members.selectedVidlist;
+                                                                                                                                           }
+                                                                                                                                           invoke('wwapp.journal.getWorknoteChartData', params, function (data) {
+                                                                                                                                                  G_data = data;
+                                                                                                                                                  renderView();
+                                                                                                                                                  })
+                                                                                                                                           })
+                                                                                                                                    });
+                                                                                                                                    
+                                                                                                                                    var bridgeReadyCallBack = function () {
+                                                                                                                                        G_params.tempId = getQueryVariable('tempid');
+                                                                                                                                        G_params.itemId = getQueryVariable('itemid');
+                                                                                                                                        
+                                                                                                                                        var relateDate = getDate(0).date;
+                                                                                                                                        relateDate.setHours(0, 0, 0, 0);
+                                                                                                                                        
+                                                                                                                                        var endDate = new Date(relateDate).setHours(23, 59, 59, 999);
+                                                                                                                                        
+                                                                                                                                        var startDate = getDate(7 * -1 + 1, relateDate).date.getTime();
+                                                                                                                                        
+                                                                                                                                        G_params.dateRange = {
+                                                                                                                                            startTime: parseInt(startDate / 1000),
+                                                                                                                                            endTime: parseInt(endDate / 1000)
+                                                                                                                                        };
+                                                                                                                                        
+                                                                                                                                        invoke('wwapp.journal.getWorknoteChartData', G_params, function (data) {
+                                                                                                                                               
+                                                                                                                                               if (!data) {
+                                                                                                                                               $(".showErrorMsg").show();
+                                                                                                                                               return;
+                                                                                                                                               }
+                                                                                                                                               
+                                                                                                                                               G_data = data;
+                                                                                                                                               G_params.useDefault = false;
+                                                                                                                                               
+                                                                                                                                               if (!data.vidlist) {
+                                                                                                                                               data.vidlist = [];
+                                                                                                                                               }
+                                                                                                                                               
+                                                                                                                                               G_members = data.vidlist;
+                                                                                                                                               
+                                                                                                                                               var vids = [];
+                                                                                                                                               
+                                                                                                                                               for (var i = 0; i < data.vidlist.length; i++) {
+                                                                                                                                               vids.push(data.vidlist[i].vid + '');
+                                                                                                                                               }
+                                                                                                                                               
+                                                                                                                                               G_params.members.vidlist = vids;
+                                                                                                                                               G_params.members.selectedVidlist = vids;
+                                                                                                                                               
+                                                                                                                                               renderView();
+                                                                                                                                               }, function (err) {
+                                                                                                                                               $(".showErrorMsg").show();
+                                                                                                                                               });
+                                                                                                                                    };
+                                                                                                                                    
+                                                                                                                                    //        if (typeof(MiJSBridge) == "undefined") {
+                                                                                                                                    //            document.addEventListener('MiJSBridgeReady', bridgeReadyCallBack, false);
+                                                                                                                                    //        } else {
+                                                                                                                                    //            bridgeReadyCallBack();
+                                                                                                                                    //        }
+                                                                                                                                    
+                                                                                                                                    if (typeof(WeixinJSBridge) == "undefined") {
+                                                                                                                                        document.addEventListener('WeixinJSBridgeReady', bridgeReadyCallBack, false);
+                                                                                                                                    } else {
+                                                                                                                                        bridgeReadyCallBack();
+                                                                                                                                    }
+                                                                                                                                    
+                                                                                                                                    if (G_debug) {
+                                                                                                                                        renderView();
+                                                                                                                                    }
+                                                                                                                                    
+                                                                                                                                    function renderView() {
+                                                                                                                                        
+                                                                                                                                        if (!G_data.rangeinfo.dayhasreport) {
+                                                                                                                                            $('#use_analysis_container').hide();
+                                                                                                                                            $('.js_trendEmpty').show();
+                                                                                                                                        } else {
+                                                                                                                                            $('#use_analysis_container').show();
+                                                                                                                                            $('.js_trendEmpty').hide();
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                        if (!G_data.vidlist || !G_data.vidlist.length) {
+                                                                                                                                            $('.js_memberSelect').addClass('worknote_memberSelect_disable');
+                                                                                                                                        } else {
+                                                                                                                                            $('.js_memberSelect').removeClass('worknote_memberSelect_disable');
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        for (var i = 0; i < G_data.dayinfo.length; i++) {
+                                                                                                                                            G_data.dayinfo[i].sum = G_data.dayinfo[i].sumstr;
+                                                                                                                                            G_data.dayinfo[i].topsum = G_data.dayinfo[i].topsumstr;
+                                                                                                                                            G_data.dayinfo[i].tailsum = G_data.dayinfo[i].tailsumstr;
+                                                                                                                                            G_data.dayinfo[i].sumstr = convertNumber(G_data.dayinfo[i].sumstr, true);
+                                                                                                                                            G_data.dayinfo[i].topsumstr = convertNumber(G_data.dayinfo[i].topsumstr, true);
+                                                                                                                                            G_data.dayinfo[i].tailsumstr = convertNumber(G_data.dayinfo[i].tailsumstr, true);
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        G_data.rangeinfo.sumstr = convertNumber(G_data.rangeinfo.sumstr);
+                                                                                                                                        G_data.rangeinfo.topsumstr = convertNumber(G_data.rangeinfo.topsumstr);
+                                                                                                                                        G_data.rangeinfo.tailsumstr = convertNumber(G_data.rangeinfo.tailsumstr);
+                                                                                                                                        
+                                                                                                                                        var todayInfo;
+                                                                                                                                        if ($('.js_datePicker_text').html() == language.today) {
+                                                                                                                                            todayInfo = G_data.dayinfo[G_data.dayinfo.length - 1];
+                                                                                                                                            
+                                                                                                                                            if (todayInfo.vidnum <= 1) {
+                                                                                                                                                $('.worknote_summarize_item_max').hide();
+                                                                                                                                                $('.worknote_summarize_item_min').hide();
+                                                                                                                                                $('.js_avarage').hide();
+                                                                                                                                            }
+                                                                                                                                            
+                                                                                                                                            // 没有今日数据时候，展示为空
+                                                                                                                                            if (!todayInfo || !todayInfo.dayhasreport || new Date(todayInfo.daytime * 1000).getDate() !== new Date().getDate()) {
+                                                                                                                                                $('.worknote_summarize_item').hide();
+                                                                                                                                                $('.js_summaryEmpty').show();
+                                                                                                                                            } else {
+                                                                                                                                                $('.worknote_summarize_item').show();
+                                                                                                                                                $('.js_summaryEmpty').hide();
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            todayInfo = G_data.rangeinfo;
+                                                                                                                                            if (!todayInfo.dayhasreport) {
+                                                                                                                                                $('.worknote_summarize_item').hide();
+                                                                                                                                                $('.js_summaryEmpty').show();
+                                                                                                                                            } else {
+                                                                                                                                                $('.worknote_summarize_item').show();
+                                                                                                                                                $('.js_summaryEmpty').hide();
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        if (G_data.vidlist && G_data.vidlist.length <= 1 || todayInfo.vidnum <= 1) {
+                                                                                                                                            $('.worknote_summarize_item_max').hide();
+                                                                                                                                            $('.worknote_summarize_item_min').hide();
+                                                                                                                                            $('.js_avarage').hide();
+                                                                                                                                        } else {
+                                                                                                                                            $('.worknote_summarize_item_max').show();
+                                                                                                                                            $('.worknote_summarize_item_min').show();
+                                                                                                                                            $('.js_avarage').show();
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                        $('.js_total').html(convertNumber(todayInfo.sum, false, true));
+                                                                                                                                        $('.js_max_value').html(convertNumber(todayInfo.topsum));
+                                                                                                                                        $('.js_min_value').html(convertNumber(todayInfo.tailsum));
+                                                                                                                                        $('.js_max_member').html(getNames(todayInfo.toplist));
+                                                                                                                                        $('.js_min_member').html(getNames(todayInfo.taillist));
+                                                                                                                                        $('.js_member_cnt').html(todayInfo.vidnum);
+                                                                                                                                        $('.js_member_avarage').html((todayInfo.sumstr / (todayInfo.vidnum || 1)).toFixed(2) - 0);
+                                                                                                                                        $('title').html(G_data.title);
+                                                                                                                                        
+                                                                                                                                        $('.main').show();
+                                                                                                                                        
+                                                                                                                                        var defaultOptions = {
+                                                                                                                                            chart: {
+                                                                                                                                                type: 'spline',
+                                                                                                                                                height: 220
+                                                                                                                                            },
+                                                                                                                                            title: {},
+                                                                                                                                            credits: {
+                                                                                                                                                enabled: false // 禁用版权信息
+                                                                                                                                            },
+                                                                                                                                            legend: {
+                                                                                                                                                enabled: false
+                                                                                                                                            },
+                                                                                                                                            xAxis: {
+                                                                                                                                                tickmarkPlacement: 'on',
+                                                                                                                                                gridLineDashStyle: 'ShortDash',
+                                                                                                                                                gridLineWidth: 0,
+                                                                                                                                                gridLineColor: "#E4E6E9",
+                                                                                                                                                lineColor: "#E4E6E9",
+                                                                                                                                                tickLength: 0,
+                                                                                                                                                labels: {
+                                                                                                                                                    style: {
+                                                                                                                                                        color: "#979797"
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            },
+                                                                                                                                            yAxis: {
+                                                                                                                                                min: 0,
+                                                                                                                                                minRange: 1,
+                                                                                                                                                gridLineDashStyle: 'solid',
+                                                                                                                                                gridLineWidth: 0.5,
+                                                                                                                                                gridLineColor: "#E4E6E9",
+                                                                                                                                                lineColor: "#e4e6e9",
+                                                                                                                                                labels: {
+                                                                                                                                                    style: {
+                                                                                                                                                        color: '#979797'
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            },
+                                                                                                                                            tooltip: {
+                                                                                                                                                animate: false,
+                                                                                                                                                shape: 'circlepin',
+                                                                                                                                                backgroundColor: "#fff",
+                                                                                                                                                borderWidth: 0.5,
+                                                                                                                                                borderRadius: 0,
+                                                                                                                                                borderColor: '#D5D5D5',
+                                                                                                                                                useHTML: true,
+                                                                                                                                                shadow: false,
+                                                                                                                                                stickyTracking: false,
+                                                                                                                                                hideDelay: 0,
+                                                                                                                                                crosshairs: {
+                                                                                                                                                    className: 'crosshairs',
+                                                                                                                                                    width: 1,
+                                                                                                                                                    color: 'rgba(151,151,151, 0.3)',
+                                                                                                                                                    dashStyle: 'ShortDash',
+                                                                                                                                                },
+                                                                                                                                                style: {
+                                                                                                                                                    color: '#737373',
+                                                                                                                                                    fontFamily: '"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", sans-serif',
+                                                                                                                                                    'z-index': 10000
+                                                                                                                                                }
+                                                                                                                                            },
+                                                                                                                                            plotOptions: {
+                                                                                                                                                area: {},
+                                                                                                                                                series: {
+                                                                                                                                                    lineWidth: 1,
+                                                                                                                                                    states: {
+                                                                                                                                                        hover: {
+                                                                                                                                                            halo: {
+                                                                                                                                                                size: 0
+                                                                                                                                                            },
+                                                                                                                                                            lineWidth: 1,
+                                                                                                                                                        }
+                                                                                                                                                    },
+                                                                                                                                                    marker: {
+                                                                                                                                                        radius: 2,
+                                                                                                                                                        lineWidth: 1,
+                                                                                                                                                        states: {
+                                                                                                                                                            hover: {
+                                                                                                                                                                radius: 3,
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    },
+                                                                                                                                                }
+                                                                                                                                            },
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        var chartOption = {
+                                                                                                                                            xAxisArray: [],
+                                                                                                                                            yData: [],
+                                                                                                                                            tickOption: [],
+                                                                                                                                            initdata: [],
+                                                                                                                                            animation: 1000,
+                                                                                                                                            markerEnabled: true
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        var getTickOption = function (yData) {
+                                                                                                                                            var useMax = Math.max.apply(null, yData);
+                                                                                                                                            
+                                                                                                                                            var yTick = 2;
+                                                                                                                                            var yMax = 10;
+                                                                                                                                            var step = 1;
+                                                                                                                                            if (useMax < 10) {
+                                                                                                                                                yTick = 2;
+                                                                                                                                                yMax = 10;
+                                                                                                                                            } else if (useMax < 100) {
+                                                                                                                                                yTick = 10;
+                                                                                                                                                yMax = Math.ceil(useMax / 10) * 10;
+                                                                                                                                            } else if (useMax < 1000) {
+                                                                                                                                                yTick = 100;
+                                                                                                                                                yMax = Math.ceil(useMax / 100) * 100;
+                                                                                                                                            } else {
+                                                                                                                                                yTick = Math.ceil(useMax / 3);
+                                                                                                                                                yMax = Math.ceil(useMax / 1000) * 1000;
+                                                                                                                                            }
+                                                                                                                                            
+                                                                                                                                            step = Math.ceil(yData.length / 8);
+                                                                                                                                            
+                                                                                                                                            return {
+                                                                                                                                                x_Tick: 1,
+                                                                                                                                                step: step,
+                                                                                                                                                y_Tick: yTick,
+                                                                                                                                                y_Max: yMax + yTick
+                                                                                                                                            }
+                                                                                                                                        };
+                                                                                                                                        
+                                                                                                                                        for (var i = 0; i < G_data.dayinfo.length; i++) {
+                                                                                                                                            G_data.dayinfo[i].daytime = G_data.dayinfo[i].daytime * 1000;
+                                                                                                                                            var tdate = getDate(0, G_data.dayinfo[i].daytime);
+                                                                                                                                            chartOption.xAxisArray.push(tdate.month + "/" + tdate.day);
+                                                                                                                                            G_data.dayinfo[i].y = G_data.dayinfo[i].sumstr;
+                                                                                                                                            chartOption.initdata.push(G_data.dayinfo[i])
+                                                                                                                                            chartOption.yData.push(G_data.dayinfo[i].sumstr)
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        chartOption.tickOption = getTickOption(chartOption.yData);
+                                                                                                                                        chartOption.markerEnabled = (G_data.dayinfo.length <= 31);
+                                                                                                                                        
+                                                                                                                                        var theChart;
+                                                                                                                                        var initCharts = function (chartOption) {
+                                                                                                                                            
+                                                                                                                                            var option = $.extend(true, defaultOptions, {
+                                                                                                                                                                  chart: {
+                                                                                                                                                                  renderTo: 'use_analysis_container',
+                                                                                                                                                                  spacingLeft: 20
+                                                                                                                                                                  },
+                                                                                                                                                                  title: {
+                                                                                                                                                                  text: ''
+                                                                                                                                                                  },
+                                                                                                                                                                  xAxis: {
+                                                                                                                                                                  categories: chartOption.xAxisArray,
+                                                                                                                                                                  tickInterval: chartOption.tickOption.step,
+                                                                                                                                                                  tickmarkPlacement: "on",
+                                                                                                                                                                  labels: {
+                                                                                                                                                                  staggerLines: 0,
+                                                                                                                                                                  autoRotation: false
+                                                                                                                                                                  //                            step: chartOption.tickOption.step
+                                                                                                                                                                  }
+                                                                                                                                                                  },
+                                                                                                                                                                  yAxis: {
+                                                                                                                                                                  title: "",
+                                                                                                                                                                  //                        labels: {
+                                                                                                                                                                  //                            formatter: function () {
+                                                                                                                                                                  //                                return this.value;
+                                                                                                                                                                  //                            }
+                                                                                                                                                                  //                        }
+                                                                                                                                                                  },
+                                                                                                                                                                  tooltip: {
+                                                                                                                                                                  positioner: function (x, y, point) {
+                                                                                                                                                                  
+                                                                                                                                                                  var x = 0;
+                                                                                                                                                                  if (point.plotX > (theChart.plotWidth) / 2) {
+                                                                                                                                                                  x = theChart.plotLeft;
+                                                                                                                                                                  } else {
+                                                                                                                                                                  x = theChart.plotLeft + theChart.plotWidth - theChart.tooltip.label.width;
+                                                                                                                                                                  }
+                                                                                                                                                                  
+                                                                                                                                                                  return {
+                                                                                                                                                                  x: x,
+                                                                                                                                                                  y: 0
+                                                                                                                                                                  }
+                                                                                                                                                                  },
+                                                                                                                                                                  formatter: function (data) {
+                                                                                                                                                                  var topnames = getNames(this.point.toplist);
+                                                                                                                                                                  var tailnames = getNames(this.point.taillist);
+                                                                                                                                                                  topnames = topnames ? '(' + topnames + ')' : '';
+                                                                                                                                                                  tailnames = tailnames ? '(' + tailnames + ')' : '';
+                                                                                                                                                                  
+                                                                                                                                                                  var daytimeStr = DateFormat(new Date(this.point.daytime), 'YYYY/MM/dd');
+                                                                                                                                                                  var y = this.point.y == Number.MAX_SAFE_INTEGER / 100 ? language.LimitExceeded : this.point.y;
+                                                                                                                                                                  var topsumstr = this.point.topsumstr == Number.MAX_SAFE_INTEGER / 100 ? language.LimitExceeded : this.point.topsumstr;
+                                                                                                                                                                  var tailsumstr = this.point.tailsumstr == Number.MAX_SAFE_INTEGER / 100 ? language.LimitExceeded : this.point.tailsumstr;
+                                                                                                                                                                  var avarage = this.point.y == Number.MAX_SAFE_INTEGER / 100 ? language.LimitExceeded : ((this.point.y / (this.point.vidnum || 1)).toFixed(2) - 0);
+                                                                                                                                                                  
+                                                                                                                                                                  var tooltipHtml = '<div>' +
+                                                                                                                                                                  '<div><span class="tooltips_title">' + language.date + '</span>&nbsp&nbsp' + daytimeStr + '</div>' +
+                                                                                                                                                                  '<div class="dayValue"><span class="tooltips_title">' + language.totalCnt + '</span>&nbsp&nbsp' + y + '</div>' +
+                                                                                                                                                                  '<div class="dayValue"><span class="tooltips_title">' + language.memberCnt + '</span>&nbsp&nbsp' + this.point.vidnum + '</div>' +
+                                                                                                                                                                  
+                                                                                                                                                                  (this.point.vidnum > 1 ? ('<div class="dayValue"><span class="tooltips_title">' + language.memberAvarage + '</span>&nbsp&nbsp' + avarage + '</div>' +
+                                                                                                                                                                                            '<div class="dayMax"><span class="tooltips_title">' + language.max + '</span>&nbsp&nbsp' + topsumstr + topnames + '</div>' +
+                                                                                                                                                                                            '<div class="dayMin"><span class="tooltips_title">' + language.min + '</span>&nbsp&nbsp' + tailsumstr + tailnames + '</div>') : '') +
+                                                                                                                                                                  '</div>';
+                                                                                                                                                                  
+                                                                                                                                                                  return tooltipHtml;
+                                                                                                                                                                  }
+                                                                                                                                                                  },
+                                                                                                                                                                  
+                                                                                                                                                                  series: [{
+                                                                                                                                                                           type: 'areaspline',
+                                                                                                                                                                           data: chartOption.initdata,
+                                                                                                                                                                           }],
+                                                                                                                                                                  plotOptions: {
+                                                                                                                                                                  areaspline: {
+                                                                                                                                                                  lineColor: "rgba(14,204,203, .7)",
+                                                                                                                                                                  marker: {
+                                                                                                                                                                  enabled: chartOption.markerEnabled,
+                                                                                                                                                                  fillColor: "#fff",
+                                                                                                                                                                  lineColor: "rgba(14,204,203, .7)",
+                                                                                                                                                                  states: {
+                                                                                                                                                                  hover: {
+                                                                                                                                                                  fillColor: "rgba(14,204,203, .9)",
+                                                                                                                                                                  lineColor: "rgba(255,255,255)",
+                                                                                                                                                                  lineWidth: 1,
+                                                                                                                                                                  }
+                                                                                                                                                                  }
+                                                                                                                                                                  },
+                                                                                                                                                                  },
+                                                                                                                                                                  series: {
+                                                                                                                                                                  animation: chartOption.animation,
+                                                                                                                                                                  fillColor: {
+                                                                                                                                                                  linearGradient: [0, 0, 0, 300],
+                                                                                                                                                                  stops: [
+                                                                                                                                                                          [0, "rgba(14,204,203, .2)"],
+                                                                                                                                                                          [1, "rgba(0,0,0, 0)"]
+                                                                                                                                                                          ]
+                                                                                                                                                                  },
+                                                                                                                                                                  },
+                                                                                                                                                                  }
+                                                                                                                                                                  });
+                                                                                                                                                                  theChart = new Highcharts.Chart(option);
+                                                                                                                                                                  
+                                                                                                                                        };
+                                                                                                                                        
+                                                                                                                                        $('body').on('touchstart', function (event) {
+                                                                                                                                                     
+                                                                                                                                                     if (theChart && theChart.tooltip && !$(event.target).parents('#use_analysis_container').length) {
+                                                                                                                                                     theChart.tooltip.hide();
+                                                                                                                                                     theChart.xAxis[0].hideCrosshair();
+                                                                                                                                                     theChart.xAxis[0].series[0].points.forEach(function (point) {
+                                                                                                                                                                                                point.setState('');
+                                                                                                                                                                                                });
+                                                                                                                                                     }
+                                                                                                                                                     
+                                                                                                                                                     });
+                                                                                                                                                     
+                                                                                                                                                     setTimeout(function () {
+                                                                                                                                                                if (document.body.clientHeight > $('.main').outerHeight()) {
+                                                                                                                                                                $('body').css('overflow-y', 'hidden');
+                                                                                                                                                                $('.main').css('overflow', 'hidden');
+                                                                                                                                                                } else {
+                                                                                                                                                                $('body').css('overflow-y', 'auto');
+                                                                                                                                                                $('.main').css('overflow', 'auto');
+                                                                                                                                                                }
+                                                                                                                                                                }, 500);
+                                                                                                                                                                
+                                                                                                                                                                initCharts(chartOption);
+                                                                                                                                    };
+        }
+        
+        
+            </script>
+    </body>
+</html>

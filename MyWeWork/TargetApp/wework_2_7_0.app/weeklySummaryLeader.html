@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0">
+            <meta charset="UTF-8">
+                <title></title>
+                <style type="text/css">
+                    * {
+                        -webkit-touch-callout: none;
+                        -webkit-user-select: none;
+                        user-select: none;
+                    }
+                html, body, div, h1, h2, h3, p {
+                    margin: 0;
+                    padding: 0;
+                }
+                html {
+                    height: 100%;
+                }
+                body {
+                    margin: 0;
+                    /*padding: 0 0 80px;*/
+                    height: 100%;
+                    overflow-x: hidden;
+                    background: #fff;
+                    font-family: "Microsoft YaHei", sans-serif ;
+                }
+                
+                .main {
+                    height: 100%;
+                    padding-bottom: 40px;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                }
+                .main::-webkit-scrollbar {display:none}
+                
+                li, ol, ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                a {
+                    text-decoration: none;
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+                }
+                
+                .main {
+                    position: relative;
+                    display: block;
+                    background: #fff;
+                }
+                
+                .chart-analysis-container {
+                    background: #f5f5f5;
+                    padding: 0 0 8px;
+                }
+                
+                .chart-analysis {
+                    width: 100%;
+                    margin: 0 auto;
+                    box-sizing: border-box;
+                }
+                
+                .rank__title {
+                    padding: 15px 20px;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #373E45;
+                    font-weight: bold;
+                    position: relative;
+                }
+                
+                .rank__title:after , .user-item:after {
+                    content: " ";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    height: 1px;
+                    border-bottom: 1px solid #DBDBDB;
+                    color: #e5e5e5;
+                    -webkit-transform-origin: 0 100%;
+                    transform-origin: 0 100%;
+                    -webkit-transform: scaleY(.5);
+                    transform: scaleY(.5);
+                    left: 20px;
+                }
+                
+                .rank__empty {
+                    text-align: center;
+                    color: #ACB2BB;
+                    margin-top: 120px;
+                }
+                
+                .rank-item {
+                    padding: 11px 0 11px 20px;
+                    
+                    color: #3E3E3E;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+                
+                .user-item {
+                    position: relative;
+                    padding: 7px 0 7px 20px;
+                }
+                
+                .i18n__en_rank .rank-item__progress {
+                    width: 75vw;
+                }
+                
+                .rank-item:nth-of-type(1) {
+                    margin-top: 11px;
+                }
+                
+                .rank-item__desc {
+                    margin-top: 3px;
+                    
+                    font-size: 12px;
+                    line-height: 14px;
+                    color: #B2B2B2;
+                }
+                
+                .rank-item__progress {
+                    height: 5px;
+                    width: 78.93vw;
+                    margin-right: 5px;
+                    
+                    background-color: #F5F7FA;
+                    border-radius: 4px;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                
+                /* highcharts 样式 */
+                .highcharts-grid-line:nth-of-type(1) {
+                    opacity: 0;
+                }
+                </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="color: #373E45;font-size: 14px;font-weight: bold;position: relative;height: 20px;">
+                <div class="chart_title js_chart_title" style="position: absolute;left: 20px;z-index: 10;top: 20px;width: 300px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;" ></div>
+            </div>
+            <div class="chart-analysis-container">
+                <div class="chart-analysis" id="useSummaryContainer"></div>
+            </div>
+            <div class="rank js-rankMain" style="padding-bottom:40px;">
+            </div>
+        </div>
+        
+        <script>
+            // 根据语言切换文案
+            var i18n = {
+                zh: {
+                    rankTitle: '部门使用率排行',
+                    useTitle: '使用的成员',
+                    unuseTitle: '未使用的成员',
+                    userate: '不足1%',
+                    rankEmpty: '当前暂无部门排行'
+                },
+                en: {
+                    rankTitle: 'Usage Rate Rankings by Department ',
+                    useTitle: 'Used members',
+                    unuseTitle: 'Unused members',
+                    userate: 'Below 1%',
+                    rankEmpty: 'No rankings available'
+                },
+                zh_HK: {
+                    rankTitle: '部門使用率排行',
+                    useTitle: '使用的成員',
+                    unuseTitle: '未使用的成員',
+                    userate: '不足1%',
+                    rankEmpty: '當前暫無部門排行'
+                }
+            };
+        
+        var languageType = '$language$';
+        // var language = i18n.en;
+        var language = i18n[languageType] || i18n.zh;
+        // translate();
+        
+        var isAndroid = /android/i.test(navigator.userAgent);
+        var isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
+        var loadJS = function (url, success) {
+            var domScript = document.createElement('script');
+            domScript.src = url;
+            success = success || function () {
+            };
+            domScript.onload = domScript.onreadystatechange = function () {
+                if (!this.readyState || 'loaded' === this.readyState || 'complete' === this.readyState) {
+                    success();
+                    this.onload = this.onreadystatechange = null;
+                    this.parentNode.removeChild(this);
+                }
+            };
+            document.getElementsByTagName('head')[0].appendChild(domScript);
+        };
+        
+        if (isIOS) {
+            loadJS('jquery-3.2.1.min.js', function () {
+                   loadJS('highcharts.js', function () {
+                          renderChart();
+                          });
+                   });
+                   
+                   loadJS('underscore.js', function () {
+                          renderRank();
+                          });
+        } else if (isAndroid) {
+            loadJS('file:///android_asset/js/jquery-3.2.1.min.js', function () {
+                   loadJS('file:///android_asset/js/highcharts.js', function () {
+                          renderChart();
+                          });
+                   });
+                   
+                   loadJS('file:///android_asset/js/underscore.js', function () {
+                          renderRank();
+                          });
+        } else {
+            loadJS('https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js', function () {
+                   loadJS('https://code.highcharts.com/highcharts.js', function () {
+                          renderChart();
+                          });
+                   });
+                   
+                   loadJS('https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js', function () {
+                          renderRank();
+                          });
+        }
+        
+        var G_data = $content$;
+        /* var G_data = {
+         info1: '设计组',
+         info2: '使用人数16人',
+         info3: '未使用人数4人',
+         info4: '使用率86%，比上周有上升',
+         useinfos: [{
+         timeflag: 1534348800,
+         usecnt: 2
+         }, {
+         timeflag: 1534348800,
+         usecnt: 0
+         }, {
+         timeflag: 1534348800,
+         usecnt: 0
+         }, {
+         timeflag: 1534348800,
+         usecnt: 7
+         }, {
+         timeflag: 1534348800,
+         usecnt: 1
+         }],
+         partyinfos: [{
+         "partyname": "产品设计部",
+         "userate": 100
+         }, {
+         "partyname": "行业运营部",
+         "userate": 68
+         }, {
+         "partyname": "行业运营部",
+         "userate": 0.5
+         }, {
+         "partyname": "行业运营部",
+         "userate": 0
+         }],
+         
+         usevids: [{
+         "name": " 飞机哥",
+         "headurl": "http://p.qlogo.cn/bizmail/KPwvuRtwSdRibeDS4XvJtDYzpTFy4tfIVhpHz8PhiccMvTV87BCOyRJw/0"
+         },{
+         "name": " 飞机哥",
+         "headurl": "http://p.qlogo.cn/bizmail/KPwvuRtwSdRibeDS4XvJtDYzpTFy4tfIVhpHz8PhiccMvTV87BCOyRJw/0"
+         }],
+         
+         unusevids: [{
+         "name": " 飞机哥",
+         "headurl": "http://p.qlogo.cn/bizmail/KPwvuRtwSdRibeDS4XvJtDYzpTFy4tfIVhpHz8PhiccMvTV87BCOyRJw/0"
+         },{
+         "name": " 飞机哥",
+         "headurl": "http://p.qlogo.cn/bizmail/KPwvuRtwSdRibeDS4XvJtDYzpTFy4tfIVhpHz8PhiccMvTV87BCOyRJw/0"
+         }]
+         };*/
+        function renderChart() {
+            var startTime = parseInt(G_data.useinfos[0].timeflag) * 1000;
+            var useCnts = [];
+            _.each(G_data.useinfos, function (info) {
+                   useCnts.push(info.usecnt);
+                   });
+                   var defaultOptions = {
+                       chart: {
+                           type: 'line',
+                           backgroundColor: '#fff',
+                           height: (243 / 343 * 100) + '%',
+                           marginLeft: 20,
+                           marginRight: 28,
+                           marginBottom: 42,
+                           // shadow: { color: 'rgba(0,0,0,0.1)', offsetX: 0, offsetY: 0, width: 1 },
+                           style: {
+                               fontFamily: '"Microsoft YaHei", sans-serif'
+                           },
+                           events: {
+                           }
+                       },
+                       title: {
+                           text: G_data.info2,
+                           align: 'left',
+                           margin: 29,
+                           style: {
+                               color: '#373E45',
+                               display: 'block',
+                               height: '30x',
+                               'lineHeight': '30px',
+                               'fontSize': '21px',
+                               'fontWeight': 'bold',
+                               'paddingLeft': '10px',
+                               'paddingTop': '13px'
+                           },
+                           useHTML: true,
+                           formatter: function () {
+                               return '<div></div>';
+                           }
+                       },
+                       subtitle: {
+                           text: [G_data.info3, '，', G_data.info4].join(''),
+                           useHTML: true,
+                           align: 'left',
+                           y: 56,
+                           style: {
+                               color: '#848484',
+                               display: 'block',
+                               height: '20px',
+                               'lineHeight': '20px',
+                               'fontSize': '14px',
+                               'paddingLeft': '10px',
+                               'paddingBottom': '4px',
+                               'paddingTop': '4px'
+                           }
+                       },
+                       credits: {
+                           enabled: false // 禁用版权信息
+                       },
+                       legend: {
+                           enabled: false
+                       },
+                       xAxis: {
+                           tickmarkPlacement: 'between',
+                           gridLineDashStyle: 'ShortDash',
+                           gridLineWidth: 0,
+                           gridLineColor: '#E4E6E9',
+                           lineColor: '#CBD3DD',
+                           lineWidth: 0,
+                           tickLength: 0,
+                           labels: {
+                               align: 'center',
+                               style: {
+                                   color: '#B2B2B2'
+                               }
+                           }
+                       },
+                       yAxis: {
+                           tickmarkPlacement: 'between',
+                           gridLineDashStyle: 'ShortDash',
+                           gridLineWidth: 1,
+                           gridLineColor: '#F7F7F7',
+                           lineColor: '#CBD3DD',
+                           lineWidth: 0,
+                           tickLength: 0,
+                           labels: {
+                               style: {
+                                   color: '#B2B2B2'
+                               },
+                               align: 'left',
+                               x: 4,
+                               y: 4,
+                               formatter: function () {
+                                   if (this.value === 0) return;
+                                   return this.value;
+                               }
+                           },
+                           opposite: true
+                       },
+                       tooltip: {
+                           shape: 'circlepin',
+                           backgroundColor: 'rgba(0,0,0,0)',
+                           borderWidth: 0,
+                           borderRadius: 0,
+                           borderColor: '#E4E6E9',
+                           useHTML: true,
+                           shadow: false,
+                           stickyTracking: false,
+                           hideDelay: 0,
+                           crosshairs: {
+                               className: 'crosshairs',
+                               width: 1,
+                               color: '#3685DC',
+                               dashStyle: 'Solid',
+                           },
+                           style: {
+                               color: '#B6CFEE',
+                               fontFamily: '"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", sans-serif',
+                               'z-index': 10000
+                           }
+                       },
+                       plotOptions: {
+                           series: {
+                               pointPlacement: 'on',
+                               pointStart: 0,
+                               pointInterval: 1,
+                               lineColor: '#3685DC',
+                               lineWidth: 2,
+                               states: {
+                                   hover: {
+                                       lineWidth: 2
+                                   }
+                               },
+                               marker: {
+                                   enabled: false,
+                                   radius: 1,
+                                   lineWidth: 1,
+                                   states: {
+                                       hover: {
+                                           fillColor: '#2A77CA',
+                                           lineWidth: 0
+                                       },
+                                       select: {
+                                           lineColor: null
+                                       }
+                                   }
+                               },
+                           }
+                       }
+                   };
+                   
+                   var theChart;
+                   var initCharts = function () {
+                       var xAxisData = formatXAxisData(startTime);
+                       var option = $.extend(true, defaultOptions, {
+                                             chart: {
+                                             renderTo: 'useSummaryContainer',
+                                             },
+                                             xAxis: {
+                                             categories: xAxisData,
+                                             labels: {}
+                                             },
+                                             yAxis: {
+                                             title: ''
+                                             },
+                                             tooltip: {
+                                             positioner: function (x, y, point) {
+                                             var _x = point.plotX - this.label.width / 3;
+                                             return {
+                                             x: _x > 0 ? _x + 16 : 9,
+                                             y: 81
+                                             };
+                                             },
+                                             formatter: function () {
+                                             return '<div style="color: #3685DC">' + this.point.y + '</div>';
+                                             }
+                                             },
+                                             
+                                             series: [{
+                                                      type: 'area',
+                                                      data: useCnts
+                                                      }],
+                                             plotOptions: {
+                                             line: {
+                                             lineColor: '#2D78CB'
+                                             },
+                                             series: {
+                                             marker: {
+                                             fillColor: '#2A77CA',
+                                             lineWidth: 0,
+                                             radius: 2.6
+                                             },
+                                             animation: 0,
+                                             fillColor: {
+                                             linearGradient: [0, 0, 0, 150],
+                                             stops: [
+                                                     [0, 'rgba(76, 167, 254, .5)'],
+                                                     [1, 'rgba(235, 245, 255, .1)']
+                                                     ]
+                                             }
+                                             },
+                                             }
+                                             });
+                                             // eslint-disable-next-line no-undef
+                                             theChart = new Highcharts.Chart(option);
+                                             
+                                             
+                                             // theChart.series[0].data[4].setState('hover');
+                                             // theChart.tooltip.refresh(theChart.series[0].data[4]);
+                                             // theChart.xAxis[0].addPlotLine({
+                                             //     id: 'crosshairsY',
+                                             //     dashStyle: 'ShortDash',
+                                             //     value:4,
+                                             //     width: 1,
+                                             //     color: 'rgb(219, 219, 219)',
+                                             // });
+                                             // $('#useSummaryContainer').one('touchend' , function (){
+                                             //   theChart.xAxis[0].removePlotLine('crosshairsY');
+                                             // })
+                                             // chartElHeight = document.querySelector('#useSummaryContainer').parentNode.clientHeight;
+                   };
+                   
+                   document.querySelector('.js_chart_title').innerText = G_data.info1;
+                   
+                   initCharts()
+        }
+        
+        function formatXAxisData(startTime) {
+            var getDay = function (time) {
+                var date = new Date(time);
+                return [date.getMonth() + 1, '-', date.getDate()].join('');
+            };
+            
+            var res = [];
+            for (var i = 0; i < G_data.useinfos.length ; i++) {
+                res.push(getDay(startTime));
+                startTime += 24 * 60 * 60 * 1000;
+            }
+            return res;
+        }
+        
+        function renderRank () {
+            var rankList = G_data.partyinfos || [] ;
+            var usevidList = G_data.usevids || [];
+            var unusevidsList = G_data.unusevids || [];
+            
+            var renderTpl = '';
+            
+            if(rankList.length  ){
+                renderTpl = renderDepart(rankList);
+            } else if (usevidList.length || unusevidsList.length){
+                renderTpl = renderMemberList(usevidList, unusevidsList);
+            } else {
+                renderTpl = '<div class="rank__title " >' + language.rankTitle + '</div><div class=""><div class="rank__empty">' + language.rankEmpty + '</div></div>';
+            }
+            
+            var rankContentEl = document.querySelector('.js-rankMain');
+            rankContentEl.innerHTML = renderTpl;
+            
+            translate();
+        }
+        
+        function renderDepart (rankList){
+            var rankHTML = '';
+            
+            var rankItemTpl = _.template('<div class="rank-item">\
+                                         <p><%- partyname %></p>\
+                                         <div class="rank-item__desc">\
+                                         <span class="rank-item__progress" style="<%= "background-image: linear-gradient(to right, #E3EAF2 0%, #D6DEE7 " + Math.floor(userate) + "%, #F5F7FA " + Math.floor(userate) + "%, #F5F7FA 100%);" %>"></span>\
+                                         <span><%= rateInfo %></span>\
+                                         </div>\
+                                         </div>');
+                                         _.each(rankList, function (rankItem) {
+                                                rankItem.rateInfo = rankItem.userate < 1 ? language.userate : Math.floor(rankItem.userate) + '%';
+                                                rankHTML += rankItemTpl(rankItem);
+                                                });
+                                                
+                                                return '<div class="rank__title " >' + language.rankTitle + '</div><div class="">' +rankHTML + '</div></div>';
+        }
+        
+        function renderMemberList (usevidList , unusevidList){
+            var rankHTML = '';
+            var itemTpl = _.template('<div class="rank-item user-item">\
+                                     <div class="rank-item__avatar" style="float:left;position: relative;top: 2px;"><img style="width:36px;height:36px;border-radius: 3px;" src="<%=headurl%>"></div>\
+                                     <div class="rank-item__username" style="margin-left:50px;margin-top:10px;font-size:17px;color:#000"><%=name%></div>\
+                                     <div style="clear:both;"></div>\
+                                     </div>');
+                                     
+                                     var useTpl = '';
+                                     _.each(usevidList, function (userItem) {
+                                            useTpl += itemTpl(userItem);
+                                            });
+                                            
+                                            if(useTpl){
+                                                rankHTML += '<div class="rank__title " >' + language.useTitle + '</div>' + useTpl + '</div>';
+                                            }
+                                            
+                                            var unuseTpl = '';
+                                            _.each(unusevidList, function (userItem) {
+                                                   unuseTpl += itemTpl(userItem);
+                                                   });
+                                                   
+                                                   if(unuseTpl){
+                                                       rankHTML += '<div class="rank__title" style="padding-top:' + (useTpl ? 22 : 15) + 'px" >' + language.unuseTitle + '</div>' + unuseTpl + '</div>';
+                                                   }
+                                                   
+                                                   return rankHTML;
+                                                   
+        }
+        
+        function translate() {
+            // 英文时，排行进度条的宽度需要调整
+            if (languageType === 'en') {
+                var rankContentEl = document.querySelector('.js-rankMain');
+                var rankContentElClassName = rankContentEl.className;
+                rankContentEl.className = rankContentElClassName + ' i18n__en_rank';
+            }
+            
+            document.querySelectorAll('.i18n').forEach(function (el) {
+                                                       var key = el.getAttribute('name');
+                                                       el.innerHTML = language[key];
+                                                       });
+                                                       
+        }
+        </script>
+    </body>
+</html>
+

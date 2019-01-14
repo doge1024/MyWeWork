@@ -28,6 +28,8 @@
 		3452336020305A510032EF93 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452335E20305A510032EF93 /* HookTool.h */; };
 		34A5DB47204B24D5007AEEC5 /* HookFunctionsAndPropertys.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */; };
 		34A5DB48204B24D5007AEEC5 /* HookFunctionsAndPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */; };
+		34C5762421ECF1F700265C08 /* DEBUGViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C5762121ECF1F700265C08 /* DEBUGViewController.h */; };
+		34C5762521ECF1F700265C08 /* DEBUGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C5762221ECF1F700265C08 /* DEBUGViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		3452335E20305A510032EF93 /* HookTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
 		34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookFunctionsAndPropertys.h; sourceTree = "<group>"; };
 		34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookFunctionsAndPropertys.m; sourceTree = "<group>"; };
+		34C5762121ECF1F700265C08 /* DEBUGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEBUGViewController.h; sourceTree = "<group>"; };
+		34C5762221ECF1F700265C08 /* DEBUGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEBUGViewController.m; sourceTree = "<group>"; };
 		5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.release.xcconfig"; sourceTree = "<group>"; };
 		AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWeWorkDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,13 +162,15 @@
 			isa = PBXGroup;
 			children = (
 				3452334C203059D90032EF93 /* MyWeWorkDylib.xm */,
-				3452334D203059D90032EF93 /* MyWeWorkDylib.mm */,
 				34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */,
+				3452334D203059D90032EF93 /* MyWeWorkDylib.mm */,
 				34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */,
 				3452335E20305A510032EF93 /* HookTool.h */,
 				3452335D20305A510032EF93 /* HookTool.m */,
 				3452334F203059D90032EF93 /* MyWeWorkDylib.h */,
 				34523351203059D90032EF93 /* MyWeWorkDylib.m */,
+				34C5762121ECF1F700265C08 /* DEBUGViewController.h */,
+				34C5762221ECF1F700265C08 /* DEBUGViewController.m */,
 				34523339203059D90032EF93 /* MethodTrace */,
 				34523344203059D90032EF93 /* AntiAntiDebug */,
 				34523347203059D90032EF93 /* fishhook */,
@@ -230,6 +236,7 @@
 				3452333F203059D90032EF93 /* MethodTrace.h in Headers */,
 				34523350203059D90032EF93 /* MyWeWorkDylib.h in Headers */,
 				3452336020305A510032EF93 /* HookTool.h in Headers */,
+				34C5762421ECF1F700265C08 /* DEBUGViewController.h in Headers */,
 				3452334B203059D90032EF93 /* fishhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +274,6 @@
 				34523329203059D90032EF93 /* Sources */,
 				3452332A203059D90032EF93 /* Frameworks */,
 				3452332B203059D90032EF93 /* Headers */,
-				EB0B0C0A1CEBA8DD032F0DC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -385,21 +391,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB0B0C0A1CEBA8DD032F0DC8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -416,6 +407,7 @@
 			files = (
 				3452335F20305A510032EF93 /* HookTool.m in Sources */,
 				34523346203059D90032EF93 /* AntiAntiDebug.m in Sources */,
+				34C5762521ECF1F700265C08 /* DEBUGViewController.m in Sources */,
 				34523341203059D90032EF93 /* MethodTrace.m in Sources */,
 				3452334E203059D90032EF93 /* MyWeWorkDylib.mm in Sources */,
 				34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */,
@@ -545,7 +537,7 @@
 			baseConfigurationReference = E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_BITCODE = NO;
@@ -588,8 +580,8 @@
 					"-weak_library",
 					"/usr/lib/libstdc++.dylib",
 					"-lsubstrate",
-					"-framework",
-					Cycript,
+					"-l",
+					cycript,
 					"-framework",
 					RevealServer,
 				);
@@ -605,7 +597,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_BITCODE = NO;
@@ -658,14 +650,14 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MyWeWork/Info.plist;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.mywework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -677,14 +669,14 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2DX3VC5E33;
+				DEVELOPMENT_TEAM = 5CJEBBFK9A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MyWeWork/Info.plist;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.wework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.mywework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

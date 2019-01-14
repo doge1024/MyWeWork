@@ -1,0 +1,319 @@
+html{
+    background:#fff!important;padding:12px 0px 2px;
+}
+body {
+    font-family: sans-serif;    
+    padding: 0;
+    margin:0 !important;
+    height: 100%;
+    line-height:1.4em;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* prevent default highlight style */
+    /*-webkit-user-select: auto;*/
+    /*background-color: green;*/
+    word-wrap:break-word; 
+    font-size: 17px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#QMEditor {
+    /*background-color: red;*/
+    width: auto;
+    min-height: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+}
+
+/* 定制fontSize 1-7个Level的像素大小*/
+#QMEditor font[size='1'] {
+    font-size: 11px;
+}
+
+#QMEditor font[size='2'] {
+    font-size: 13px;
+}
+
+#QMEditor font[size='3'] {
+    font-size: 15px;
+}
+
+#QMEditor font[size='4'] {
+    font-size: 17px;
+}
+
+#QMEditor font[size='5'] {
+    font-size: 20px;
+}
+
+#QMEditor font[size='6'] {
+    font-size: 23px;
+}
+
+#QMEditor font[size='7'] {
+    font-size: 28px;
+}
+
+
+@media screen and (max-device-width: 320px) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 292px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 294px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 454px !important;
+    }
+
+    .editordidload img{ 
+        max-width:294px!important; 
+        max-height:none;
+        height:auto!important;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 347px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 349px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 621px !important;
+    }
+
+    .editordidload img{ 
+        max-width:349px!important; 
+        max-height:none; 
+        height:auto!important;
+    }
+}
+
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
+    .ios-upload-image, 
+    .app-upload-image, 
+    img[src^=webkit-fake-url], 
+    img[src^=file] {
+        max-width: 388px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image, 
+    .portrait .app-upload-image, 
+    .portrait img[src^=webkit-fake-url], 
+    .portrait img[src^=file] {
+        max-width: 390px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 710px !important;
+    }
+
+    .editordidload img{ 
+        max-width:390px!important; 
+        max-height:none; 
+        height:auto!important;
+    }
+}
+
+/*
+ for ipad
+ */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) {
+    .ios-upload-image,
+    .app-upload-image,
+    img[src^=webkit-fake-url],
+    img[src^=file] {
+        max-width: 670px;
+        margin: 4px 0;
+    }
+    .portrait .ios-upload-image,
+    .portrait .app-upload-image,
+    .portrait img[src^=webkit-fake-url],
+    .portrait img[src^=file] {
+        max-width: 670px;
+    }
+    .landscape .ios-upload-image,
+    .landscape .app-upload-image,
+    .landscape img[src^=webkit-fake-url],
+    .landscape img[src^=file] {
+        max-width: 670px !important;
+    }
+    
+    .editordidload img{
+        max-width:670px!important;
+        max-height:none;
+        height:auto!important;
+    }
+}
+
+.ios-upload-audio, .app-upload-audio {
+    display: none;
+    hidden: true;
+    visibility: hidden;
+}
+
+#QMEditor .qm-preloader {
+    margin:3px 5px 3px 5px !important;
+    width: 39px !important;
+    height: 30px !important;
+    Background: url(icon_pic_loading@2x.png);
+    background-size: 39px 30px;
+}
+
+/*
+ 从样式上屏蔽系统添加的span
+/* */
+/*#QMEditor span[style] {*/
+/*    font-family : inherit !important;*/
+/*    font-weight : inherit !important;*/
+/*    font-size   : inherit !important;*/
+/*    color       : inherit !important;*/
+/*    text-align  : inherit !important;*/
+/*}*/
+
+blockquote {
+    padding: 13px 14px;
+    color: #959595;
+    font-size: 16px;
+    background-color: #F5F7FB;
+    border-radius:4px;
+    line-height: 1.4em;
+    margin: 1em 2px;
+}
+
+/*
+ 删除节点时的占位class
+*/
+.qm-minHeightPlace {
+    min-height: 20px;
+}
+
+.origin-mail-header, .mail-footer{
+    color:#444;
+    font-size:100%;
+}
+
+.origin-mail-header strong, .mail-footer strong{
+    font-weight: bold;
+}
+
+.QMUIEditor_empty[placeholder]:before {
+    content: attr(placeholder);
+    color:#D9D9D9;
+    position: absolute;
+    top:11px;
+}
+
+textarea {
+    display:none !important;
+}
+
+
+.editordidload div {
+    margin-bottom:0.6em;
+    line-height: 1.6em;
+}
+
+
+li {
+    line-height: 1.4em;
+    margin: 0.0em;
+    margin-bottom:0.6em;
+    padding:0px;
+}
+
+ol {
+    padding-left: 34px;
+    margin:0.0em;
+   /* margin-top:0.6em;*/
+}
+
+ul {
+    padding-left: 34px;
+    margin:0.0em;
+   /* margin-top:0.6em;*/
+}
+
+
+/*
+li:before {
+    content: "• ";
+    
+    color: red; /* or whatever color you prefer */
+  /*
+}*/
+
+/* webkit puts cursor against the left edge of checkboxes when in contentEditable mode
+   which is confusing as it appears to be before the checkbox, this fixes the appearance */
+input[type=checkbox]:after {
+    content: ' ';
+}
+input[type=checkbox] {
+    padding-right: 16px;
+}
+
+/************** audio **************/
+object.ios-upload-qmaudio {
+    border:1px solid #cbcbcb;
+    border-radius:6px;
+    -webkit-border-radius: 6px;
+    margin: 8px 4px 0px 4px;
+    opacity: 1;
+    max-width: 290px;
+    max-height: 60px;
+}
+
+/*********** debug *******************/
+.qm-debug.qm-debug-padded {
+    position: absolute;
+    border:1px solid red;
+}
+
+.qm-debug.qm-debug-paddedinfo {
+    color: red;
+    position: absolute;
+    right: 10px;
+}
+
+.qm-debug.qm-debug-visibleinfo {
+    color: green;
+    position: absolute;
+    right: 10px;
+}
+
+.qm-debug.qm-debug-visible{
+    position: absolute;
+    border:3px solid green;
+}
+
+iframe {
+    position: absolute;
+    top:  -9999px;
+}
+
+

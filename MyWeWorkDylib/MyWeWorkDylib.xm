@@ -10,8 +10,12 @@
 %hook WWKNavigationController
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
+        
         WWRedEnvDetailViewController *vc = (WWRedEnvDetailViewController *)viewController;
         if ([HookTool removeBubbleViewWithHongBaoID:vc.mHongBaoID]) {
+            NSLog(@"==Log 删除了mHongBaoID==");
+        }
+        if ([HookTool sharedInstance].stopToRedPackageVC) {
             return;
         }
     }
@@ -52,7 +56,7 @@
         self.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
         [swt.rac_newOnChannel subscribeNext:^(NSNumber * _Nullable x) {
             [HookTool sharedInstance].startSnatchHB = [x boolValue];
-            NSLog(@"抢红包：%@", [x boolValue] ? @"开" : @"关");
+            NSLog(@"Log 抢红包：%@", [x boolValue] ? @"开" : @"关");
         }];
         swt.on = YES;
         [swt sendActionsForControlEvents:UIControlEventValueChanged];
@@ -104,11 +108,46 @@
 
 %hook WWRedEnvOpenHongBaoWindow
 
+
+%new
+- (BOOL)start {
+    return [objc_getAssociatedObject(self, @selector(start)) boolValue];
+}
+
+%new
+- (void)setStart:(BOOL)start {
+    objc_setAssociatedObject(self, @selector(start), @(start), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+%new
+- (void)p__startOpenRedPackage {
+    if (self.start == NO) {
+        NSLog(@"==Log 循环拉取红包 return 掉 ==");
+        return;
+    }
+
+    [self onOpenBtnClick:self.mOpenBtn];
+    NSString *mHongBaoID = self.mHongBaoID;
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (!weakSelf.isHidden) {
+            NSLog(@"==Log 循环拉取红包1==");
+            [weakSelf p__startOpenRedPackage];
+        } else {
+            NSLog(@"==Log 循环拉取红包2==");
+        }
+    });
+}
+
 - (void)_initUI {
     %orig;
+    /*
+    __weak typeof(self) weakSelf = self;
     [self.rac_willDeallocSignal subscribeCompleted:^{
-        [HookTool removeBubbleViewWithHongBaoID:self.mHongBaoID];
+        [HookTool removeBubbleViewWithHongBaoID:weakSelf.mHongBaoID];
+        weakSelf.start == NO;
     }];
+     */
 }
 
 // 红包window，设置完最后一个属性后，自动打开红包
@@ -117,13 +156,13 @@
     
     // 如果是未打开的红包
     if (self.mHongbaoStatus == 2) {
-        [self onOpenBtnClick:self.mOpenBtn];
-        NSLog(@"打开红包");
+        [self p__startOpenRedPackage];
     }
 }
 
 // btn的位置会偏移
 - (void)startOpenHongbaoAnimation {
+    self.start = YES;
     CGFloat bgWidth = self.mFrontContainerView.image.size.width;
     CGFloat bgHeight = self.mFrontContainerView.image.size.height;
     CGFloat openBtnWidth = self.mOpenBtn.frame.size.width;
@@ -136,4 +175,5 @@
 - (void)playOpenSuccessVoice {
     return;
 }
+
 %end

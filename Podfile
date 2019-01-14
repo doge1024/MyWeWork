@@ -9,5 +9,6 @@ target 'MyWeWorkDylib' do
   pod 'FLEX', '~> 2.0', :configurations => ['Debug']
   
   pod 'ReactiveObjC', '3.0.0'
+  pod 'MSWeakTimer', '~> 1.1.0'
 
 end

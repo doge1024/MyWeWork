@@ -24,6 +24,7 @@
         sharedInstance = [[HookTool alloc] init];
         
         // Do any other initialisation stuff here
+        sharedInstance.stopToRedPackageVC = YES;
     });
     return sharedInstance;
 }

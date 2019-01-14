@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ENABLE_METHODTRACE</key>
-	<true/>
+	<false/>
 	<key>TARGET_CLASS_LIST</key>
 	<dict>
 		<key>WWRedEnvOpenHongBaoWindow</key>
