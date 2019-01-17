@@ -24,26 +24,21 @@ static __attribute__((constructor)) void entry(){
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
         CYListenServer(6666);
-        
-        // show FLEX
-        [[FLEXManager sharedManager] showExplorer];
     }];
 #endif
     
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         UIApplication *app = note.object;
         app.applicationSupportsShakeToEdit = YES;
+        [DebugWindow getWindow];
     }];
 }
 
 @implementation UIViewController (MotionAppDelegate)
 
-DebugWindow *window = nil;
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
-        if (window == nil) {
-            window = [[DebugWindow alloc] init];
-        }
+        UIWindow *window = [DebugWindow getWindow];
         window.hidden = !window.hidden;
     }
 }

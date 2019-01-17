@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DebugWindow : UIWindow
 
++ (instancetype)getWindow;
+
 @end
 
 NS_ASSUME_NONNULL_END

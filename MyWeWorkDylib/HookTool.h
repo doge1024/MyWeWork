@@ -26,7 +26,7 @@
 
 @property(nonatomic, assign, getter=isStartSnatchHB) BOOL startSnatchHB;
 
-@property(nonatomic, assign) BOOL stopToRedPackageVC;
+@property(nonatomic, assign) BOOL canToRedPackageVC;
 
 + (instancetype)sharedInstance;
 

@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				3452334C203059D90032EF93 /* MyWeWorkDylib.xm */,
-				34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */,
 				3452334D203059D90032EF93 /* MyWeWorkDylib.mm */,
+				34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */,
 				34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */,
 				3452335E20305A510032EF93 /* HookTool.h */,
 				3452335D20305A510032EF93 /* HookTool.m */,

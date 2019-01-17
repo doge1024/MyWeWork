@@ -10,12 +10,10 @@
 %hook WWKNavigationController
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController isKindOfClass:%c(WWRedEnvDetailViewController)]) {
-        
         WWRedEnvDetailViewController *vc = (WWRedEnvDetailViewController *)viewController;
-        if ([HookTool removeBubbleViewWithHongBaoID:vc.mHongBaoID]) {
-            NSLog(@"==Log 删除了mHongBaoID==");
-        }
-        if ([HookTool sharedInstance].stopToRedPackageVC) {
+        
+        [HookTool removeBubbleViewWithHongBaoID:vc.mHongBaoID];
+        if (![HookTool sharedInstance].canToRedPackageVC) {
             return;
         }
     }
@@ -37,14 +35,8 @@
 // 初始化以后weak持有会话控制器
 - (WWKConversationViewController *)initWithConversation:(void *)arg1 {
     WWKConversationViewController *conversationViewController = %orig;
-    [HookTool sharedInstance].startSnatchHB = NO;
     [HookTool sharedInstance].currentConversationViewController = conversationViewController;
     return conversationViewController;
-}
-
-%new
-- (void)my_swtAction:(UISwitch *)swt {
-    [HookTool sharedInstance].startSnatchHB = swt.isOn;
 }
 
 %end
@@ -93,45 +85,35 @@
 %hook WWRedEnvOpenHongBaoWindow
 
 
-%new
-- (BOOL)start {
-    return [objc_getAssociatedObject(self, @selector(start)) boolValue];
-}
-
-%new
-- (void)setStart:(BOOL)start {
-    objc_setAssociatedObject(self, @selector(start), @(start), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+//%new
+//- (BOOL)start {
+//    return [objc_getAssociatedObject(self, @selector(start)) boolValue];
+//}
+//
+//%new
+//- (void)setStart:(BOOL)start {
+//    objc_setAssociatedObject(self, @selector(start), @(start), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
 
 %new
 - (void)p__startOpenRedPackage {
-    if (self.start == NO) {
-        NSLog(@"==Log 循环拉取红包 return 掉 ==");
+    if ([HookTool sharedInstance].startSnatchHB == NO) {
         return;
     }
 
     [self onOpenBtnClick:self.mOpenBtn];
-    NSString *mHongBaoID = self.mHongBaoID;
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (!weakSelf.isHidden) {
-            NSLog(@"==Log 循环拉取红包1==");
-            [weakSelf p__startOpenRedPackage];
-        } else {
-            NSLog(@"==Log 循环拉取红包2==");
-        }
-    });
 }
 
 - (void)_initUI {
     %orig;
-    /*
-    __weak typeof(self) weakSelf = self;
-    [self.rac_willDeallocSignal subscribeCompleted:^{
-        [HookTool removeBubbleViewWithHongBaoID:weakSelf.mHongBaoID];
-        weakSelf.start == NO;
-    }];
-     */
+}
+
+- (void)makeKeyWindow {
+    return;
+}
+
+- (void)makeKeyAndVisible {
+    return;
 }
 
 // 红包window，设置完最后一个属性后，自动打开红包
@@ -146,7 +128,6 @@
 
 // btn的位置会偏移
 - (void)startOpenHongbaoAnimation {
-    self.start = YES;
     CGFloat bgWidth = self.mFrontContainerView.image.size.width;
     CGFloat bgHeight = self.mFrontContainerView.image.size.height;
     CGFloat openBtnWidth = self.mOpenBtn.frame.size.width;
