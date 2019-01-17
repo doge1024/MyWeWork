@@ -47,22 +47,6 @@
     [HookTool sharedInstance].startSnatchHB = swt.isOn;
 }
 
-- (void)viewDidLoad {
-    %orig;
-    UIBarButtonItem *conversationMsgItems = self.navigationItem.rightBarButtonItem;
-    if (conversationMsgItems) {
-        UISwitch *swt = [[UISwitch alloc] init];
-        UIBarButtonItem *swtItem = [[UIBarButtonItem alloc] initWithCustomView:swt];
-        self.navigationItem.rightBarButtonItems = @[ swtItem, conversationMsgItems ];
-        [swt.rac_newOnChannel subscribeNext:^(NSNumber * _Nullable x) {
-            [HookTool sharedInstance].startSnatchHB = [x boolValue];
-            NSLog(@"Log 抢红包：%@", [x boolValue] ? @"开" : @"关");
-        }];
-        swt.on = YES;
-        [swt sendActionsForControlEvents:UIControlEventValueChanged];
-    }
-}
-
 %end
 
 %hook WWKMessage

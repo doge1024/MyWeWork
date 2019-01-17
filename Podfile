@@ -10,5 +10,6 @@ target 'MyWeWorkDylib' do
   
   pod 'ReactiveObjC', '3.0.0'
   pod 'MSWeakTimer', '~> 1.1.0'
+  pod 'Masonry', '1.1.0'
 
 end

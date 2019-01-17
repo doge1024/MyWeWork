@@ -11,7 +11,7 @@
 #import "MyWeWorkDylib.h"
 #import <UIKit/UIKit.h>
 #import "HookFunctionsAndPropertys.h"
-#import "DEBUGViewController.h"
+#import "DebugWindow.h"
 #ifdef DEBUG
 #import <CaptainHook/CaptainHook.h>
 #import <Cycript/Cycript.h>
@@ -36,19 +36,15 @@ static __attribute__((constructor)) void entry(){
     }];
 }
 
-@implementation UITabBarController (AppDelegate)
+@implementation UIViewController (MotionAppDelegate)
 
+DebugWindow *window = nil;
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
-        
-        return;
-        UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        if ([rootVC.presentedViewController isKindOfClass:[DEBUGViewController class]]) {
-            [rootVC.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-        } else {
-            UIViewController *vc = [[DEBUGViewController alloc] init];
-            [rootVC presentViewController:vc animated:NO completion:nil];
+        if (window == nil) {
+            window = [[DebugWindow alloc] init];
         }
+        window.hidden = !window.hidden;
     }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0C69A90969F2E729495BC1C3 /* Pods_MyWeWorkDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */; };
+		34475C5E21F0802F00DC74AB /* DebugWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 34475C5C21F0802F00DC74AB /* DebugWindow.h */; };
+		34475C5F21F0802F00DC74AB /* DebugWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 34475C5D21F0802F00DC74AB /* DebugWindow.m */; };
 		34523323203059D90032EF93 /* MethodTraceConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34523322203059D90032EF93 /* MethodTraceConfig.plist */; };
 		34523326203059D90032EF93 /* put ipa or app here in Resources */ = {isa = PBXBuildFile; fileRef = 34523325203059D90032EF93 /* put ipa or app here */; };
 		3452332E203059D90032EF93 /* libMyWeWorkDylib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -28,8 +30,6 @@
 		3452336020305A510032EF93 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452335E20305A510032EF93 /* HookTool.h */; };
 		34A5DB47204B24D5007AEEC5 /* HookFunctionsAndPropertys.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */; };
 		34A5DB48204B24D5007AEEC5 /* HookFunctionsAndPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */; };
-		34C5762421ECF1F700265C08 /* DEBUGViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C5762121ECF1F700265C08 /* DEBUGViewController.h */; };
-		34C5762521ECF1F700265C08 /* DEBUGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C5762221ECF1F700265C08 /* DEBUGViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		34475C5C21F0802F00DC74AB /* DebugWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugWindow.h; sourceTree = "<group>"; };
+		34475C5D21F0802F00DC74AB /* DebugWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugWindow.m; sourceTree = "<group>"; };
 		3452331F203059D90032EF93 /* MyWeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34523322203059D90032EF93 /* MethodTraceConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MethodTraceConfig.plist; sourceTree = "<group>"; };
 		34523325203059D90032EF93 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
@@ -80,8 +82,6 @@
 		3452335E20305A510032EF93 /* HookTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
 		34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookFunctionsAndPropertys.h; sourceTree = "<group>"; };
 		34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookFunctionsAndPropertys.m; sourceTree = "<group>"; };
-		34C5762121ECF1F700265C08 /* DEBUGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEBUGViewController.h; sourceTree = "<group>"; };
-		34C5762221ECF1F700265C08 /* DEBUGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEBUGViewController.m; sourceTree = "<group>"; };
 		5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.release.xcconfig"; sourceTree = "<group>"; };
 		AEE5556064D22B9A0DF50DDE /* Pods_MyWeWorkDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWeWorkDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A1843239C158A9EC296369 /* Pods-MyWeWorkDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +169,8 @@
 				3452335D20305A510032EF93 /* HookTool.m */,
 				3452334F203059D90032EF93 /* MyWeWorkDylib.h */,
 				34523351203059D90032EF93 /* MyWeWorkDylib.m */,
-				34C5762121ECF1F700265C08 /* DEBUGViewController.h */,
-				34C5762221ECF1F700265C08 /* DEBUGViewController.m */,
+				34475C5C21F0802F00DC74AB /* DebugWindow.h */,
+				34475C5D21F0802F00DC74AB /* DebugWindow.m */,
 				34523339203059D90032EF93 /* MethodTrace */,
 				34523344203059D90032EF93 /* AntiAntiDebug */,
 				34523347203059D90032EF93 /* fishhook */,
@@ -231,12 +231,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34475C5E21F0802F00DC74AB /* DebugWindow.h in Headers */,
 				3452333B203059D90032EF93 /* ANYMethodLog.h in Headers */,
 				34A5DB47204B24D5007AEEC5 /* HookFunctionsAndPropertys.h in Headers */,
 				3452333F203059D90032EF93 /* MethodTrace.h in Headers */,
 				34523350203059D90032EF93 /* MyWeWorkDylib.h in Headers */,
 				3452336020305A510032EF93 /* HookTool.h in Headers */,
-				34C5762421ECF1F700265C08 /* DEBUGViewController.h in Headers */,
 				3452334B203059D90032EF93 /* fishhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,10 +407,10 @@
 			files = (
 				3452335F20305A510032EF93 /* HookTool.m in Sources */,
 				34523346203059D90032EF93 /* AntiAntiDebug.m in Sources */,
-				34C5762521ECF1F700265C08 /* DEBUGViewController.m in Sources */,
 				34523341203059D90032EF93 /* MethodTrace.m in Sources */,
 				3452334E203059D90032EF93 /* MyWeWorkDylib.mm in Sources */,
 				34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */,
+				34475C5F21F0802F00DC74AB /* DebugWindow.m in Sources */,
 				34523349203059D90032EF93 /* fishhook.c in Sources */,
 				34A5DB48204B24D5007AEEC5 /* HookFunctionsAndPropertys.m in Sources */,
 				3452333D203059D90032EF93 /* ANYMethodLog.m in Sources */,
