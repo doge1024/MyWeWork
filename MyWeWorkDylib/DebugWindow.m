@@ -51,7 +51,7 @@
 
 - (void)initViews {
     self.windowLevel = UIWindowLevelStatusBar;
-    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.8];
     
     UILabel *startLabel = [[UILabel alloc] init];
     startLabel.text = @"红包开关";

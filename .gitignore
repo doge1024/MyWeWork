@@ -1,4 +1,4 @@
-MyWeWork/TargetApp/wework.app
+MyWeWork/TargetApp/*.app
 Pods/
 */.DS_Store
 MyWeWork.xcworkspace/xcuserdata/*

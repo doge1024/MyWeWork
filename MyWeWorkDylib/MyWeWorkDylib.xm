@@ -68,19 +68,18 @@
 
 %end
 
-/*
+
 %hook WXCCommonUtil
 // 强制输出log
 + (void)_wxc_logConvert:(id)arg1 level:(int)arg2 function:(id)arg3 {
- return %orig(arg1, arg2, arg3);
-
- NSLog(@"强制输出log-start");
- %orig(arg1, 2, arg3);
- NSLog(@"强制输出log-end");
+    return;
+ //NSLog(@"强制输出log-start");
+ //%orig(arg1, 2, arg3);
+ //NSLog(@"强制输出log-end");
  
 }
 %end
-*/
+
 
 %hook WWRedEnvOpenHongBaoWindow
 
