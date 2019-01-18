@@ -1,4 +1,5 @@
 MyWeWork/TargetApp/*.app
+MyWeWork/wework_Headers
 Pods/
 */.DS_Store
 MyWeWork.xcworkspace/xcuserdata/*
