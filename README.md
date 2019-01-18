@@ -4,7 +4,7 @@
 
 附[MyWeWork_Tweak越狱版](https://github.com/harddog/MyWeWork_Tweak.git)
 
-![wwk](./wework.gif)
+![wwk](./wework.gif){:height="50%" width="50%"}
 
 ### 使用
 先安装[MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)
