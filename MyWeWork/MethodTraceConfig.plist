@@ -6,13 +6,8 @@
 	<false/>
 	<key>TARGET_CLASS_LIST</key>
 	<dict>
-		<key>BaseMsgContentViewController</key>
+		<key>WWRedEnvOpenHongBaoWindow</key>
 		<string></string>
-		<key>CMessageMgr</key>
-		<array>
-			<string>AsyncOnAddMsg:MsgWrap:</string>
-			<string>onRevokeMsg:</string>
-		</array>
 	</dict>
 </dict>
 </plist>
