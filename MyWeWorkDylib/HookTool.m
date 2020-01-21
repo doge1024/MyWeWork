@@ -73,5 +73,13 @@
     return _hongBaoIDs;
 }
 
+- (void)setWaitTime:(NSString *)waitTime {
+    [[NSUserDefaults standardUserDefaults] setObject:waitTime forKey:@"HookTool_waitTime"];
+}
+
+- (NSString *)waitTime {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"HookTool_waitTime"];
+}
+
 @end
 

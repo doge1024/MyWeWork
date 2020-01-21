@@ -28,6 +28,8 @@
 
 @property(nonatomic, assign) BOOL canToRedPackageVC;
 
+@property(nonatomic, strong) NSString *waitTime;
+
 + (instancetype)sharedInstance;
 
 + (void)saveBubbleView:(WWKConversationRedEnvelopesBubbleView *)view;
