@@ -100,7 +100,16 @@
         return;
     }
 
-    [self onOpenBtnClick:self.mOpenBtn];
+    if ([HookTool sharedInstance].waitTime) {
+        NSLog(@"-=-=-=-=-= 开始延时");
+        double delayInSeconds = [[HookTool sharedInstance].waitTime doubleValue];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"-=-=-=-=-= 开始抢了");
+            [self onOpenBtnClick:self.mOpenBtn];
+        });
+    } else {
+        [self onOpenBtnClick:self.mOpenBtn];
+    }
 }
 
 - (void)_initUI {

@@ -28,6 +28,12 @@
 		34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 34523351203059D90032EF93 /* MyWeWorkDylib.m */; };
 		3452335F20305A510032EF93 /* HookTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3452335D20305A510032EF93 /* HookTool.m */; };
 		3452336020305A510032EF93 /* HookTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 3452335E20305A510032EF93 /* HookTool.h */; };
+		3466056023D6338D00C96E8C /* DebugTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3466055E23D6338D00C96E8C /* DebugTableViewCell.h */; };
+		3466056123D6338D00C96E8C /* DebugTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3466055F23D6338D00C96E8C /* DebugTableViewCell.m */; };
+		3466056423D633D800C96E8C /* DebugCellModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3466056223D633D800C96E8C /* DebugCellModel.h */; };
+		3466056523D633D800C96E8C /* DebugCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3466056323D633D800C96E8C /* DebugCellModel.m */; };
+		3466056823D6A2E400C96E8C /* DebugTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3466056623D6A2E400C96E8C /* DebugTableViewController.h */; };
+		3466056923D6A2E400C96E8C /* DebugTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3466056723D6A2E400C96E8C /* DebugTableViewController.m */; };
 		34A5DB47204B24D5007AEEC5 /* HookFunctionsAndPropertys.h in Headers */ = {isa = PBXBuildFile; fileRef = 34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */; };
 		34A5DB48204B24D5007AEEC5 /* HookFunctionsAndPropertys.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */; };
 /* End PBXBuildFile section */
@@ -58,7 +64,7 @@
 /* Begin PBXFileReference section */
 		34475C5C21F0802F00DC74AB /* DebugWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugWindow.h; sourceTree = "<group>"; };
 		34475C5D21F0802F00DC74AB /* DebugWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugWindow.m; sourceTree = "<group>"; };
-		3452331F203059D90032EF93 /* MyWeWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3452331F203059D90032EF93 /* my企业微信.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my企业微信.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34523322203059D90032EF93 /* MethodTraceConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MethodTraceConfig.plist; sourceTree = "<group>"; };
 		34523325203059D90032EF93 /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
 		34523327203059D90032EF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +86,12 @@
 		34523351203059D90032EF93 /* MyWeWorkDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWeWorkDylib.m; sourceTree = "<group>"; };
 		3452335D20305A510032EF93 /* HookTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HookTool.m; sourceTree = "<group>"; };
 		3452335E20305A510032EF93 /* HookTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookTool.h; sourceTree = "<group>"; };
+		3466055E23D6338D00C96E8C /* DebugTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugTableViewCell.h; sourceTree = "<group>"; };
+		3466055F23D6338D00C96E8C /* DebugTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugTableViewCell.m; sourceTree = "<group>"; };
+		3466056223D633D800C96E8C /* DebugCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugCellModel.h; sourceTree = "<group>"; };
+		3466056323D633D800C96E8C /* DebugCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugCellModel.m; sourceTree = "<group>"; };
+		3466056623D6A2E400C96E8C /* DebugTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugTableViewController.h; sourceTree = "<group>"; };
+		3466056723D6A2E400C96E8C /* DebugTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugTableViewController.m; sourceTree = "<group>"; };
 		34A5DB45204B24D5007AEEC5 /* HookFunctionsAndPropertys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookFunctionsAndPropertys.h; sourceTree = "<group>"; };
 		34A5DB46204B24D5007AEEC5 /* HookFunctionsAndPropertys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HookFunctionsAndPropertys.m; sourceTree = "<group>"; };
 		5017DE470D20F8AC61D037BF /* Pods-MyWeWorkDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWeWorkDylib.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyWeWorkDylib/Pods-MyWeWorkDylib.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,7 +135,7 @@
 		34523320203059D90032EF93 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3452331F203059D90032EF93 /* MyWeWork.app */,
+				3452331F203059D90032EF93 /* my企业微信.app */,
 				3452332D203059D90032EF93 /* libMyWeWorkDylib.dylib */,
 			);
 			name = Products;
@@ -169,8 +181,7 @@
 				3452335D20305A510032EF93 /* HookTool.m */,
 				3452334F203059D90032EF93 /* MyWeWorkDylib.h */,
 				34523351203059D90032EF93 /* MyWeWorkDylib.m */,
-				34475C5C21F0802F00DC74AB /* DebugWindow.h */,
-				34475C5D21F0802F00DC74AB /* DebugWindow.m */,
+				3466055D23D6336A00C96E8C /* DebugView */,
 				34523339203059D90032EF93 /* MethodTrace */,
 				34523344203059D90032EF93 /* AntiAntiDebug */,
 				34523347203059D90032EF93 /* fishhook */,
@@ -215,6 +226,21 @@
 			name = fishhook;
 			sourceTree = "<group>";
 		};
+		3466055D23D6336A00C96E8C /* DebugView */ = {
+			isa = PBXGroup;
+			children = (
+				34475C5C21F0802F00DC74AB /* DebugWindow.h */,
+				34475C5D21F0802F00DC74AB /* DebugWindow.m */,
+				3466055E23D6338D00C96E8C /* DebugTableViewCell.h */,
+				3466055F23D6338D00C96E8C /* DebugTableViewCell.m */,
+				3466056223D633D800C96E8C /* DebugCellModel.h */,
+				3466056323D633D800C96E8C /* DebugCellModel.m */,
+				3466056623D6A2E400C96E8C /* DebugTableViewController.h */,
+				3466056723D6A2E400C96E8C /* DebugTableViewController.m */,
+			);
+			name = DebugView;
+			sourceTree = "<group>";
+		};
 		5AFDB845A0D066B876880CB0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,10 +259,13 @@
 			files = (
 				34475C5E21F0802F00DC74AB /* DebugWindow.h in Headers */,
 				3452333B203059D90032EF93 /* ANYMethodLog.h in Headers */,
+				3466056823D6A2E400C96E8C /* DebugTableViewController.h in Headers */,
 				34A5DB47204B24D5007AEEC5 /* HookFunctionsAndPropertys.h in Headers */,
 				3452333F203059D90032EF93 /* MethodTrace.h in Headers */,
+				3466056023D6338D00C96E8C /* DebugTableViewCell.h in Headers */,
 				34523350203059D90032EF93 /* MyWeWorkDylib.h in Headers */,
 				3452336020305A510032EF93 /* HookTool.h in Headers */,
+				3466056423D633D800C96E8C /* DebugCellModel.h in Headers */,
 				3452334B203059D90032EF93 /* fishhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +291,7 @@
 			);
 			name = MyWeWork;
 			productName = MyWeWork;
-			productReference = 3452331F203059D90032EF93 /* MyWeWork.app */;
+			productReference = 3452331F203059D90032EF93 /* my企业微信.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3452332C203059D90032EF93 /* MyWeWorkDylib */ = {
@@ -408,12 +437,15 @@
 				3452335F20305A510032EF93 /* HookTool.m in Sources */,
 				34523346203059D90032EF93 /* AntiAntiDebug.m in Sources */,
 				34523341203059D90032EF93 /* MethodTrace.m in Sources */,
+				3466056123D6338D00C96E8C /* DebugTableViewCell.m in Sources */,
 				3452334E203059D90032EF93 /* MyWeWorkDylib.mm in Sources */,
 				34523352203059D90032EF93 /* MyWeWorkDylib.m in Sources */,
 				34475C5F21F0802F00DC74AB /* DebugWindow.m in Sources */,
+				3466056923D6A2E400C96E8C /* DebugTableViewController.m in Sources */,
 				34523349203059D90032EF93 /* fishhook.c in Sources */,
 				34A5DB48204B24D5007AEEC5 /* HookFunctionsAndPropertys.m in Sources */,
 				3452333D203059D90032EF93 /* ANYMethodLog.m in Sources */,
+				3466056523D633D800C96E8C /* DebugCellModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,15 +682,17 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A9X3LHX823;
+				CURRENT_PROJECT_VERSION = 13132;
+				DEVELOPMENT_TEAM = R82SGZGBH8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MyWeWork/Info.plist;
+				MARKETING_VERSION = 2.7.0;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.mywework;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "my企业微信";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -669,15 +703,17 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A9X3LHX823;
+				CURRENT_PROJECT_VERSION = 13132;
+				DEVELOPMENT_TEAM = R82SGZGBH8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MyWeWork/Info.plist;
+				MARKETING_VERSION = 2.7.0;
 				MONKEYDEV_CLASS_DUMP = YES;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_CONFIGURATION_BUILD_DIR = "$BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.test.mywework;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "my企业微信";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

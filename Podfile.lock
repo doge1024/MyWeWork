@@ -11,7 +11,7 @@ DEPENDENCIES:
   - ReactiveObjC (= 3.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - FLEX
     - Masonry
     - MSWeakTimer
@@ -25,4 +25,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8ab32be20bab2f081f15ddb962c26b7445b4821e
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.8.4
