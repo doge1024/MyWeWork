@@ -26,6 +26,8 @@
 
 @property(nonatomic, strong) NSArray *items;
 
+@property(nonatomic, strong) UILabel *tipsLabel;
+
 @end
 
 @implementation DebugTableViewController
@@ -102,6 +104,11 @@
     [self.view addSubview:self.closeBtn];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    self.tipsLabel = [[UILabel alloc] init];
+    self.tipsLabel.text = @"抢红包只在聊天页面生效";
+    self.tipsLabel.font = [UIFont systemFontOfSize:10];
+    [self.view addSubview:self.tipsLabel];
 }
 
 - (void)initActions {
@@ -131,7 +138,7 @@
         }
     }];
     
-    // 打开抢红包时，关闭去详情
+    // 关闭去详情时，打开抢红包
     [[openDetailSwitch rac_newOnChannel] subscribeNext:^(NSNumber * _Nullable x) {
         if ([x boolValue]) {
             [HookTool sharedInstance].startSnatchHB = NO;
@@ -140,6 +147,7 @@
         }
     }];
 
+    openRedSwitch.on = [HookTool sharedInstance].startSnatchHB;
     [openRedSwitch sendActionsForControlEvents:UIControlEventValueChanged];
     
 #ifdef DEBUG
@@ -186,6 +194,11 @@
         make.width.equalTo(@60);
         make.right.equalTo(self.view.mas_right);
         make.top.equalTo(self.view.mas_top);
+    }];
+    
+    [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
     }];
 }
 

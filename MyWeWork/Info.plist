@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>my企业微信</string>
+	<string>My企业微信</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -129,7 +129,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>10990</string>
 	<key>DTAppStoreToolsBuild</key>
 	<string>10B63</string>
 	<key>DTCompiler</key>
