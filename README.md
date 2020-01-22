@@ -5,7 +5,7 @@
 
  <img src="./wework.gif" width = "40%" height = "40%" alt="wwk" align=center />
 
-###### - 如何使用
+### 如何使用
 1. 将脱壳后的企业微信ipa解压取得.app文件放到`MyWeWork/TargetApp/wework.app`  
 2. 安装Xcode，并打开`MyWeWork.xcworkspace`，配置自己的BundleID和证书  
 3. 插上手机，`cmd+R`，duang~，运行成功  
@@ -19,13 +19,13 @@
 摇一摇打开工具窗口，打开红包开关，进入聊天会话页面，即可自动抢红包    
 
 ###### - 编译打包使用
-1. 编译Release版`cmd+shift+i`，编译Debug版`cmd+R` 待编译完成 （建议使用debug版本，就不要给人家团队增加线上脏数据了😅）
+1. 编译Release版`cmd+shift+i`，编译Debug版`cmd+R` 待编译完成 （建议使用debug版本，就不要给人家团队增加线上脏数据了吧）
 2. 双击`LatestBuild/createIPA.command`，待进程完成后，文件夹下面会多一个Target.ipa文件，拿去用吧
 
 ### 效果
 1. 摇一摇打开工具窗口
-1. 自动打开红包，功能只能在聊天会话页面使用，但是可以在后台，继续抢
-2. 旧版本会存在多个红包并发，抢失败的情况，v2.0修复了
+1. 自动打开红包，功能只能在聊天会话页面使用，但是可以摁Home在后台，继续抢
+2. 旧版本会存在多个红包并发，抢失败的情况，已经修复了
 
 ### 注意
 1. 非越狱手机推送是不可能推送的，这辈子都不会有推送
