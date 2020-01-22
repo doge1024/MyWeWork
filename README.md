@@ -5,10 +5,7 @@
 
  <img src="./wework.gif" width = "40%" height = "40%" alt="wwk" align=center />
 
-### 使用
-先安装[MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)
-
-###### - 抢红包
+###### - 如何使用
 1. 将脱壳后的企业微信ipa解压取得.app文件放到`MyWeWork/TargetApp/wework.app`  
 2. 安装Xcode，并打开`MyWeWork.xcworkspace`，配置自己的BundleID和证书  
 3. 插上手机，`cmd+R`，duang~，运行成功  
@@ -16,6 +13,10 @@
     1. <红包开关> 新加了功能面板，摇晃手机展示选择框，将红包开关打开即可自动抢红包（默认打开状态）
     2. <查看红包详情> 抢红包时，点击红包消息是不能进入详情的，可以打开此按钮，来允许进入详情查看红包详情，和红包开关互斥
     3. <打开Debug> 技术人员使用
+    4. <延时抢> 填写小数，延时一定时间后再抢红包
+    
+### 抢红包
+摇一摇打开工具窗口，打开红包开关，进入聊天会话页面，即可自动抢红包    
 
 ###### - 编译打包使用
 1. 编译Release版`cmd+shift+i`，编译Debug版`cmd+R` 待编译完成 （建议使用debug版本，就不要给人家团队增加线上脏数据了😅）
