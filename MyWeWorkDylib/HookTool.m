@@ -16,6 +16,15 @@
 
 @implementation HookTool
 
++ (void)load {
+    // 初始化一下
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"HookTool_startSnatchHB"] == nil) {
+        // 没有设置过key
+        [HookTool sharedInstance].startSnatchHB = YES;
+        [HookTool sharedInstance].canToRedPackageVC = NO;
+    }
+}
+
 + (instancetype)sharedInstance {
     //  Static local predicate must be initialized to 0
     static HookTool *sharedInstance = nil;
@@ -24,8 +33,7 @@
         sharedInstance = [[HookTool alloc] init];
         
         // Do any other initialisation stuff here
-        sharedInstance.startSnatchHB = YES;
-        sharedInstance.canToRedPackageVC = NO;
+        [sharedInstance isStartSnatchHB];
     });
     return sharedInstance;
 }
@@ -79,6 +87,14 @@
 
 - (NSString *)waitTime {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"HookTool_waitTime"];
+}
+
+- (BOOL)isStartSnatchHB {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"HookTool_startSnatchHB"];
+}
+
+- (void)setStartSnatchHB:(BOOL)startSnatchHB {
+    [[NSUserDefaults standardUserDefaults] setBool:startSnatchHB forKey:@"HookTool_startSnatchHB"];
 }
 
 @end
